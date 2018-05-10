@@ -8,6 +8,17 @@ using UnityEngine;
 
 public class ModelMove2D : MonoBehaviour {
 
+/******************************************************/
+//public float rotSpeed =5f;
+//public float accuracy = 1.0f;
+
+
+
+
+
+
+
+/******************************************************/
 	Vector3 offset;
 	GameObject textPrefab;
 	GameObject hoverText;
@@ -45,6 +56,8 @@ public class ModelMove2D : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		//moveAgent();
+
 		if(firstTime && (targetPoint != transform.position))
 		{
 			OriginalDistanceBetween = Vector3.Distance(transform.position, targetPoint);
@@ -58,6 +71,8 @@ public class ModelMove2D : MonoBehaviour {
 		CurrentDistanceBetween = Vector3.Distance(transform.position, targetPoint);
 
 		if (isSelected & move & (transform.position != targetPoint)) {
+			//moveAgent();
+
 			//transform.position = Vector3.Lerp (transform.position, targetPoint, Time.deltaTime * 2.0f); 
 			if (CurrentDistanceBetween >= Halfway)
 			{
@@ -88,6 +103,7 @@ public class ModelMove2D : MonoBehaviour {
 			}
 			step = playerVelocity * Time.deltaTime;
 			transform.position = Vector3.MoveTowards(transform.position, targetPoint, step);
+			
 		} 
 		else if(transform.position == targetPoint)
 		{
@@ -98,6 +114,7 @@ public class ModelMove2D : MonoBehaviour {
 		else {
 			targetPoint = transform.position;
 		}
+
 	}
 
     // Function OnSelect:
@@ -146,4 +163,37 @@ public class ModelMove2D : MonoBehaviour {
         targetPoint.y = 1.53f;
         move = true;
 	}
+
+
+	/*
+	public void moveAgent()
+	{
+		if (Input.GetMouseButtonDown(0)) {
+             Vector3 mouse = Input.mousePosition;
+        	 Ray castPoint = Camera.main.ScreenPointToRay(mouse);
+        	 RaycastHit hit;
+
+			 if (Physics.Raycast(castPoint, out hit, 100)) 
+			 {
+				Vector3 lookAtGoal = hit.point;
+				Vector3 direction = lookAtGoal - this.transform.position;
+
+
+				this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime*rotSpeed);
+
+				if(Vector3.Distance(transform.position, lookAtGoal) > accuracy)
+				{
+					this.transform.Translate(0,0, speed*Time.deltaTime);
+				}
+	  		 }
+
+		    }
+			
+			   this.transform.Translate(0,0, speed*Time.deltaTime);
+	 	
+		
+	}
+*/
+
+
 }
