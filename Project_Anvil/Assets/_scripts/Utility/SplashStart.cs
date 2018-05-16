@@ -27,8 +27,23 @@ public class SplashStart : MonoBehaviour {
 
     public GetLocation getLocation;
     public BasicMap basicMap;
+
+    public GameObject buttonTemplate;
     
 
+    void GenerateLocationButtons()
+    {
+
+        for (int i = 0; i < 5;/*change to length of location list later*/ i++)
+        {
+            GameObject button = Instantiate(buttonTemplate) as GameObject;
+            button.SetActive(true);
+
+          //  button.GetComponent<ButtonLitstButton>.SetText("button # " + i);
+
+            button.transform.SetParent(buttonTemplate.transform.parent, false);
+        }
+    }
 
 
 	// Use this for initialization
