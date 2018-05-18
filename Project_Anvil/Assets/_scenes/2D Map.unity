@@ -809,23 +809,35 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 196684833}
+<<<<<<< HEAD
 --- !u!1 &230990540
+=======
+--- !u!1 &303168273
+>>>>>>> 3921e6e724ee4616e4f7a8e424dee7a217add785
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 230990541}
   - component: {fileID: 230990543}
   - component: {fileID: 230990542}
   m_Layer: 0
   m_Name: TaskPanel
+=======
+  - component: {fileID: 303168275}
+  - component: {fileID: 303168274}
+  m_Layer: 0
+  m_Name: LocationReader
+>>>>>>> 3921e6e724ee4616e4f7a8e424dee7a217add785
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!224 &230990541
 RectTransform:
   m_ObjectHideFlags: 0
@@ -846,10 +858,14 @@ RectTransform:
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &230990542
+=======
+--- !u!114 &303168274
+>>>>>>> 3921e6e724ee4616e4f7a8e424dee7a217add785
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 230990540}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -878,6 +894,28 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 230990540}
+=======
+  m_GameObject: {fileID: 303168273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddb85fa8fe402ba4eac94b170e06f6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allLocations: []
+--- !u!4 &303168275
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 303168273}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+>>>>>>> 3921e6e724ee4616e4f7a8e424dee7a217add785
 --- !u!1 &315564954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1639,8 +1677,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc57cac50a536941afd2bec1e385486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotSpeed: 5
-  accuracy: 1
   isAirUnit: 0
   uiAirUnitDisplay: {fileID: 0}
   maxSpeed: 20
@@ -3823,8 +3859,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc57cac50a536941afd2bec1e385486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotSpeed: 5
-  accuracy: 1
   isAirUnit: 0
   uiAirUnitDisplay: {fileID: 0}
   maxSpeed: 100
