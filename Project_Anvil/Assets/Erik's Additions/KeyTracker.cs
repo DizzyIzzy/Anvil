@@ -8,6 +8,7 @@ public class KeyTracker : MonoBehaviour {
 	public int menuPoint = 3;
 
 	CameraController cameraMove;
+	AgentController agentUIInputs;
 
 	public bool selection;
 
@@ -29,6 +30,7 @@ public class KeyTracker : MonoBehaviour {
 	void Start () {
 		selection = false;
 	    cameraMove = GetComponent(typeof(CameraController)) as CameraController;
+		agentUIInputs = GetComponent(typeof(AgentController)) as AgentController;
 
 		//Assigns all the panels
 		getPanels();
@@ -59,6 +61,7 @@ public class KeyTracker : MonoBehaviour {
 			if(selection==true)
 			{
 			uiPicker(menuPoint);
+			agentUIInputs.agentInputs();
 			//agentUI();
 			}
 			break;
@@ -71,7 +74,8 @@ public class KeyTracker : MonoBehaviour {
 			}
 			break;
 		case 3:
-			if (cameraMove.setSelect && selection==true) {
+			//if (cameraMove.setSelect && selection==true) 
+			if (selection==true) {
 				uiPicker(menuPoint);
 				//mapUI();
 				cameraMove.mapMove ();
