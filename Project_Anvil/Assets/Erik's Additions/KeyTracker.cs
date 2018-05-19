@@ -62,6 +62,7 @@ public class KeyTracker : MonoBehaviour {
 			{
 			uiPicker(menuPoint);
 			agentUIInputs.agentInputs();
+		
 			//agentUI();
 			}
 			break;
@@ -249,8 +250,8 @@ public class KeyTracker : MonoBehaviour {
 	public void mainMenuUI()
 	{
 		mainMenuPanel.gameObject.SetActive(true);
-		agentPanel.gameObject.SetActive(false);
-		routePanel.gameObject.SetActive(false);
+		agentPanel.gameObject.SetActive(true);
+	//	routePanel.gameObject.SetActive(false);
 		debugPanel.gameObject.SetActive(false);
 	}
 

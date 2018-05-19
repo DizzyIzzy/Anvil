@@ -9,6 +9,10 @@ public class AgentController : MonoBehaviour {
 	private GameObject routePanel;
 	private GameObject taskPanel;
 	private GameObject targetingPanel;
+	public GameObject mainMenuPanel;
+	public GameObject agentPanel;
+
+	public GameObject thisPanel;
 
 	int menuPoint;
 
@@ -20,6 +24,8 @@ public class AgentController : MonoBehaviour {
 		routePanel = GameObject.Find ("RoutePanel");
 		taskPanel = GameObject.Find ("TaskPanel");
 		targetingPanel = GameObject.Find ("TargetingPanel");
+		mainMenuPanel = GameObject.Find("Menu Panel");
+		agentPanel = GameObject.Find("AgentPanel");
 		waypointUI ();
 	}
 	
@@ -63,12 +69,9 @@ public class AgentController : MonoBehaviour {
 
 
 		if (Input.GetKeyDown (KeyCode.B)) {
-
-			//setSelect = false;
+			exitUI ();
 			keyTracker.selection = false;
-			//mainMenuPanel.gameObject.SetActive(true);
-			//keyTracker.menuPoint++;
-			//Debug.Log ("B was pressed" + keyTracker.selection);
+			mainMenuPanel.gameObject.SetActive(true);
 		}
 
 		agentUIPicker (menuPoint);
@@ -99,19 +102,24 @@ public class AgentController : MonoBehaviour {
 			taskPanel.gameObject.SetActive(false);
 			targetingPanel.gameObject.SetActive(false);
 			routePanel.gameObject.SetActive(true);
+			thisPanel = routePanel;
 		}
 
 		public void targetingUI(){
 			taskPanel.gameObject.SetActive(false);
 			routePanel.gameObject.SetActive(false);
 			targetingPanel.gameObject.SetActive(true);
+			thisPanel = targetingPanel;
 		}
 
 		public void taskUI(){
 			routePanel.gameObject.SetActive(false);
 			targetingPanel.gameObject.SetActive(false);
 			taskPanel.gameObject.SetActive(true);
+		    thisPanel = taskPanel;
 		}
+
+
 	public void checkMenuPoint()
 	{
 		if (menuPoint > 3 ) {
@@ -120,6 +128,11 @@ public class AgentController : MonoBehaviour {
 		else if (menuPoint < 1) {
 			menuPoint = 3;
 		}
+	}
+
+	public void exitUI(){
+		agentPanel.gameObject.SetActive (true);
+		thisPanel.gameObject.SetActive(true);
 	}
 
 
