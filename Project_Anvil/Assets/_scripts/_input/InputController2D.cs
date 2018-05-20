@@ -43,7 +43,7 @@ public class InputController2D : MonoBehaviour
                     if (myPlane.Raycast(ray, out hitDist))
                     {
                         targetPoint = ray.GetPoint(hitDist);
-                        Debug.Log(targetPoint);
+                      //  Debug.Log(targetPoint);
                         if (ModelMove2D != null)
                         {
                             ModelMove2D.MoveToPoint(targetPoint);

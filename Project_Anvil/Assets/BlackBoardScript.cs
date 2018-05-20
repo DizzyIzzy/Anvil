@@ -19,13 +19,16 @@ public class BlackBoardScript : MonoBehaviour {
         allGameAgents = new List<AnvilAgent>(GameObject.Find("Faction1").GetComponentsInChildren<AnvilAgent>());
     }
     void Start () {
-        WayPoint wpt0 = new WayPoint(1, 5, 5, "wpt0");
+       // WayPoint wpt0 = new WayPoint(1, 5, 5, "wpt0");
         allGameWayPoints = new List<WayPoint>();
         allGameRoutes = new List<Route>();
 
-        allGameWayPoints.Add(wpt0);
+      //  allGameWayPoints.Add(wpt0);
         wayPointSerial = GetWayPointSerial();
-      
+
+
+
+		//ReadWayPointFile ();
     }
     
     public int GetWayPointSerial()
@@ -80,12 +83,24 @@ public class BlackBoardScript : MonoBehaviour {
         {
             char[] delimiter = {','};
             string[] fields = readString.Split(delimiter);
+
+			Debug.Log ("Fields 0: " + fields[0]);
+			Debug.Log ("Fields 1: " + fields[1]);
+			Debug.Log ("Fields 2: " + fields[2]);
            
             allGameWayPoints.Add(new WayPoint(Convert.ToDouble(fields[0]), Convert.ToDouble(fields[1]), Convert.ToDouble(fields[2]), fields[3]));
-            readString = reader.ReadLine();
+           
+		
+
+
+			readString = reader.ReadLine();
         }
+
+
         Route loadedRoute = new Route(fileName, allGameWayPoints);
         allGameRoutes.Add(loadedRoute);
+
+
         GameObject.Find("UIController").GetComponent<UserControlScript>().UpdateRouteUIInfo();
     }   
 

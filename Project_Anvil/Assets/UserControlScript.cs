@@ -40,6 +40,8 @@ public class UserControlScript : MonoBehaviour {
 
     public GameObject blackBoard;
 
+	public AgentBlackBoard agentBlackBoard;
+
     // next action as Delegate
 
     // Use this for initialization
@@ -48,6 +50,15 @@ public class UserControlScript : MonoBehaviour {
         //faction hard coded to faction 1 for now
         string factionName = "Faction1";
         blackBoard = GameObject.Find("BlackBoard");
+
+
+		//blackBoard.GetComponent<BlackBoardScript> ().ReadWayPointFile ();
+
+		//agentBlackBoard = GetComponent(typeof(AgentBlackBoard)) as AgentBlackBoard;
+
+	
+
+
 
         //reset UI
         if (allFactionRoutes == null)
@@ -61,6 +72,7 @@ public class UserControlScript : MonoBehaviour {
         allFactionAgents = blackBoard.GetComponent<BlackBoardScript>().allGameAgents;
 
 
+
         UpdateAgentUIInfo();
         UpdateRouteUIInfo();
         UpdateWayPointUIInfo();
@@ -71,6 +83,15 @@ public class UserControlScript : MonoBehaviour {
         }
         agentCount = allFactionAgents.Count;
         
+		//blackBoard.GetComponent<BlackBoardScript>().ReadWayPointFile();
+
+		foreach (WayPoint waypoint in allFactionRoutes[routeIndex].routeWayPoints) 
+		{
+			Debug.Log ("SELECTED " + waypoint.ToSaveString());
+		}
+
+
+
     }
 
     private void UpdateAgentUIInfo()
@@ -118,6 +139,10 @@ public class UserControlScript : MonoBehaviour {
         if (selectedRoute != null)
         {
             activeWayPoint = selectedRoute.routeWayPoints[wayPointIndex];
+
+			Debug.Log (activeWayPoint.ToSaveString());
+
+
             activeWayPointLabel.text = "[" + (wayPointIndex + 1) + "/" + selectedRoute.routeWayPoints.Count + "]" + activeWayPoint.mWayPointName;
             activeWayPointPositionLabel.text = activeWayPoint.LatLonString();
         }
@@ -188,9 +213,15 @@ public class UserControlScript : MonoBehaviour {
         UpdateRouteUIInfo();
         UpdateWayPointUIInfo();
     }
+
     public void nextWayPoint()
     {
-        wayPointListCount = selectedRoute.Count();
+		
+
+
+		wayPointListCount = agentBlackBoard.agentWayPoints.Count;
+
+
         int nextWayPointIndex = wayPointIndex + 1;
         if (nextWayPointIndex >= wayPointListCount)
         {
@@ -200,7 +231,14 @@ public class UserControlScript : MonoBehaviour {
         {
             wayPointIndex = nextWayPointIndex;
         }
-        UpdateWayPointUIInfo();
+
+		activeWayPoint = agentBlackBoard.agentWayPoints[wayPointIndex];
+
+		Debug.Log (activeWayPoint.ToSaveString());
+
+
+
+        //UpdateWayPointUIInfo();
     }
     public void prevWayPoint()
     {
