@@ -11,21 +11,27 @@ using Mapbox.Utils.JsonConverters;
 using Mapbox.Utils;
 using Mapbox.Unity;
 
-public class ReadLocationFile : MonoBehaviour {
+public class ReadLocationFile : MonoBehaviour
+{
 
     public List<string> allLocations;
 
-    // Use this for initialization
-    void Start () {
-        ReadLocation();
-}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-    public void ReadLocation()
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    // public List<string> ReadLocation()
+    // takes input from a file and puts them into a list of strings to be used on splash screen
+    public List<string> ReadLocation()
     {
         allLocations = new List<string>();
         string fileName = "Locations";
@@ -41,20 +47,6 @@ public class ReadLocationFile : MonoBehaviour {
             allLocations.Add(fields[0]);
             readString = reader.ReadLine();
         }
-        Debug.Log(allLocations[0] + " : " + allLocations[1]);
-        // load the locations
-        //HandleLocationInput("lyman wy"); // change the location here if you want to test out finding coords
-    }
-
-    public void SaveLocation()
-    {
-
-        string path = "Assets/Resources/Locations.txt";
-        StreamWriter writer = new StreamWriter(path);
-        foreach (string thisPoint in allLocations)
-        {
-            writer.WriteLine(thisPoint);
-        }
-        writer.Close();
+        return allLocations;
     }
 }

@@ -16,6 +16,8 @@ public class GeoForward : MonoBehaviour
     public ForwardGeocodeResponse geoResponse;
     public ForwardGeocodeResource geoResource;
 
+    public Vector2d myLoc;
+
 
     ForwardGeocodeResource _resource;
     Vector2d _coordinate;
@@ -57,9 +59,9 @@ public class GeoForward : MonoBehaviour
     {
 
     }
+   
 
-
-    void HandleLocationInput(string searchString)
+    public void HandleLocationInput(string searchString)
     {
         _hasResponse = false;
         if (!string.IsNullOrEmpty(searchString))
@@ -78,12 +80,16 @@ public class GeoForward : MonoBehaviour
         }
         else if (null != res.Features && res.Features.Count > 0)
         {
-            Debug.Log(res.Features[0].Center);
             var center = res.Features[0].Center;
-            //_inputField.text = string.Format("{0},{1}", center.x, center.y);
             _coordinate = res.Features[0].Center;
         }
         Response = res;
         OnGeocoderResponse(res);
+        myLoc = res.Features[0].Center;
+    }
+
+    public Vector2d GetLoc()
+    {
+        return myLoc;
     }
 }

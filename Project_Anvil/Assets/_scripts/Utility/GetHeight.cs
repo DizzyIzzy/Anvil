@@ -22,9 +22,9 @@ public class GetHeight : MonoBehaviour {
     public double HeightForPrefab(double lat, double lon, BasicMap _map)
     {
         //get tile ID
-        Debug.Log("lat: " + lat + ", long: " + lon);
+        //Debug.Log("lat: " + lat + ", long: " + lon);
         var tileIDUnwrapped = TileCover.CoordinateToTileId(new Mapbox.Utils.Vector2d(lat, lon), 15);
-        Debug.Log(tileIDUnwrapped);
+       // Debug.Log(tileIDUnwrapped);
         //get tile
         UnityTile tile = _map._mapVisualizer.GetUnityTileFromUnwrappedTileId(tileIDUnwrapped);
 
@@ -46,7 +46,7 @@ public class GetHeight : MonoBehaviour {
         Vector3 location = Conversions.GeoToWorldPosition(lat, lon, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();
         //replace y in position
         location = new Vector3(location.x, h, location.z);
-        Debug.Log("our height is: " + h);
+        //Debug.Log("our height is: " + h);
         return h;
     }
 }
