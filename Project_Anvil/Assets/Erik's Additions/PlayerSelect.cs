@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AgentController : MonoBehaviour {
+public class PlayerSelect: MonoBehaviour {
 
 	KeyTracker keyTracker;
 	UserControlScript buttonControl;
@@ -13,6 +13,8 @@ public class AgentController : MonoBehaviour {
 	public GameObject agentPanel;
 
 	public GameObject thisPanel;
+
+	public bool selection;
 
 	int menuPoint;
 
@@ -27,6 +29,7 @@ public class AgentController : MonoBehaviour {
 		mainMenuPanel = GameObject.Find("Menu Panel");
 		agentPanel = GameObject.Find("AgentPanel");
 		waypointUI ();
+		selection = true;
 	}
 	
 	// Update is called once per frame
@@ -53,19 +56,8 @@ public class AgentController : MonoBehaviour {
 		{
 			buttonControl.PrevAgent ();
 		}
-		if (  Input.GetKeyDown(KeyCode.W)  || Input.GetKey(KeyCode.UpArrow)) 
-		{
-		
-				menuPoint--;
-			checkMenuPoint ();
 
-		}
-		else if ( Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) 
-		{
-				menuPoint++;
-			checkMenuPoint ();
 
-		}
 
 
 		if (Input.GetKeyDown (KeyCode.B)) {
@@ -74,11 +66,45 @@ public class AgentController : MonoBehaviour {
 			mainMenuPanel.gameObject.SetActive(true);
 		}
 
+
+		if (Input.GetKeyDown (KeyCode.C)) {
+			if (selection == false) {
+				selection = true;
+			} else {
+				selection = false;
+			}
+			Debug.Log (selection);
+			//selection = true;
+		}
+
+		checkSelection ();
 		agentUIPicker (menuPoint);
 
 
 
 	}
+
+
+	public void checkSelection()
+	{
+		if (selection) {
+			if (  Input.GetKeyDown(KeyCode.W)  || Input.GetKey(KeyCode.UpArrow)) 
+			{
+
+				menuPoint--;
+				checkMenuPoint ();
+
+			}
+			else if ( Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) 
+			{
+				menuPoint++;
+				checkMenuPoint ();
+
+			}
+		}
+	}
+
+		
 
 		public void agentUIPicker(int pick)
 		{

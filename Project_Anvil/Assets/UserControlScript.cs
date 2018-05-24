@@ -40,7 +40,7 @@ public class UserControlScript : MonoBehaviour {
 
     public GameObject blackBoard;
 
-	public AgentBlackBoard agentBlackBoard;
+
 
     // next action as Delegate
 
@@ -50,14 +50,6 @@ public class UserControlScript : MonoBehaviour {
         //faction hard coded to faction 1 for now
         string factionName = "Faction1";
         blackBoard = GameObject.Find("BlackBoard");
-
-
-		//blackBoard.GetComponent<BlackBoardScript> ().ReadWayPointFile ();
-
-		//agentBlackBoard = GetComponent(typeof(AgentBlackBoard)) as AgentBlackBoard;
-
-	
-
 
 
         //reset UI
@@ -185,6 +177,9 @@ public class UserControlScript : MonoBehaviour {
     }
     public void nextRoute()
     {
+		allFactionRoutes = blackBoard.GetComponent<BlackBoardScript>().allGameRoutes;
+		allFactionAgents = blackBoard.GetComponent<BlackBoardScript>().allGameAgents;
+
         routeListCount = allFactionRoutes.Count;
         int nextRouteIndex = routeIndex + 1;
         if (nextRouteIndex >= routeListCount)
@@ -198,8 +193,12 @@ public class UserControlScript : MonoBehaviour {
         UpdateRouteUIInfo();
         UpdateWayPointUIInfo();
     }
+
     public void prevRoute()
     {
+		allFactionRoutes = blackBoard.GetComponent<BlackBoardScript>().allGameRoutes;
+		allFactionAgents = blackBoard.GetComponent<BlackBoardScript>().allGameAgents;
+
         routeListCount = allFactionRoutes.Count;
         int prevRouteIndex = routeIndex - 1;
         if (prevRouteIndex < 0)
@@ -216,10 +215,11 @@ public class UserControlScript : MonoBehaviour {
 
     public void nextWayPoint()
     {
-		
+		allFactionRoutes = blackBoard.GetComponent<BlackBoardScript>().allGameRoutes;
+		allFactionAgents = blackBoard.GetComponent<BlackBoardScript>().allGameAgents;
 
 
-		wayPointListCount = agentBlackBoard.agentWayPoints.Count;
+		int wayPointListCount = selectedRoute.Count();
 
 
         int nextWayPointIndex = wayPointIndex + 1;
@@ -232,16 +232,23 @@ public class UserControlScript : MonoBehaviour {
             wayPointIndex = nextWayPointIndex;
         }
 
-		activeWayPoint = agentBlackBoard.agentWayPoints[wayPointIndex];
+		//activeWayPoint = agentBlackBoard.agentWayPoints[wayPointIndex];
 
 		Debug.Log (activeWayPoint.ToSaveString());
 
 
 
-        //UpdateWayPointUIInfo();
+        UpdateWayPointUIInfo();
     }
+
+
+
+
     public void prevWayPoint()
     {
+		allFactionRoutes = blackBoard.GetComponent<BlackBoardScript>().allGameRoutes;
+		allFactionAgents = blackBoard.GetComponent<BlackBoardScript>().allGameAgents;
+		
         int wayPointListCount = selectedRoute.Count();
         int prevWayPointIndex = wayPointIndex - 1;
         if (prevWayPointIndex < 0)

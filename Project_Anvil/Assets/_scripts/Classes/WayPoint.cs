@@ -48,7 +48,7 @@ public class WayPoint{
 
     public string LatLonString()
     {
-        string wptString = mLatitude+ "\n" + mLongitude + "\n" + mElevation;
+        string wptString = "Lat: " + mLatitude+ "\nLong: " +  mLongitude + "\nElev: " + mElevation;
         return wptString;
     }
     //TODO method return WayPoint as KML string (https://developers.google.com/kml/documentation/kmlreference#point)

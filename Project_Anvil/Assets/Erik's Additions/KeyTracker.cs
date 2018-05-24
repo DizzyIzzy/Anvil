@@ -8,7 +8,7 @@ public class KeyTracker : MonoBehaviour {
 	public int menuPoint = 3;
 
 	CameraController cameraMove;
-	AgentController agentUIInputs;
+	PlayerSelect agentUIInputs;
 
 	public bool selection;
 
@@ -30,7 +30,7 @@ public class KeyTracker : MonoBehaviour {
 	void Start () {
 		selection = false;
 	    cameraMove = GetComponent(typeof(CameraController)) as CameraController;
-		agentUIInputs = GetComponent(typeof(AgentController)) as AgentController;
+		agentUIInputs = GetComponent(typeof(PlayerSelect)) as PlayerSelect;
 
 		//Assigns all the panels
 		getPanels();

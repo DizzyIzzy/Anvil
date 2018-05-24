@@ -40,4 +40,13 @@ public class Route {
     {
         return routeWayPoints;
     }
+
+	public void addWaypoint(WayPoint wayPoint)
+	{
+		routeWayPoints.Add (wayPoint);
+	}
+
+
+
+
 }

@@ -12,6 +12,12 @@ public class BlackBoardScript : MonoBehaviour {
 
     public GameObject faction;
 
+
+	public GameObject controlScript;
+
+
+
+
     // Use this for initialization
 
     void Awake()
@@ -19,16 +25,16 @@ public class BlackBoardScript : MonoBehaviour {
         allGameAgents = new List<AnvilAgent>(GameObject.Find("Faction1").GetComponentsInChildren<AnvilAgent>());
     }
     void Start () {
-       // WayPoint wpt0 = new WayPoint(1, 5, 5, "wpt0");
+       
         allGameWayPoints = new List<WayPoint>();
         allGameRoutes = new List<Route>();
 
-      //  allGameWayPoints.Add(wpt0);
+     
         wayPointSerial = GetWayPointSerial();
 
+		controlScript = GameObject.Find("UIController");
 
 
-		//ReadWayPointFile ();
     }
     
     public int GetWayPointSerial()
@@ -101,7 +107,11 @@ public class BlackBoardScript : MonoBehaviour {
         allGameRoutes.Add(loadedRoute);
 
 
-        GameObject.Find("UIController").GetComponent<UserControlScript>().UpdateRouteUIInfo();
+      //  GameObject.Find("UIController").GetComponent<UserControlScript>().UpdateRouteUIInfo();
+
+		controlScript.GetComponent<UserControlScript> ().nextRoute();
+
+
     }   
 
     //for debug purposes
