@@ -121,7 +121,9 @@ public class UserControlScript : MonoBehaviour {
             selectedRoute = allFactionRoutes[routeIndex];
             if (selectedRoute != null)
             {
-                activeRouteLabel.text = selectedRoute.mRouteName + "[" + (routeIndex + 1) + "/" + allFactionRoutes.Count + "]";
+				//This was previous routeUIinfo
+                //activeRouteLabel.text = selectedRoute.mRouteName + "[" + (routeIndex + 1) + "/" + allFactionRoutes.Count + "]";
+				activeRouteLabel.text = "Rte: [" + (routeIndex + 1) + "/" + allFactionRoutes.Count + "]";
             }
         }
     }
@@ -134,8 +136,11 @@ public class UserControlScript : MonoBehaviour {
 
 			Debug.Log (activeWayPoint.ToSaveString());
 
+			//Old waypointUIinfo
+            //activeWayPointLabel.text = "[" + (wayPointIndex + 1) + "/" + selectedRoute.routeWayPoints.Count + "]" + activeWayPoint.mWayPointName;
+			activeWayPointLabel.text = "Wpt: " + activeWayPoint.mWayPointName;
 
-            activeWayPointLabel.text = "[" + (wayPointIndex + 1) + "/" + selectedRoute.routeWayPoints.Count + "]" + activeWayPoint.mWayPointName;
+
             activeWayPointPositionLabel.text = activeWayPoint.LatLonString();
         }
     }

@@ -5,9 +5,9 @@ using DotNetCoords;
 
 public class AnvilAgent : MonoBehaviour {
     //name,id,location, orientation, faction
-    public string mAgentName;
+	public string mAgentName;      //[NAME]
     public string mAgentSerial;
-    public LatLng mLocation;
+	public LatLng mLocation;		//[Location]
     public string mFaction;
     public string locString;
     public bool isSelected;
@@ -15,8 +15,9 @@ public class AnvilAgent : MonoBehaviour {
 
     public string transformString;
 
-    public WayPoint mNavTarget;
-    public WayPoint mSensorTarget;
+    public WayPoint mNavTarget;		//[Nav Target]
+    public WayPoint mSensorTarget;  //[Sensor Tgt]
+	public string task; 			//[Task]
     //Gear - links to equipments by Arrays and List of owned or accessible objects
     //Goals -links to drives and traits classes
     //working memory - unit level blackboard: navTarget, navSequence, schedule, goals, sensorTarget, sensorList
