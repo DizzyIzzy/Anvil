@@ -6,25 +6,26 @@ using UnityEngine.UI;
 public class MasterPanelUI : MonoBehaviour {
 
 	private GameObject masterMenuPanel;
+
+	//Text Objects
 	public Text routeDataLabel;
 	public Text waypointDataLabel;
 	public Text factionDataLabel;
 	public Text agentDataLabel;
 	public Text taskDataLabel;
-
 	public Text navTargetLabel;
-
 	private Text thisLabel;
-	private Text prevLabel;
-
 	private List<Text> allLabels;
 
 	public UserControlScript controlScript;
+	public PlayerSelect playerSelect;
+	public KeyTracker keyTracker;
 
-	private bool selected;
+	public bool selected;
 	private bool routeSelected;
 
 	int menuPoint; 
+	int startSelect = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -45,34 +46,54 @@ public class MasterPanelUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		checkMenuPoint ();
-		checkSelected();
+	}
+		
 
-		if (selected == false) {
+
+	public void masterMenuControl()
+	{
+		/*
+		keyTracker.agentActionSelect = true;
+		//masterMenuPanel.gameObject.SetActive(true);
+		getInputs ();
+		Debug.Log (selected);
+		*/
+	}
+
+	public void getInputs()
+	{
+		
 			if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown (KeyCode.UpArrow)) {
-				Debug.Log (menuPoint);
 				menuPoint--;
 			}
 			if (Input.GetKeyDown (KeyCode.S) || Input.GetKeyDown (KeyCode.DownArrow)) {
-				Debug.Log (menuPoint);
 				menuPoint++;
 			}
-		}
+		
 
-
-		if (Input.GetKeyDown (KeyCode.C)) 
-		{
-			selected = true;
-		}
+			if (Input.GetKeyDown (KeyCode.C)) {
+				if (selected == false) {
+					selected = true;
+				} else {
+					selected = false;
+				}
+				
+			}
+		
+		/*
 		if (Input.GetKeyDown (KeyCode.B)) 
 		{
 			selected = false;
+			playerSelect.selection = false;
+			keyTracker.agentActionSelect = true;
 		}
+	*/
 
-		//routeControl ();
-		//waypointControl ();
+		checkMenuPoint ();
+		checkSelected();
 	}
-		
+
+
 	public void checkMenuPoint()
 	{
 		if (menuPoint > 4 ) {
@@ -89,7 +110,7 @@ public class MasterPanelUI : MonoBehaviour {
 		{
 		case 0:
 			thisLabel = routeDataLabel;
-			if (selected) 
+			if (!selected) 
 			{
 				routeControl ();
 			}
@@ -116,9 +137,7 @@ public class MasterPanelUI : MonoBehaviour {
 			{
 				label.color = Color.white;
 			}
-		}
-
-
+		}			
 	}
 
 	private void specificCheck(int specificPoint)
@@ -171,12 +190,13 @@ public class MasterPanelUI : MonoBehaviour {
 
 	private void routeControl()
 	{
+		routeSelected = false;
 
 		if (Input.GetKeyDown (KeyCode.A) || Input.GetKeyDown (KeyCode.LeftArrow)) 
 		{
 			controlScript.prevRoute();
 		}
-		if (Input.GetKeyDown (KeyCode.D) || Input.GetKeyDown (KeyCode.RightArrow)) 
+		else if (Input.GetKeyDown (KeyCode.D) || Input.GetKeyDown (KeyCode.RightArrow)) 
 		{
 			controlScript.nextRoute();
 		}
@@ -184,10 +204,7 @@ public class MasterPanelUI : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.C)) 
 		{
 			routeSelected = true;
-
 		}
-			
-
 
 		if (controlScript.activeRouteLabel != null) 
 		{
@@ -213,8 +230,6 @@ public class MasterPanelUI : MonoBehaviour {
 		{
 			controlScript.nextWayPoint();
 		}
-
-
 
 
 		if (controlScript.activeRouteLabel != null) 

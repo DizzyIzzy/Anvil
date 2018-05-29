@@ -91,7 +91,7 @@ public class CameraController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.B)) {
 			
 			//setSelect = false;
-			keyTracker.selection = false;
+			keyTracker.mainMenuSelect = false;
 			mainMenuPanel.gameObject.SetActive(true);
 			//keyTracker.menuPoint++;
 			//Debug.Log ("B was pressed" + keyTracker.selection);

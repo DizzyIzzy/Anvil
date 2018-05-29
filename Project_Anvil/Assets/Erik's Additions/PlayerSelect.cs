@@ -14,22 +14,33 @@ public class PlayerSelect: MonoBehaviour {
 
 	public GameObject thisPanel;
 
+	public GameObject masterMenuPanel;
+
+	public MasterPanelUI masterPanel;
+
 	public bool selection;
+	public bool masterSelection;
 
 	int menuPoint;
+
+
+
 
 	// Use this for initialization
 	void Start () {
 		menuPoint = 1;
 		keyTracker = GetComponent(typeof(KeyTracker)) as KeyTracker;
 		buttonControl = GetComponent (typeof(UserControlScript)) as UserControlScript;
-		routePanel = GameObject.Find ("RoutePanel");
-		taskPanel = GameObject.Find ("TaskPanel");
-		targetingPanel = GameObject.Find ("TargetingPanel");
-		mainMenuPanel = GameObject.Find("Menu Panel");
-		agentPanel = GameObject.Find("AgentPanel");
+
+		getPanels ();
+
 		waypointUI ();
+		//selection = true;
 		selection = true;
+
+		masterMenuPanel.gameObject.SetActive (false);
+
+		masterSelection = false;
 	}
 	
 	// Update is called once per frame
@@ -40,47 +51,52 @@ public class PlayerSelect: MonoBehaviour {
 
 	public void agentInputs()
 	{
+		/*
 		getInput ();
+		exitUI ();
+		*/
 	}
 
 
 	public void getInput()
 	{
+
+
+		/*
 		Debug.Log (menuPoint);
 
-		if (Input.GetKeyDown(KeyCode.D) || Input.GetKey(KeyCode.LeftArrow))
-		{
-			buttonControl.NextAgent ();
+		if (!selection) {
+			if (Input.GetKeyDown (KeyCode.D) || Input.GetKey (KeyCode.LeftArrow)) {
+				buttonControl.NextAgent ();
+			} else if (Input.GetKeyDown (KeyCode.A) || Input.GetKey (KeyCode.RightArrow)) {
+				buttonControl.PrevAgent ();
+			}
+
+		//	masterMenuPanel.gameObject.SetActive (false);
+
 		}
-		else if (Input.GetKeyDown(KeyCode.A) || Input.GetKey(KeyCode.RightArrow)) 
-		{
-			buttonControl.PrevAgent ();
-		}
 
-
-
-
+		/*
 		if (Input.GetKeyDown (KeyCode.B)) {
 			exitUI ();
-			keyTracker.selection = false;
+			keyTracker.mainMenuSelect = false;
 			mainMenuPanel.gameObject.SetActive(true);
 		}
 
-
 		if (Input.GetKeyDown (KeyCode.C)) {
-			if (selection == false) {
+			//if (selection == false) {
 				selection = true;
-			} else {
-				selection = false;
-			}
-			Debug.Log (selection);
-			//selection = true;
+			//} else {
+			//selection = false;
+			//}
+			Debug.Log ("Selection: " + selection);
+
+		//	masterMenuPanel.gameObject.SetActive (true);
 		}
+		*/
 
 		checkSelection ();
 		agentUIPicker (menuPoint);
-
-
 
 	}
 
@@ -88,19 +104,10 @@ public class PlayerSelect: MonoBehaviour {
 	public void checkSelection()
 	{
 		if (selection) {
-			if (  Input.GetKeyDown(KeyCode.W)  || Input.GetKey(KeyCode.UpArrow)) 
-			{
 
-				menuPoint--;
-				checkMenuPoint ();
-
-			}
-			else if ( Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) 
-			{
-				menuPoint++;
-				checkMenuPoint ();
-
-			}
+			agentPanel.gameObject.SetActive (false);
+			masterMenuPanel.gameObject.SetActive (true);
+			masterPanel.masterMenuControl ();
 		}
 	}
 
@@ -157,10 +164,19 @@ public class PlayerSelect: MonoBehaviour {
 	}
 
 	public void exitUI(){
-		agentPanel.gameObject.SetActive (true);
-		thisPanel.gameObject.SetActive(true);
+		taskPanel.gameObject.SetActive(false);
+		routePanel.gameObject.SetActive(false);
+		targetingPanel.gameObject.SetActive(false);
 	}
 
+	public void getPanels(){
+		routePanel = GameObject.Find ("RoutePanel");
+		taskPanel = GameObject.Find ("TaskPanel");
+		targetingPanel = GameObject.Find ("TargetingPanel");
+		mainMenuPanel = GameObject.Find("Menu Panel");
+		agentPanel = GameObject.Find("AgentPanel");
+		masterMenuPanel = GameObject.Find ("MasterMenuPanel");
+	}
 
 
 }
