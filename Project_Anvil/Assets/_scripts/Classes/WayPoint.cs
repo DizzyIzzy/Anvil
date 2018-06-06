@@ -10,8 +10,8 @@ public class WayPoint{
     public string mWayPointName;
     string wayPointShortTitle;
     string group;
-    double mLatitude;
-    double mLongitude;
+    public double mLatitude;
+    public  double mLongitude;
     public double mElevation;
     public static int lastUnassignedSerial=0;
 

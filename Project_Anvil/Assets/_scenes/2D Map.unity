@@ -3338,6 +3338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889a3c630adc9db49aa837245c8f3c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _map: {fileID: 1754058991}
   menuPoint: 3
   actionPoint: 0
   buttonControl: {fileID: 1046089964}
@@ -3346,6 +3347,7 @@ MonoBehaviour:
   agentMenuSelect: 0
   agentActionSelect: 0
   actionMenuPanel: {fileID: 163582662}
+  moveAgent: {fileID: 1587953432}
   routeDataLabel: {fileID: 1162757459}
   waypointDataLabel: {fileID: 320059007}
   factionDataLabel: {fileID: 114604181}
@@ -4194,6 +4196,7 @@ GameObject:
   - component: {fileID: 1397300582}
   - component: {fileID: 1397300581}
   - component: {fileID: 1397300583}
+  - component: {fileID: 1397300584}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4299,6 +4302,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3410cba44eb9b354bba5907b6b2c5e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1397300584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1397300576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0e955466a574c46b97cdf9005b8a3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _map: {fileID: 1754058991}
 --- !u!1 &1468827255
 GameObject:
   m_ObjectHideFlags: 0

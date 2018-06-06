@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Mapbox.Unity.Map;
+using Mapbox.Unity.Utilities;
+using Mapbox.Utils;
 
 public class KeyTracker : MonoBehaviour {
+
+	public AbstractMap _map;
 
 	//This keeps track of what we want to select from main menu
 	public int menuPoint = 0;
@@ -34,6 +39,8 @@ public class KeyTracker : MonoBehaviour {
 	private GameObject debugPanel;
 	
 	public GameObject actionMenuPanel;
+
+	public GameObject moveAgent;
 
 
 	//These are the text objects for the menu
@@ -342,6 +349,18 @@ public class KeyTracker : MonoBehaviour {
 				Debug.Log ("Plus pressed inside waypoint");
 			}
 		}
+
+
+		WayPoint wayPoint = new WayPoint (33.95, -118.45, 49, "NPSGate");
+
+		Vector2d latLong = new Vector2d(wayPoint.mLatitude, wayPoint.mLongitude);
+		if (Input.GetKeyDown (KeyCode.E)) 
+		{
+			moveAgent.transform.localPosition = Conversions.GeoToWorldPosition(latLong, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();
+		}
+
+
+
 
 	}
 
