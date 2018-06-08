@@ -21,13 +21,23 @@ public class UserControlScript : MonoBehaviour {
     // active waypoint 
     public WayPoint activeWayPoint;
     public GameObject faction;
+
+	//active tasks
+	public string currentTask;
+
     public int agentIndex = 0;
     public int routeIndex = 0;
     public int wayPointIndex = 0;
+	public int taskIndex = 0;
+
+	//Indeces for tracking
     private int agentCount;
     private int routeListCount;
     private int wayPointListCount;
+	private int taskListCount;
 
+	//task object
+	public Tasks tasks;
 
     //for UI output to canvas
     public Text activeAgentLabel;
@@ -37,6 +47,7 @@ public class UserControlScript : MonoBehaviour {
     public Text activeWayPointLabel;
     public Text activeWayPointShortLabel;
     public Text activeWayPointPositionLabel;
+	public Text activeTaskLabel;
 
     public GameObject blackBoard;
 
@@ -68,6 +79,8 @@ public class UserControlScript : MonoBehaviour {
         UpdateAgentUIInfo();
         UpdateRouteUIInfo();
         UpdateWayPointUIInfo();
+		UpdateTaskUIInfo ();
+
         if (allFactionRoutes != null)
         {
             selectedRoute = allFactionRoutes[routeIndex];
@@ -111,12 +124,29 @@ public class UserControlScript : MonoBehaviour {
                     activeAgentDataLabel.text = selectedAgent.mNavTarget.mWayPointName;
                 }
             }
+
+			if (selectedAgent.task != null) 
+			{
+				if (selectedAgent.task == "")
+				{
+					activeTaskLabel.text = "Task: Idle";
+				}
+				else
+				{
+					activeTaskLabel.text = selectedAgent.task;
+				}
+			}
+
         }
     }
 
+
+
+		
+
     public void UpdateRouteUIInfo()
     {
-        if (allFactionRoutes != null)
+		if (allFactionRoutes != null)
         {
             selectedRoute = allFactionRoutes[routeIndex];
             if (selectedRoute != null)
@@ -145,6 +175,24 @@ public class UserControlScript : MonoBehaviour {
         }
     }
 
+
+	public void UpdateTaskUIInfo()
+	{
+		if (tasks.taskList != null)
+		{
+			
+			if (currentTask != null)
+			{
+				currentTask = tasks.taskList[taskIndex];
+				//This was previous routeUIinfo
+				//activeRouteLabel.text = selectedRoute.mRouteName + "[" + (routeIndex + 1) + "/" + allFactionRoutes.Count + "]";
+				activeTaskLabel.text = "Task: " + currentTask;
+			}
+		}
+	}
+
+
+
     // Update is called once per frame
     void Update () {
 	}
@@ -166,6 +214,7 @@ public class UserControlScript : MonoBehaviour {
         }
         UpdateAgentUIInfo();
     }
+
     public void PrevAgent()
         {
             agentCount = allFactionAgents.Count;
@@ -218,6 +267,7 @@ public class UserControlScript : MonoBehaviour {
         UpdateWayPointUIInfo();
     }
 
+	//Gets the next waypoint
     public void nextWayPoint()
     {
 		allFactionRoutes = blackBoard.GetComponent<BlackBoardScript>().allGameRoutes;
@@ -248,7 +298,7 @@ public class UserControlScript : MonoBehaviour {
 
 
 
-
+	//Gets the previous waypoint
     public void prevWayPoint()
     {
 		allFactionRoutes = blackBoard.GetComponent<BlackBoardScript>().allGameRoutes;
@@ -272,4 +322,47 @@ public class UserControlScript : MonoBehaviour {
         selectedAgent.setNavTarget(activeWayPoint);
         UpdateAgentUIInfo();
     }
+
+	public void PushTaskToAgent()
+	{
+		selectedAgent.setTask (activeTaskLabel.text);
+		UpdateAgentUIInfo ();
+	}
+
+	public void prevTask()
+	{
+		taskListCount = tasks.taskList.Count;
+		Debug.Log("NextTask pressed"+taskListCount);
+		int nextTaskIndex = taskIndex - 1;
+		if (nextTaskIndex < 0)
+		{
+			taskIndex = tasks.taskList.Count-1;
+
+		}
+		else
+		{
+			taskIndex = nextTaskIndex;
+		}
+		UpdateTaskUIInfo();
+	}
+
+
+	public void nextTask()
+	{
+		taskListCount = tasks.taskList.Count;
+		Debug.Log("NextTask pressed"+taskListCount);
+		int nextTaskIndex = taskIndex + 1;
+		if (nextTaskIndex >= taskListCount)
+		{
+			taskIndex = 0;
+
+		}
+		else
+		{
+			taskIndex = nextTaskIndex;
+		}
+		UpdateTaskUIInfo();
+	}
+
+
 }

@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using DotNetCoords;
 using System;
+using Mapbox.Unity.Map;
+using Mapbox.Unity.Utilities;
+using Mapbox.Utils;
 
 public class WayPoint{
+	AbstractMap _map;
+
     public LatLng latLong;
     string wayPointSerialID;
     public string mWayPointName;
@@ -19,12 +24,18 @@ public class WayPoint{
     private int blackBoardWayPointSerial;
     private List<WayPoint> blackBoardWayPointList;
 
+
+	public Vector3 position;
+
     void Start()
     {
+		_map = GameObject.Find ("Map").GetComponent<AbstractMap> ();
         blackBoard = GameObject.Find("BlackBoard");
         // blackBoardWayPointSerial = blackBoard.GetComponent<BlackBoardScript>().GetWayPointSerial();
         blackBoardWayPointSerial = 5;
         blackBoardWayPointList = blackBoard.GetComponent<BlackBoardScript>().allGameWayPoints;
+
+		position = new Vector3 ();
     }
     public WayPoint (double latitude, double longitude, double height, string newWayPointName)
     {
@@ -36,6 +47,12 @@ public class WayPoint{
         mWayPointName = newWayPointName;
         lastUnassignedSerial ++;
         latLong = new LatLng(latitude, longitude, height);
+
+
+	//	Vector2d vectorLatLong = new Vector2d(latitude, longitude);
+
+//		position = Conversions.GeoToWorldPosition(vectorLatLong, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();
+
         wayPointShortTitle = newWayPointName;
         PostToBlackboard();
     }

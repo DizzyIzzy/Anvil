@@ -34,7 +34,7 @@ public class BlackBoardScript : MonoBehaviour {
 
 		controlScript = GameObject.Find("UIController");
 
-
+		ReadWayPointFile ();
     }
     
     public int GetWayPointSerial()

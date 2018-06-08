@@ -16,10 +16,9 @@ public class KeyTracker : MonoBehaviour {
 
 	//References to other scripts
 	CameraController cameraMove;
-	public UserControlScript buttonControl;
-
+	public UserControlScript userControl;
 	public BlackBoardScript blackBoard;
-
+	public Tasks taskToDo;
 
 	//This determines which selection we are using
 	public bool mainMenuSelect;
@@ -35,12 +34,10 @@ public class KeyTracker : MonoBehaviour {
 	//These hold the GUI panels to turn on or off
 	private GameObject mainMenuPanel;
 	private GameObject agentPanel;
-	//private GameObject routePanel;
 	private GameObject debugPanel;
-	
 	public GameObject actionMenuPanel;
-
 	public GameObject moveAgent;
+	public GameObject routePanel;
 
 
 	//These are the text objects for the menu
@@ -49,12 +46,12 @@ public class KeyTracker : MonoBehaviour {
 	public Text factionDataLabel;
 	public Text agentDataLabel;
 	public Text taskDataLabel;
-
 	private Text thisLabel;
 	private List<Text> allLabels;
 
 
-
+	//Booleans
+	public bool moving;
 
 
 	void Start () {
@@ -62,6 +59,7 @@ public class KeyTracker : MonoBehaviour {
 		mainMenuSelect = false;
 	    cameraMove = GetComponent(typeof(CameraController)) as CameraController;
 
+		taskToDo = GetComponent<Tasks> ();
 
 		allLabels = new List<Text> ();
 
@@ -70,6 +68,8 @@ public class KeyTracker : MonoBehaviour {
 		getButtons ();
 		addLabels();
 		actionMenuPanel.gameObject.SetActive (false);
+
+		moving = false;
 
 	}
 	
@@ -82,12 +82,14 @@ public class KeyTracker : MonoBehaviour {
 
 		checkSelected ();
 
+		//This helps highlight the different main menu options
 		switch (menuPoint)
 		{
 		case 0:
-			//Code for other menu
+			//Code for setting menu
 			break;
 		case 1:
+			//This is the case for the agent menu
 			if(mainMenuSelect==true)
 			{
 			uiPicker(menuPoint);
@@ -95,15 +97,17 @@ public class KeyTracker : MonoBehaviour {
 				//If we are already in the agent Menu and now we go into the action menu
 				if (agentActionSelect == true) {
 					actionMenuPanel.gameObject.SetActive (true);
+					//agentPanel.gameObject.SetActive (false);
 					checkActionPoint ();
 					checkActionSelected ();
 				} else {
 					actionMenuPanel.gameObject.SetActive (false);
+					agentPanel.gameObject.SetActive (true);
 				}
 			}
 			break;
 		case 2:
-			//Code for other menu
+			//Code for waypoint menu
 			if(mainMenuSelect==true)
 			{
 			uiPicker(menuPoint);
@@ -111,6 +115,7 @@ public class KeyTracker : MonoBehaviour {
 			}
 			break;
 		case 3:
+			//Code for camera menu
 			//if (cameraMove.setSelect && selection==true) 
 			if (mainMenuSelect==true) {
 				uiPicker(menuPoint);
@@ -251,25 +256,39 @@ public class KeyTracker : MonoBehaviour {
 				//If we are navigating the agent select
 				if (agentMenuSelect && !agentActionSelect) 
 			{
-					buttonControl.NextAgent ();
+					//Navigates the possible agents
+					userControl.NextAgent ();
 			} 
+				//If we are navigating the agent action menu
 			else if (agentActionSelect) 
 			{
+				
 				//If we are changing routes
 				if (actionPoint == 0) {
-					buttonControl.nextRoute ();
+					//Gets next route
+					userControl.nextRoute ();
 
-					if (buttonControl.activeRouteLabel != null) {
-						routeDataLabel.text = buttonControl.activeRouteLabel.text;
+					if (userControl.activeRouteLabel != null) {
+						routeDataLabel.text = userControl.activeRouteLabel.text;
 					}
 				} 
-				else if (actionPoint == 1) 
-				{
-					buttonControl.prevWayPoint();
+				//Navigating Waypoints
+				else if (actionPoint == 1) {
+					//Gets next waypoint
+					userControl.nextWayPoint ();
 
-					if (buttonControl.activeRouteLabel != null) 
-					{
-						waypointDataLabel.text = buttonControl.activeWayPointLabel.text;
+					if (userControl.activeRouteLabel != null) {
+						waypointDataLabel.text = userControl.activeWayPointLabel.text;
+					}
+				} 
+				//Navigating Tasks
+				else if (actionPoint == 4)
+				{
+					//Gets next task
+					userControl.nextTask();
+
+					if (userControl.activeRouteLabel != null) {
+						taskDataLabel.text = userControl.activeTaskLabel.text;
 					}
 				}
 
@@ -280,26 +299,41 @@ public class KeyTracker : MonoBehaviour {
 				//If we are navigating the agent select
 				if (agentMenuSelect && !agentActionSelect) 
 			{
-					buttonControl.PrevAgent ();
+				//Gets the previous agent
+					userControl.PrevAgent ();
 			}
+				//If we are navigating the action select
 			else if (agentActionSelect) 
 			{
-
+				//Navigating Routes
 				if (actionPoint == 0) 
 				{
-					buttonControl.prevRoute ();
+					userControl.prevRoute ();
 					
-						if (buttonControl.activeRouteLabel != null) {
-							routeDataLabel.text = buttonControl.activeRouteLabel.text;
+						if (userControl.activeRouteLabel != null) {
+							routeDataLabel.text = userControl.activeRouteLabel.text;
 						}
 				}
+				//Navigating Waypoints
 				else if (actionPoint == 1) 
 				{
-					buttonControl.prevWayPoint();
+					//Gets the previous waypoint
+					userControl.prevWayPoint();
 
-					if (buttonControl.activeRouteLabel != null) 
+					if (userControl.activeRouteLabel != null) 
 					{
-						waypointDataLabel.text = buttonControl.activeWayPointLabel.text;
+						waypointDataLabel.text = userControl.activeWayPointLabel.text;
+					}
+				}
+				//Navigating Tasks
+				else if (actionPoint == 4)
+				{
+					//Gets the previous task
+					userControl.prevTask();
+
+					if (userControl.activeRouteLabel != null) {
+						taskDataLabel.text = userControl.activeTaskLabel.text;
+
 					}
 				}
 			}
@@ -308,9 +342,14 @@ public class KeyTracker : MonoBehaviour {
 			
 
 			if (Input.GetKeyDown (KeyCode.C)) {
+					//Hitting C over a main menu option will now open the next part of the menu
 					mainMenuSelect = true;
 				if (agentMenuSelect == true) {
 					agentActionSelect = true;
+				//This makes the routes display when the action menu pops up
+				routeDataLabel.text = userControl.activeRouteLabel.text;
+				waypointDataLabel.text = userControl.activeWayPointLabel.text;
+				taskDataLabel.text = userControl.activeTaskLabel.text;
 				}
 
 
@@ -321,9 +360,10 @@ public class KeyTracker : MonoBehaviour {
 
 			if (Input.GetKeyDown (KeyCode.B)) {
 
-
+				//If we are in action select and want to go back
 				if (mainMenuSelect == true && agentMenuSelect == true && agentActionSelect == true) {
 					agentActionSelect = false;
+				//If we are in the agent select and want to go back
 				} else if (mainMenuSelect == true && agentMenuSelect == true && agentActionSelect == false) {
 					agentMenuSelect = false;
 					mainMenuSelect = false;
@@ -340,14 +380,32 @@ public class KeyTracker : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.T)) 
 		{
 			Debug.Log ("Plus pressed");
-			if (actionPoint == 1)
-			{
+			//If we confirm while over the waypoints, set the current agents waypoint 
+			if (actionPoint == 1) {
 				//Add code to store the actual waypoint data
-				buttonControl.activeAgentDataLabel.text = waypointDataLabel.text;
+				userControl.activeAgentDataLabel.text = waypointDataLabel.text;
 				//This might need to be changed
-				buttonControl.PushWayPointToAgent ();
+				userControl.PushWayPointToAgent ();
 				Debug.Log ("Plus pressed inside waypoint");
+			} else if (actionPoint == 4) 
+			{
+				taskDataLabel.text = userControl.activeTaskLabel.text;
+
+				if (taskDataLabel.text == "Task: moveNow")
+				{
+					moving = true;
+				}
+
+
+
+				//userControl.activeTaskLabel.text = taskDataLabel.text;
+				userControl.PushTaskToAgent();
 			}
+		}
+
+		if (moving) 
+		{
+			taskToDo.doTask ("moveNow");
 		}
 
 
@@ -378,7 +436,7 @@ public class KeyTracker : MonoBehaviour {
 			break;
 		case 2:
 			//Code for other menu
-			waypointUI();
+			routeUI();
 			break;
 		case 3:
 				mapUI();
@@ -391,6 +449,7 @@ public class KeyTracker : MonoBehaviour {
 		mainMenuPanel.gameObject.SetActive(true);
 		agentPanel.gameObject.SetActive(true);
 		debugPanel.gameObject.SetActive(false);
+		routePanel.gameObject.SetActive (false);
 	}
 
 	public void mapUI()
@@ -398,6 +457,7 @@ public class KeyTracker : MonoBehaviour {
 		mainMenuPanel.gameObject.SetActive(false);
 		agentPanel.gameObject.SetActive(false);
 		debugPanel.gameObject.SetActive(false);
+		routePanel.gameObject.SetActive (false);
 	}
 
 	public void agentUI()
@@ -405,6 +465,7 @@ public class KeyTracker : MonoBehaviour {
 		mainMenuPanel.gameObject.SetActive(false);
 		agentPanel.gameObject.SetActive(true);
 		debugPanel.gameObject.SetActive(false);
+		routePanel.gameObject.SetActive (false);
 	}
 
 	public void waypointUI()
@@ -412,16 +473,26 @@ public class KeyTracker : MonoBehaviour {
 		mainMenuPanel.gameObject.SetActive(false);
 		agentPanel.gameObject.SetActive(false);
 		debugPanel.gameObject.SetActive(false);
+		routePanel.gameObject.SetActive (false);
 	}
 
-
+	public void routeUI()
+	{
+		routePanel.gameObject.SetActive (true);
+		mainMenuPanel.gameObject.SetActive(false);
+		agentPanel.gameObject.SetActive(false);
+		debugPanel.gameObject.SetActive(false);
+	}
 
 	public void getPanels()
 	{
 		mainMenuPanel = GameObject.Find("Menu Panel");
 		agentPanel = GameObject.Find("AgentPanel");
 		debugPanel = GameObject.Find("DebugBlackboard");
+		routePanel = GameObject.Find("RoutePanel");
 	}
+
+
 
 
 	//This adds all the text values to a list in order to make highlighting easier

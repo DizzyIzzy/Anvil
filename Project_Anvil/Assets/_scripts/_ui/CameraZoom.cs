@@ -14,6 +14,8 @@ public class CameraZoom : MonoBehaviour
     float newCamSize;
     Camera myCam;
 
+	public float zoomSpeed;
+
     // Use this for initialization
     void Start()
     {
@@ -38,13 +40,13 @@ public class CameraZoom : MonoBehaviour
         zoom = true;
         currentTime = 0f;
         camSize = myCam.orthographicSize;
-        newCamSize = myCam.orthographicSize - 2;
+		newCamSize = myCam.orthographicSize - zoomSpeed;
     }
     public void ZoomOut()
     {
         zoom = true;
         currentTime = 0f;
         camSize = myCam.orthographicSize;
-        newCamSize = myCam.orthographicSize + 2;
+		newCamSize = myCam.orthographicSize + zoomSpeed;
     }
 }

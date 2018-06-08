@@ -18,7 +18,6 @@ public class MasterPanelUI : MonoBehaviour {
 	private List<Text> allLabels;
 
 	public UserControlScript controlScript;
-	public PlayerSelect playerSelect;
 	public KeyTracker keyTracker;
 
 	public bool selected;
