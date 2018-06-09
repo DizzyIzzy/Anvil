@@ -24,8 +24,7 @@ public class WayPoint{
     private int blackBoardWayPointSerial;
     private List<WayPoint> blackBoardWayPointList;
 
-
-	public Vector3 position;
+    public Vector3 position;
 
     void Start()
     {
@@ -91,8 +90,8 @@ public class WayPoint{
 
     }
 
-    public Vector3 ToUnityVector3()
-    {
-        return ConversionTool.LatLongToUnityVector3D(latLong);
-    }
+    //public Vector3 ToUnityVector3()
+    //{
+    //    return Conversions.GeoToWorldGlobePosition(mLatitude, mLongitude, 6378137 + (float)mElevation);
+    //}
 }

@@ -10,10 +10,10 @@ using Mapbox.Unity.Map;
 using Mapbox.Utils;
 using Mapbox.Unity.Utilities;
 
-public class ConversionTool : MonoBehaviour {
+public class ConversionTool {
 
-	public GameObject player;
-	public Text CurrentPos;
+public GameObject player;
+public Text CurrentPos;
 	private BasicMap MyMap;
 	private Vector2d InitRef2D;
 	private Vector3 UnityPos3D; 
@@ -66,9 +66,19 @@ public class ConversionTool : MonoBehaviour {
       
         return outputV3;
 
-
     }
-	
+
+    public static Vector3 WayPointToUnityVector3D(WayPoint waypoint)
+    {
+        double latitude = waypoint.mLatitude;
+        double longitude = waypoint.mLongitude;
+        float height = 6378137 + (float)waypoint.mElevation;
+        Vector2d outputV2 = new Vector2d(latitude, longitude);
+        Vector3 outputV3 = Conversions.GeoToWorldGlobePosition(outputV2, height);
+        return outputV3;
+    }
+
+   
     public static LatLng LatLongFromUnityVector3D(Vector3 aPosition)
     {
         Vector3 unityCoords = aPosition;
@@ -81,7 +91,6 @@ public class ConversionTool : MonoBehaviour {
         convertPos2D = aMap.CenterMercator + (convertPos2D * aMap.WorldRelativeScale);
         Vector2d Ref2d;
         Ref2d = Mapbox.Unity.Utilities.Conversions.MetersToLatLon(convertPos2D);
-
         LatLng outputlatLng = new LatLng(Ref2d.x, Ref2d.y);
         return outputlatLng;
     }

@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Mapbox.Unity.Map;
 
 
 public class UserControlScript : MonoBehaviour {
+    private BasicMap MyMap;
     // active agent
     public AnvilAgent selectedAgent;
     public List<AnvilAgent> allFactionAgents;
@@ -30,7 +32,7 @@ public class UserControlScript : MonoBehaviour {
     public int wayPointIndex = 0;
 	public int taskIndex = 0;
 
-	//Indeces for tracking
+	//Indices for tracking
     private int agentCount;
     private int routeListCount;
     private int wayPointListCount;
@@ -49,9 +51,11 @@ public class UserControlScript : MonoBehaviour {
     public Text activeWayPointPositionLabel;
 	public Text activeTaskLabel;
 
+    public Texture agentHighlight;
+    public Texture WayPointHighlight;
+
     public GameObject blackBoard;
-
-
+    public Vector3 activeWayPointWorldPoint;
 
     // next action as Delegate
 
@@ -62,7 +66,7 @@ public class UserControlScript : MonoBehaviour {
         string factionName = "Faction1";
         blackBoard = GameObject.Find("BlackBoard");
 
-
+        MyMap = BasicMap.FindObjectOfType<BasicMap>();
         //reset UI
         if (allFactionRoutes == null)
         {
@@ -73,9 +77,7 @@ public class UserControlScript : MonoBehaviour {
         faction = GameObject.Find(factionName);
         allFactionRoutes = blackBoard.GetComponent<BlackBoardScript>().allGameRoutes;
         allFactionAgents = blackBoard.GetComponent<BlackBoardScript>().allGameAgents;
-
-
-
+        
         UpdateAgentUIInfo();
         UpdateRouteUIInfo();
         UpdateWayPointUIInfo();
@@ -94,9 +96,6 @@ public class UserControlScript : MonoBehaviour {
 		{
 			Debug.Log ("SELECTED " + waypoint.ToSaveString());
 		}
-
-
-
     }
 
     private void UpdateAgentUIInfo()
@@ -136,14 +135,9 @@ public class UserControlScript : MonoBehaviour {
 					activeTaskLabel.text = selectedAgent.task;
 				}
 			}
-
         }
     }
-
-
-
-		
-
+    
     public void UpdateRouteUIInfo()
     {
 		if (allFactionRoutes != null)
@@ -163,14 +157,12 @@ public class UserControlScript : MonoBehaviour {
         if (selectedRoute != null)
         {
             activeWayPoint = selectedRoute.routeWayPoints[wayPointIndex];
-
-			Debug.Log (activeWayPoint.ToSaveString());
-
-			//Old waypointUIinfo
+            activeWayPointWorldPoint = ConversionTool1.WayPointToUnityVector3D2(activeWayPoint);
+            Debug.Log("activeWayPointWorldPoint: " + activeWayPointWorldPoint);
+            Debug.Log (activeWayPoint.ToSaveString());
+            //Old waypointUIinfo
             //activeWayPointLabel.text = "[" + (wayPointIndex + 1) + "/" + selectedRoute.routeWayPoints.Count + "]" + activeWayPoint.mWayPointName;
 			activeWayPointLabel.text = "Wpt: " + activeWayPoint.mWayPointName;
-
-
             activeWayPointPositionLabel.text = activeWayPoint.LatLonString();
         }
     }
@@ -180,7 +172,6 @@ public class UserControlScript : MonoBehaviour {
 	{
 		if (tasks.taskList != null)
 		{
-			
 			if (currentTask != null)
 			{
 				currentTask = tasks.taskList[taskIndex];
@@ -191,22 +182,16 @@ public class UserControlScript : MonoBehaviour {
 		}
 	}
 
-
-
-    // Update is called once per frame
     void Update () {
 	}
 
     public void NextAgent()
     {
-        Debug.Log("NextAgent pressed");
         agentCount = allFactionAgents.Count;
-        Debug.Log("NextAgent pressed"+agentCount);
         int nextAgentIndex = agentIndex + 1;
         if (nextAgentIndex >= agentCount)
         {
             agentIndex = 0;
-            
         }
         else
         {
@@ -233,7 +218,6 @@ public class UserControlScript : MonoBehaviour {
     {
 		allFactionRoutes = blackBoard.GetComponent<BlackBoardScript>().allGameRoutes;
 		allFactionAgents = blackBoard.GetComponent<BlackBoardScript>().allGameAgents;
-
         routeListCount = allFactionRoutes.Count;
         int nextRouteIndex = routeIndex + 1;
         if (nextRouteIndex >= routeListCount)
@@ -252,7 +236,6 @@ public class UserControlScript : MonoBehaviour {
     {
 		allFactionRoutes = blackBoard.GetComponent<BlackBoardScript>().allGameRoutes;
 		allFactionAgents = blackBoard.GetComponent<BlackBoardScript>().allGameAgents;
-
         routeListCount = allFactionRoutes.Count;
         int prevRouteIndex = routeIndex - 1;
         if (prevRouteIndex < 0)
@@ -272,11 +255,7 @@ public class UserControlScript : MonoBehaviour {
     {
 		allFactionRoutes = blackBoard.GetComponent<BlackBoardScript>().allGameRoutes;
 		allFactionAgents = blackBoard.GetComponent<BlackBoardScript>().allGameAgents;
-
-
-		int wayPointListCount = selectedRoute.Count();
-
-
+        int wayPointListCount = selectedRoute.Count();
         int nextWayPointIndex = wayPointIndex + 1;
         if (nextWayPointIndex >= wayPointListCount)
         {
@@ -286,18 +265,12 @@ public class UserControlScript : MonoBehaviour {
         {
             wayPointIndex = nextWayPointIndex;
         }
-
-		//activeWayPoint = agentBlackBoard.agentWayPoints[wayPointIndex];
-
-		Debug.Log (activeWayPoint.ToSaveString());
-
-
-
+        //activeWayPoint = agentBlackBoard.agentWayPoints[wayPointIndex];
+        Debug.Log (activeWayPoint.ToSaveString());
         UpdateWayPointUIInfo();
     }
 
-
-
+    
 	//Gets the previous waypoint
     public void prevWayPoint()
     {
@@ -364,5 +337,30 @@ public class UserControlScript : MonoBehaviour {
 		UpdateTaskUIInfo();
 	}
 
+
+    void OnGUI()
+    {
+        //Reticle on UI menu selected agent
+        int reticleSize = 30;
+        int labelHeight = 20;
+        if (selectedAgent != null)
+            
+        {
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(selectedAgent.transform.position);
+            GUI.DrawTexture(new Rect(screenPos.x - reticleSize / 2, (Screen.height - screenPos.y - reticleSize / 2), reticleSize, reticleSize), agentHighlight);
+            GUI.Label(new Rect(screenPos.x - reticleSize / 2, (Screen.height - screenPos.y + labelHeight), 40, labelHeight), selectedAgent.mAgentName);
+        }
+        //Reticle on UI menu selected navTarget
+        if (activeWayPoint != null)
+        {
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(activeWayPointWorldPoint);
+            Debug.Log("screenSize " + Screen.width + "/" + Screen.height);
+            Debug.Log("screenPos" + screenPos.x + "/" + screenPos.y);
+            GUI.DrawTexture(new Rect(screenPos.x - reticleSize/2, (Screen.height - screenPos.y - reticleSize/2), reticleSize, reticleSize), WayPointHighlight);
+            GUI.Label(new Rect(screenPos.x - reticleSize / 2, (Screen.height - screenPos.y + labelHeight), 40, labelHeight), activeWayPoint.mWayPointName);
+        }
+        //Reticle on UI menu selected sensorTarget
+        //LineRender from agent to target
+    }
 
 }

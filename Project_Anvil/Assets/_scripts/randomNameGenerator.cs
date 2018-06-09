@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-// This will be used to generate names for NPC's. In the NPC's start() function, we can simply call: 'string myName = makeNewName.generate();'
-public static class makeNewName : object {
+// This will be used to generate names for NPC's. In the NPC's start() function, we can simply call: 'string myName = randomNameGenerator.generate();'
+public static class randomNameGenerator: object {
 
 	// Creates array of all last names in the lastName.txt file
 	static string[] lines = System.IO.File.ReadAllLines(@"Assets\Resources\lastNamesCleaned.txt");

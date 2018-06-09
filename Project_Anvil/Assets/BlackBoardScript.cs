@@ -8,6 +8,7 @@ public class BlackBoardScript : MonoBehaviour {
     public List<Route> allGameRoutes;
     public List<WayPoint> allGameWayPoints;
     public List<AnvilAgent> allGameAgents;
+    public AnvilAgent activeAgent;
     private int wayPointSerial;
 
     public GameObject faction;

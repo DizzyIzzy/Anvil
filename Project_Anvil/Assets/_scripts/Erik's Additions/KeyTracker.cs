@@ -39,8 +39,7 @@ public class KeyTracker : MonoBehaviour {
 	public GameObject moveAgent;
 	public GameObject routePanel;
 
-
-	//These are the text objects for the menu
+    //These are the text objects for the menu
 	public Text routeDataLabel;
 	public Text waypointDataLabel;
 	public Text factionDataLabel;
@@ -52,8 +51,7 @@ public class KeyTracker : MonoBehaviour {
 
 	//Booleans
 	public bool moving;
-
-
+    
 	void Start () {
 		agentActionSelect = false;
 		mainMenuSelect = false;
@@ -125,10 +123,8 @@ public class KeyTracker : MonoBehaviour {
 
 			break;
 		}
-			
 	}
-
-
+    
 	//This assigns all of the button features
 	public void getButtons()
 	{
@@ -137,8 +133,6 @@ public class KeyTracker : MonoBehaviour {
 		waypointButton = GameObject.Find ("Waypoint Actions").GetComponent<UnityEngine.UI.Button> ();
 		mapButton = GameObject.Find ("Map Control").GetComponent<UnityEngine.UI.Button> ();
 	}
-
-
 	//This allows the jump from map to settings and settings to map
 	public void checkMenuPoint()
 	{
@@ -178,9 +172,7 @@ public class KeyTracker : MonoBehaviour {
 			playerButton.OnDeselect (null);
 		}
 	}
-
-
-
+    
 	public void checkCameraMove()
 	{
 		if (menuPoint == 3) {
@@ -339,8 +331,6 @@ public class KeyTracker : MonoBehaviour {
 			}
 		}
 
-			
-
 			if (Input.GetKeyDown (KeyCode.C)) {
 					//Hitting C over a main menu option will now open the next part of the menu
 					mainMenuSelect = true;
@@ -351,12 +341,9 @@ public class KeyTracker : MonoBehaviour {
 				waypointDataLabel.text = userControl.activeWayPointLabel.text;
 				taskDataLabel.text = userControl.activeTaskLabel.text;
 				}
-
-
-				Debug.Log ("Setting selection" + mainMenuSelect);
+                Debug.Log ("Setting selection" + mainMenuSelect);
 			}
-
-	   
+            
 
 			if (Input.GetKeyDown (KeyCode.B)) {
 
@@ -370,14 +357,12 @@ public class KeyTracker : MonoBehaviour {
 				} else if (mainMenuSelect == true) {
 					mainMenuSelect = false;
 				}
-
-					cameraMove.setSelect = false;
-
-					mainMenuUI ();
+                cameraMove.setSelect = false;
+            	mainMenuUI ();
 			}
 
 		
-		if (Input.GetKeyDown (KeyCode.T)) 
+		if (Input.GetKeyDown (KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.Equals)) 
 		{
 			Debug.Log ("Plus pressed");
 			//If we confirm while over the waypoints, set the current agents waypoint 
@@ -416,10 +401,7 @@ public class KeyTracker : MonoBehaviour {
 		{
 			moveAgent.transform.localPosition = Conversions.GeoToWorldPosition(latLong, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();
 		}
-
-
-
-
+        
 	}
 
 
@@ -491,10 +473,7 @@ public class KeyTracker : MonoBehaviour {
 		debugPanel = GameObject.Find("DebugBlackboard");
 		routePanel = GameObject.Find("RoutePanel");
 	}
-
-
-
-
+    
 	//This adds all the text values to a list in order to make highlighting easier
 	private void addLabels()
 	{
