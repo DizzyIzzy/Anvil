@@ -5,8 +5,8 @@ using System;
 using System.IO;
 
 public class BlackBoardScript : MonoBehaviour {
-    public List<Route> allGameRoutes;
-    public List<WayPoint> allGameWayPoints;
+    public List<AnvilRoute> allGameRoutes;
+    public List<AnvilWayPoint> allGameWayPoints;
     public List<AnvilAgent> allGameAgents;
     public AnvilAgent activeAgent;
     private int wayPointSerial;
@@ -27,8 +27,8 @@ public class BlackBoardScript : MonoBehaviour {
     }
     void Start () {
        
-        allGameWayPoints = new List<WayPoint>();
-        allGameRoutes = new List<Route>();
+        allGameWayPoints = new List<AnvilWayPoint>();
+        allGameRoutes = new List<AnvilRoute>();
 
      
         wayPointSerial = GetWayPointSerial();
@@ -46,7 +46,7 @@ public class BlackBoardScript : MonoBehaviour {
     {
         Debug.Log("this is waypoint" + wayPointSerial);
         string wayPointName = "WPT" + wayPointSerial;
-        WayPoint newWayPoint = new WayPoint(wayPointSerial, wayPointSerial, wayPointSerial, wayPointName);
+        AnvilWayPoint newWayPoint = new AnvilWayPoint(wayPointSerial, wayPointSerial, wayPointSerial, wayPointName);
         allGameWayPoints.Add(newWayPoint);
         Debug.Log(newWayPoint.ToString());
         wayPointSerial++;
@@ -54,7 +54,7 @@ public class BlackBoardScript : MonoBehaviour {
     public void ListPointsToConsole()
     {
         Debug.Log("BlackBoard WayPoints:");
-        foreach (WayPoint thisPoint in allGameWayPoints)
+        foreach (AnvilWayPoint thisPoint in allGameWayPoints)
         {
             Debug.Log(thisPoint.ToString());
         }
@@ -68,7 +68,7 @@ public class BlackBoardScript : MonoBehaviour {
         string path = "Assets/Resources/Saves/Waypoints.txt";
         StreamWriter writer = new StreamWriter(path);
     //    Debug.Log("trying saving to: " + path);
-        foreach (WayPoint thisPoint in allGameWayPoints)
+        foreach (AnvilWayPoint thisPoint in allGameWayPoints)
         {
             string output = thisPoint.ToSaveString();
           //  Debug.Log("putting out:" +thisPoint.ToSaveString());
@@ -80,7 +80,7 @@ public class BlackBoardScript : MonoBehaviour {
 
     public void ReadWayPointFile()
     {
-        allGameWayPoints = new List<WayPoint>();
+        allGameWayPoints = new List<AnvilWayPoint>();
         string fileName = "Waypoints";
         string path = "Assets/Resources/Saves/" + fileName +".txt";
         StreamReader reader = new StreamReader(path);
@@ -95,7 +95,7 @@ public class BlackBoardScript : MonoBehaviour {
 			Debug.Log ("Fields 1: " + fields[1]);
 			Debug.Log ("Fields 2: " + fields[2]);
            
-            allGameWayPoints.Add(new WayPoint(Convert.ToDouble(fields[0]), Convert.ToDouble(fields[1]), Convert.ToDouble(fields[2]), fields[3]));
+            allGameWayPoints.Add(new AnvilWayPoint(Convert.ToDouble(fields[0]), Convert.ToDouble(fields[1]), Convert.ToDouble(fields[2]), fields[3]));
            
 		
 
@@ -104,13 +104,13 @@ public class BlackBoardScript : MonoBehaviour {
         }
 
 
-        Route loadedRoute = new Route(fileName, allGameWayPoints);
+        AnvilRoute loadedRoute = new AnvilRoute(fileName, allGameWayPoints);
         allGameRoutes.Add(loadedRoute);
 
 
       //  GameObject.Find("UIController").GetComponent<UserControlScript>().UpdateRouteUIInfo();
 
-		controlScript.GetComponent<UserControlScript> ().nextRoute();
+		controlScript.GetComponent<UIControlScript> ().nextRoute();
 
 
     }   
@@ -120,7 +120,7 @@ public class BlackBoardScript : MonoBehaviour {
     {
         foreach (AnvilAgent thisAgent in allGameAgents)
         {
-            Debug.Log(thisAgent.mAgentName + " in blackboard");
+            Debug.Log(thisAgent.agentName + " in blackboard");
         }
     }
 }

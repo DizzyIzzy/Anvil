@@ -8,7 +8,7 @@ using Mapbox.Utils;
 public class Movement : MonoBehaviour {
 
 	public AbstractMap _map;
-	private List<WayPoint> agentWayPoints;
+	private List<AnvilWayPoint> agentWayPoints;
 	public BlackBoardScript blackBoard;
 	public AnvilAgent agent;
 	public KeyTracker keyTrack;
@@ -100,10 +100,10 @@ public class Movement : MonoBehaviour {
 
 	}
 
-
-	public void moveToWaypoint(WayPoint waypoint)
+   
+	public void moveToWaypoint(AnvilWayPoint waypoint)
 	{
-		
+        speed = 0.05f;
 			Vector2d goTo = new Vector2d (waypoint.mLatitude, waypoint.mLongitude);
 
 

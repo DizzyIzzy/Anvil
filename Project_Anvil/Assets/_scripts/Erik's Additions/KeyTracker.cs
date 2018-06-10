@@ -16,7 +16,7 @@ public class KeyTracker : MonoBehaviour {
 
 	//References to other scripts
 	CameraController cameraMove;
-	public UserControlScript userControl;
+	public UIControlScript userControl;
 	public BlackBoardScript blackBoard;
 	public Tasks taskToDo;
 
@@ -394,7 +394,7 @@ public class KeyTracker : MonoBehaviour {
 		}
 
 
-		WayPoint wayPoint = new WayPoint (33.95, -118.45, 49, "NPSGate");
+		AnvilWayPoint wayPoint = new AnvilWayPoint (33.95, -118.45, 49, "NPSGate");
 
 		Vector2d latLong = new Vector2d(wayPoint.mLatitude, wayPoint.mLongitude);
 		if (Input.GetKeyDown (KeyCode.E)) 

@@ -7,7 +7,7 @@ using Mapbox.Unity.Map;
 using Mapbox.Unity.Utilities;
 using Mapbox.Utils;
 
-public class WayPoint{
+public class AnvilWayPoint{
 	AbstractMap _map;
 
     public LatLng latLong;
@@ -22,7 +22,7 @@ public class WayPoint{
 
     private GameObject blackBoard;
     private int blackBoardWayPointSerial;
-    private List<WayPoint> blackBoardWayPointList;
+    private List<AnvilWayPoint> blackBoardWayPointList;
 
     public Vector3 position;
 
@@ -36,7 +36,7 @@ public class WayPoint{
 
 		position = new Vector3 ();
     }
-    public WayPoint (double latitude, double longitude, double height, string newWayPointName)
+    public AnvilWayPoint (double latitude, double longitude, double height, string newWayPointName)
     {
         string serialString = DateTime.Now.ToShortDateString();
         string wayPointSerialID = serialString + lastUnassignedSerial.ToString();

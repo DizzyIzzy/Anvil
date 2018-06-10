@@ -5,24 +5,22 @@ using UnityEngine;
 public class Vehicle : MonoBehaviour {
 
 	string vehicleID;
-	int vehidleLicense;
+	int vehicleLicense;
 	Color color; 
 	int vehicleHealth;
 
-	NPCAgent driver;
-	List<NPCAgent> passengers = new List<NPCAgent>();
+    AnvilAgent driver;
+	List<AnvilAgent> passengers = new List<AnvilAgent>();
 
 	int fuel;
 	int damage;
 	int speed;
 	int direction;
 
-	WayPoint location;
+	AnvilWayPoint location;
 
 	AudioSource engineSound;
 	bool engineOn;
-
-
 
 	// Use this for initialization
 	void Start () {
@@ -33,9 +31,8 @@ public class Vehicle : MonoBehaviour {
 	void Update () {
 		
 	}
-
-
-	public void addPassenger(NPCAgent passenger)
+    
+	public void addPassenger(AnvilAgent passenger)
 	{
 		passengers.Add (passenger);
 	}

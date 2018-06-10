@@ -68,7 +68,7 @@ public Text CurrentPos;
 
     }
 
-    public static Vector3 WayPointToUnityVector3D(WayPoint waypoint)
+    public static Vector3 WayPointToUnityVector3D(AnvilWayPoint waypoint)
     {
         double latitude = waypoint.mLatitude;
         double longitude = waypoint.mLongitude;

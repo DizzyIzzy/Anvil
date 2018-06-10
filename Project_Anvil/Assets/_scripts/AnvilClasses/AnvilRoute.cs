@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Route {
+public class AnvilRoute {
     public string mRouteName;
     public Color mRouteColor;
     public bool hasHardTimeConstraint;
-    public List<WayPoint> routeWayPoints = new List<WayPoint>();
+    public List<AnvilWayPoint> routeWayPoints = new List<AnvilWayPoint>();
 
-    public Route (string routeName, List<WayPoint> wayPointList)
+    public AnvilRoute (string routeName, List<AnvilWayPoint> wayPointList)
     {
         mRouteName = routeName;
-        routeWayPoints = new List<WayPoint>(wayPointList);
+        routeWayPoints = new List<AnvilWayPoint>(wayPointList);
     }
 
-    public Route(string routeName,    Color color, List<WayPoint> wayPointList)
+    public AnvilRoute(string routeName,    Color color, List<AnvilWayPoint> wayPointList)
     {
         mRouteName = routeName;
-        routeWayPoints = new List<WayPoint>(wayPointList);
+        routeWayPoints = new List<AnvilWayPoint>(wayPointList);
         mRouteColor = color;
     }
 
@@ -36,12 +36,12 @@ public class Route {
         else { return Color.white; }
     }
 
-    public List<WayPoint> returnWayPointList()
+    public List<AnvilWayPoint> returnWayPointList()
     {
         return routeWayPoints;
     }
 
-	public void addWaypoint(WayPoint wayPoint)
+	public void addWaypoint(AnvilWayPoint wayPoint)
 	{
 		routeWayPoints.Add (wayPoint);
 	}

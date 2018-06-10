@@ -22,4 +22,10 @@ public static class randomNameGenerator: object {
 		return lines[numLast] + ", " + alphabet[numFirst] + "." + alphabet[numMiddle] + ".";
 	}
 
+    public static string generateLetter()
+    {
+        // Returns a random letter
+        return alphabet[Random.Range(0, 25)].ToString();
+    }
+
 }

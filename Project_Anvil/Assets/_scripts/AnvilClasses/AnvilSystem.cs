@@ -8,7 +8,7 @@ public class AnvilSystem {
     private bool mortal;
     private int systemHealth;
     private bool armed; // need to disambiguate Arming as Weapons Condition vs ESAF later
-    public WayPoint targetLocation;
+    public AnvilWayPoint targetLocation;
     public AnvilAgent targetAgent;
     public AnvilSystem targetSystem;
     public AnvilWeapon onBoardWeapon;

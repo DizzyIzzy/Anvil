@@ -6,22 +6,22 @@ using UnityEngine.UI;
 using Mapbox.Unity.Map;
 
 
-public class UserControlScript : MonoBehaviour {
+public class UIControlScript : MonoBehaviour {
     private BasicMap MyMap;
     // active agent
     public AnvilAgent selectedAgent;
     public List<AnvilAgent> allFactionAgents;
     // active route
-    public List<Route> allFactionRoutes;
-    public Route selectedRoute;
-    public List<WayPoint> activeRouteExecution;
-    public List<WayPoint> sensorTargetList;
+    public List<AnvilRoute> allFactionRoutes;
+    public AnvilRoute selectedRoute;
+    public List<AnvilWayPoint> activeRouteExecution;
+    public List<AnvilWayPoint> sensorTargetList;
     // active sensorTarget
-    public WayPoint activeSensorTarget;
+    public AnvilWayPoint activeSensorTarget;
     // active navTarget
-    public WayPoint activeNavTarget;
+    public AnvilWayPoint activeNavTarget;
     // active waypoint 
-    public WayPoint activeWayPoint;
+    public AnvilWayPoint activeWayPoint;
     public GameObject faction;
 
 	//active tasks
@@ -92,7 +92,7 @@ public class UserControlScript : MonoBehaviour {
         
 		//blackBoard.GetComponent<BlackBoardScript>().ReadWayPointFile();
 
-		foreach (WayPoint waypoint in allFactionRoutes[routeIndex].routeWayPoints) 
+		foreach (AnvilWayPoint waypoint in allFactionRoutes[routeIndex].routeWayPoints) 
 		{
 			Debug.Log ("SELECTED " + waypoint.ToSaveString());
 		}
@@ -103,24 +103,24 @@ public class UserControlScript : MonoBehaviour {
         selectedAgent = allFactionAgents[agentIndex];
         if (selectedAgent != null)
         {
-            activeAgentLabel.text = selectedAgent.mAgentName;
-            if (selectedAgent.mLocation != null)
+            activeAgentLabel.text = selectedAgent.agentName;
+            if (selectedAgent.locationLatLng != null)
             {
-                activeAgentPosLabel.text = selectedAgent.mLocation.ToString();
+                activeAgentPosLabel.text = selectedAgent.locationLatLng.ToString();
             }
 
             //activeAgentPosLabel.text = selectedAgent.mLocation.ToString() + "*\n +" +
             //  ConversionTool.LatLongToUnityVector3D(selectedAgent.mLocation);
 
-            if (selectedAgent.mNavTarget != null)
+            if (selectedAgent.navTarget != null)
             {
-                if (selectedAgent.mNavTarget.mWayPointName == null)
+                if (selectedAgent.navTarget.mWayPointName == null)
                 {
                     activeAgentDataLabel.text = "- no waypoint set";
                 }
                 else
                 {
-                    activeAgentDataLabel.text = selectedAgent.mNavTarget.mWayPointName;
+                    activeAgentDataLabel.text = selectedAgent.navTarget.mWayPointName;
                 }
             }
 
@@ -348,7 +348,7 @@ public class UserControlScript : MonoBehaviour {
         {
             Vector3 screenPos = Camera.main.WorldToScreenPoint(selectedAgent.transform.position);
             GUI.DrawTexture(new Rect(screenPos.x - reticleSize / 2, (Screen.height - screenPos.y - reticleSize / 2), reticleSize, reticleSize), agentHighlight);
-            GUI.Label(new Rect(screenPos.x - reticleSize / 2, (Screen.height - screenPos.y + labelHeight), 40, labelHeight), selectedAgent.mAgentName);
+            GUI.Label(new Rect(screenPos.x - reticleSize / 2, (Screen.height - screenPos.y + labelHeight), 40, labelHeight), selectedAgent.agentName);
         }
         //Reticle on UI menu selected navTarget
         if (activeWayPoint != null)

@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIFloatingElements : MonoBehaviour {
     private Camera cam;
     private AnvilAgent activeAgent;
-    private WayPoint activeWayPoint;
+    private AnvilWayPoint activeWayPoint;
     public Texture highlighter;
     public Texture boxReticle;
     public int xTweak;
@@ -41,7 +41,7 @@ public class UIFloatingElements : MonoBehaviour {
     private void DrawAgentCursor()
     {
         int reticleSize = 30;
-        activeAgent = GetComponent<UserControlScript>().selectedAgent;
+        activeAgent = GetComponent<UIControlScript>().selectedAgent;
         Vector3 screenPosition = ScreenPointFromTansform(activeAgent.transform.position);
         Rect screenCoordRect = new Rect(screenPosition.x + -(reticleSize / 2), Screen.height - screenPosition.y + -(reticleSize / 2), reticleSize, reticleSize);
         GUI.DrawTexture(screenCoordRect, highlighter);
@@ -50,7 +50,7 @@ public class UIFloatingElements : MonoBehaviour {
     private void DrawWayPointCursor()
     {
         int reticleSize = 30;
-        activeWayPoint = GetComponent<UserControlScript>().activeWayPoint;
+        activeWayPoint = GetComponent<UIControlScript>().activeWayPoint;
         Vector3 screenPosition = ScreenPointFromTansform(activeAgent.transform.position);
         Rect screenCoordRect = new Rect(screenPosition.x + -(reticleSize / 2), Screen.height - screenPosition.y + -(reticleSize / 2), reticleSize, reticleSize);
     

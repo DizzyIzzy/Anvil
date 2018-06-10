@@ -15,12 +15,12 @@ public class SimpleTextFileManager : MonoBehaviour {
     }
     public void SaveWayPointFile()
     {
-        List<WayPoint> allWayPoints =  (blackBoard.GetComponent<BlackBoardScript>().allGameWayPoints);
+        List<AnvilWayPoint> allWayPoints =  (blackBoard.GetComponent<BlackBoardScript>().allGameWayPoints);
         string timeString = DateTime.Now.ToString("yyMMddHHMMss");
         string path = "Assets/Resources/Saves/" + timeString + ".txt";
         StreamWriter writer = new StreamWriter(path);
 
-        foreach (WayPoint thisPoint in allWayPoints)
+        foreach (AnvilWayPoint thisPoint in allWayPoints)
         {
             string output = thisPoint.ToString();
             writer.WriteLine(output);

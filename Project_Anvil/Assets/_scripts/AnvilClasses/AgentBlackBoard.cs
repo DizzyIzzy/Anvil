@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AgentBlackBoard : MonoBehaviour {
 
-	public WayPoint navTgt;
-	public Route agentRoute;
+	public AnvilWayPoint navTgt;
+	public AnvilRoute agentRoute;
 	public List<GameObject> TargetList = new List<GameObject>();
 
 	public GameObject blackBoard;
@@ -24,11 +24,11 @@ public class AgentBlackBoard : MonoBehaviour {
 		
 	}
 
-	public void setRoute(Route route ){
+	public void setRoute(AnvilRoute route ){
 		this.agentRoute = route;
 	}
 
-	public void setNavTgt(WayPoint target){
+	public void setNavTgt(AnvilWayPoint target){
 		this.navTgt = target;
 	}
 

@@ -15,7 +15,7 @@ public class Tasks : MonoBehaviour {
 
 	public AnvilAgent agentToOrder;
 
-	public UserControlScript userControl;
+	public UIControlScript userControl;
 
 	// Use this for initialization
 	void Start () {
@@ -27,7 +27,7 @@ public class Tasks : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		userControl = GetComponent<UserControlScript>();
+		userControl = GetComponent<UIControlScript>();
 	}
 
 
@@ -35,7 +35,7 @@ public class Tasks : MonoBehaviour {
 	{
 		if (taskName == "moveNow") 
 		{
-			agentToOrder.GetComponent<Movement> ().moveToWaypoint (userControl.selectedAgent.mNavTarget);
+			agentToOrder.GetComponent<Movement> ().moveToWaypoint (userControl.selectedAgent.navTarget);
 		}
 	}
 
