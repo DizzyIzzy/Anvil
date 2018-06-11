@@ -10,16 +10,21 @@ public static class randomNameGenerator: object {
 	static string[] lines = System.IO.File.ReadAllLines(@"Assets\Resources\lastNamesCleaned.txt");
 	// String of all chars that will be used for the First Name Initial and Middle Name Initial
 	static string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    static string alphabetWithBlank = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "; //blank space allows for no middle initial
 
-	// Generates the randomized name
-	public static string generateName(){
+    // Generates the randomized name
+    public static string generateName(){
 
 		int numLast = Random.Range (0, lines.Length - 1);
 		int numFirst = Random.Range (0, 25);
-		int numMiddle = Random.Range (0, 25);
+		int numMiddle = Random.Range (0, 26);
+        string returnString = lines[numLast] + ", " + alphabet[numFirst] + ".";
+        if (numMiddle != 26) {
+            returnString += alphabet[numMiddle] + ".";
 
-		// Returns last name in proper format: 'Smith, A.B.'
-		return lines[numLast] + ", " + alphabet[numFirst] + "." + alphabet[numMiddle] + ".";
+        }
+        // Returns last name in proper format: 'Smith, A.B.' or Smith, A.
+        return returnString;
 	}
 
     public static string generateLetter()

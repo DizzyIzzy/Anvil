@@ -54,11 +54,11 @@ public class AnvilAgent : MonoBehaviour {
     }
     private void Start()
     {
-		if (this.agentName == null)
+		if (this.agentName == "")
         {
             this.agentName = randomNameGenerator.generateName();
         }
-        if (this.agentSerial == null)
+        if (this.agentSerial == "")
         {
             this.agentSerial = randomNameGenerator.generateLetter() + randomNameGenerator.generateLetter() + ((int)Random.Range(0, 10000)).ToString();
         }
