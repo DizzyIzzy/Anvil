@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
-
-
 	public float speed = 1f;
 	public float zoomSpeed = 5f;
 	public bool setSelect;
 
-
+    private bool centerToggle;
+    private bool inFollowMode;
+    
 	private Transform target;
+
+    private MasterBlackBoard masterBlackBoard;
 	public GameObject mainCamera;
 
 	KeyTracker keyTracker;
@@ -19,32 +21,42 @@ public class CameraController : MonoBehaviour {
 	UnityEngine.UI.Button button; 
 
 	public CameraZoom cameraZoom;
+    public GameObject UIelements;
+    public GameObject mainMenuPanel;
 
-	public GameObject UIelements;
-
-	public GameObject mainMenuPanel;
+    public Transform cameraCenter;
 
 
-	void Start () {
+
+    private void Awake()
+    {
+        masterBlackBoard = GameObject.Find("GameController").GetComponent<MasterBlackBoard>();
+    }
+
+    void Start () {
 		//target = GameObject.FindWithTag ("Player").transform;
 		keyTracker = GetComponent(typeof(KeyTracker)) as KeyTracker;
 		cameraZoom = Camera.main.gameObject.GetComponent<CameraZoom>();
 		mainMenuPanel = GameObject.Find("Menu Panel");
-	}
+        centerToggle = false;
+        inFollowMode = false;
 
-	void FixedUpdate () {
+    }
 
+	void Update () {
+        if (inFollowMode)
+        {
+            overHeadFollow();
+        }
 
-	}
+    }
 
 	public void mapMove()
 	{
 	//	target = GameObject.FindGameObjectWithTag ("Player").transform;
-
-		getDirection ();
+        getDirection ();
 		getButtons ();
-
-	}
+   	}
 
 
 	public void getDirection()
@@ -83,23 +95,47 @@ public class CameraController : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.C)) 
 		{
-			Debug.Log ("Center was pressed");
-			//transform.position = Vector3.MoveTowards (transform.position, target.position, speed * Time.deltaTime);
+            Debug.Log("CBang - center toggle is: " + centerToggle);
+            if (centerToggle == false)
+            {
+                Debug.Log("Center on player" + masterBlackBoard.getActiveAgent().agentName);
+                inFollowMode = true;
+                cameraCenter = masterBlackBoard.getActiveAgent().transform;
+                centerToggle = true;
+            }
+            else 
+            {
+                Debug.Log("Center on waypoint");
+                centerToggle = false;
+                inFollowMode = false;
+                //   cameraCenter = masterBlackBoard.getActiveWayPoint()
+            }
 
-		}
+            
+            //transform.position = Vector3.MoveTowards (transform.position, target.position, speed * Time.deltaTime);
+            
+        }
 	 
 		if (Input.GetKeyDown (KeyCode.B)) {
-			
-			//setSelect = false;
-			keyTracker.mainMenuSelect = false;
+            
+            //setSelect = false;
+            keyTracker.mainMenuSelect = false;
 			mainMenuPanel.gameObject.SetActive(true);
 			//keyTracker.menuPoint++;
 			//Debug.Log ("B was pressed" + keyTracker.selection);
 
-			
-
 		}
-		
-	}
+
+
+
+    }
+
+    private void overHeadFollow() {
+        Debug.Log("Following" + masterBlackBoard.getActiveAgent().agentName);
+        Vector3 target_Position = new Vector3 (cameraCenter.position.x, mainCamera.transform.position.y, cameraCenter.position.z);
+        mainCamera.transform.position = target_Position;
+        transform.LookAt(cameraCenter);
+    }
+
 
 }

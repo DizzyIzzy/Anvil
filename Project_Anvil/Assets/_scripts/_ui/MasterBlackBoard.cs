@@ -4,11 +4,11 @@ using UnityEngine;
 using System;
 using System.IO;
 
-public class BlackBoardScript : MonoBehaviour {
+public class MasterBlackBoard : MonoBehaviour {
     public List<AnvilRoute> allGameRoutes;
     public List<AnvilWayPoint> allGameWayPoints;
     public List<AnvilAgent> allGameAgents;
-    public AnvilAgent activeAgent;
+    private AnvilAgent activeAgent;
     private int wayPointSerial;
 
     public GameObject faction;
@@ -91,9 +91,9 @@ public class BlackBoardScript : MonoBehaviour {
             char[] delimiter = {','};
             string[] fields = readString.Split(delimiter);
 
-			Debug.Log ("Fields 0: " + fields[0]);
-			Debug.Log ("Fields 1: " + fields[1]);
-			Debug.Log ("Fields 2: " + fields[2]);
+		//	Debug.Log ("Fields 0: " + fields[0]);
+			//Debug.Log ("Fields 1: " + fields[1]);
+			//Debug.Log ("Fields 2: " + fields[2]);
            
             allGameWayPoints.Add(new AnvilWayPoint(Convert.ToDouble(fields[0]), Convert.ToDouble(fields[1]), Convert.ToDouble(fields[2]), fields[3]));
            
@@ -122,5 +122,15 @@ public class BlackBoardScript : MonoBehaviour {
         {
             Debug.Log(thisAgent.agentName + " in blackboard");
         }
+    }
+
+    public void setActiveAgent (AnvilAgent newActiveAgent)
+    {
+        activeAgent = newActiveAgent;
+    }
+
+    public AnvilAgent getActiveAgent()
+    {
+        return activeAgent;
     }
 }

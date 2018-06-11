@@ -32,7 +32,7 @@ public class AnvilWayPoint{
         blackBoard = GameObject.Find("BlackBoard");
         // blackBoardWayPointSerial = blackBoard.GetComponent<BlackBoardScript>().GetWayPointSerial();
         blackBoardWayPointSerial = 5;
-        blackBoardWayPointList = blackBoard.GetComponent<BlackBoardScript>().allGameWayPoints;
+        blackBoardWayPointList = blackBoard.GetComponent<MasterBlackBoard>().allGameWayPoints;
 
 		position = new Vector3 ();
     }

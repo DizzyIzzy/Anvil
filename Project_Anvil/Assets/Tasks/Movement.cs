@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour {
 
 	public AbstractMap _map;
 	private List<AnvilWayPoint> agentWayPoints;
-	public BlackBoardScript blackBoard;
+	public MasterBlackBoard blackBoard;
 	public AnvilAgent agent;
 	public KeyTracker keyTrack;
 

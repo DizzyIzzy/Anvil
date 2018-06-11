@@ -38,8 +38,9 @@ public class UIControlScript : MonoBehaviour {
     private int wayPointListCount;
 	private int taskListCount;
 
-	//task object
-	public Tasks tasks;
+
+    //task object
+    public Tasks tasks;
 
     //for UI output to canvas
     public Text activeAgentLabel;
@@ -54,17 +55,20 @@ public class UIControlScript : MonoBehaviour {
     public Texture agentHighlight;
     public Texture WayPointHighlight;
 
-    public GameObject blackBoard;
+    public MasterBlackBoard blackBoard;
     public Vector3 activeWayPointWorldPoint;
 
     // next action as Delegate
-
+    private void Awake()
+    {
+        
+        blackBoard = GameObject.Find("GameController").GetComponent<MasterBlackBoard>();
+    }
     // Use this for initialization
     void Start ()
     {
         //faction hard coded to faction 1 for now
         string factionName = "Faction1";
-        blackBoard = GameObject.Find("BlackBoard");
 
         MyMap = BasicMap.FindObjectOfType<BasicMap>();
         //reset UI
@@ -75,8 +79,8 @@ public class UIControlScript : MonoBehaviour {
         }
 
         faction = GameObject.Find(factionName);
-        allFactionRoutes = blackBoard.GetComponent<BlackBoardScript>().allGameRoutes;
-        allFactionAgents = blackBoard.GetComponent<BlackBoardScript>().allGameAgents;
+        allFactionRoutes = blackBoard.GetComponent<MasterBlackBoard>().allGameRoutes;
+        allFactionAgents = blackBoard.GetComponent<MasterBlackBoard>().allGameAgents;
         
         UpdateAgentUIInfo();
         UpdateRouteUIInfo();
@@ -101,6 +105,7 @@ public class UIControlScript : MonoBehaviour {
     private void UpdateAgentUIInfo()
     {
         selectedAgent = allFactionAgents[agentIndex];
+        blackBoard.setActiveAgent(selectedAgent);
         if (selectedAgent != null)
         {
             activeAgentLabel.text = selectedAgent.agentName;
@@ -216,8 +221,8 @@ public class UIControlScript : MonoBehaviour {
     }
     public void nextRoute()
     {
-		allFactionRoutes = blackBoard.GetComponent<BlackBoardScript>().allGameRoutes;
-		allFactionAgents = blackBoard.GetComponent<BlackBoardScript>().allGameAgents;
+		allFactionRoutes = blackBoard.GetComponent<MasterBlackBoard>().allGameRoutes;
+		allFactionAgents = blackBoard.GetComponent<MasterBlackBoard>().allGameAgents;
         routeListCount = allFactionRoutes.Count;
         int nextRouteIndex = routeIndex + 1;
         if (nextRouteIndex >= routeListCount)
@@ -234,8 +239,8 @@ public class UIControlScript : MonoBehaviour {
 
     public void prevRoute()
     {
-		allFactionRoutes = blackBoard.GetComponent<BlackBoardScript>().allGameRoutes;
-		allFactionAgents = blackBoard.GetComponent<BlackBoardScript>().allGameAgents;
+		allFactionRoutes = blackBoard.GetComponent<MasterBlackBoard>().allGameRoutes;
+		allFactionAgents = blackBoard.GetComponent<MasterBlackBoard>().allGameAgents;
         routeListCount = allFactionRoutes.Count;
         int prevRouteIndex = routeIndex - 1;
         if (prevRouteIndex < 0)
@@ -253,8 +258,8 @@ public class UIControlScript : MonoBehaviour {
 	//Gets the next waypoint
     public void nextWayPoint()
     {
-		allFactionRoutes = blackBoard.GetComponent<BlackBoardScript>().allGameRoutes;
-		allFactionAgents = blackBoard.GetComponent<BlackBoardScript>().allGameAgents;
+		allFactionRoutes = blackBoard.GetComponent<MasterBlackBoard>().allGameRoutes;
+		allFactionAgents = blackBoard.GetComponent<MasterBlackBoard>().allGameAgents;
         int wayPointListCount = selectedRoute.Count();
         int nextWayPointIndex = wayPointIndex + 1;
         if (nextWayPointIndex >= wayPointListCount)
@@ -274,8 +279,8 @@ public class UIControlScript : MonoBehaviour {
 	//Gets the previous waypoint
     public void prevWayPoint()
     {
-		allFactionRoutes = blackBoard.GetComponent<BlackBoardScript>().allGameRoutes;
-		allFactionAgents = blackBoard.GetComponent<BlackBoardScript>().allGameAgents;
+		allFactionRoutes = blackBoard.GetComponent<MasterBlackBoard>().allGameRoutes;
+		allFactionAgents = blackBoard.GetComponent<MasterBlackBoard>().allGameAgents;
 		
         int wayPointListCount = selectedRoute.Count();
         int prevWayPointIndex = wayPointIndex - 1;
@@ -354,9 +359,7 @@ public class UIControlScript : MonoBehaviour {
         if (activeWayPoint != null)
         {
             Vector3 screenPos = Camera.main.WorldToScreenPoint(activeWayPointWorldPoint);
-            Debug.Log("screenSize " + Screen.width + "/" + Screen.height);
-            Debug.Log("screenPos" + screenPos.x + "/" + screenPos.y);
-            GUI.DrawTexture(new Rect(screenPos.x - reticleSize/2, (Screen.height - screenPos.y - reticleSize/2), reticleSize, reticleSize), WayPointHighlight);
+           GUI.DrawTexture(new Rect(screenPos.x - reticleSize/2, (Screen.height - screenPos.y - reticleSize/2), reticleSize, reticleSize), WayPointHighlight);
             GUI.Label(new Rect(screenPos.x - reticleSize / 2, (Screen.height - screenPos.y + labelHeight), 40, labelHeight), activeWayPoint.mWayPointName);
         }
         //Reticle on UI menu selected sensorTarget

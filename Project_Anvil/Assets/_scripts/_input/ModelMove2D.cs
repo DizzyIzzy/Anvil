@@ -63,8 +63,8 @@ public float accuracy = 1.0f;
 			OriginalDistanceBetween = Vector3.Distance(transform.position, targetPoint);
 			Halfway = OriginalDistanceBetween / 2;
 			Third = OriginalDistanceBetween / 3;
-			Debug.Log("Original: " + OriginalDistanceBetween);
-			Debug.Log("Halfway: " + Halfway);
+		//	Debug.Log("Original: " + OriginalDistanceBetween);
+			//Debug.Log("Halfway: " + Halfway);
 			firstTime = false;
 		}
 

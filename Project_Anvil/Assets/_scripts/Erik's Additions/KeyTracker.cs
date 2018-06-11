@@ -17,7 +17,7 @@ public class KeyTracker : MonoBehaviour {
 	//References to other scripts
 	CameraController cameraMove;
 	public UIControlScript userControl;
-	public BlackBoardScript blackBoard;
+	public MasterBlackBoard blackBoard;
 	public Tasks taskToDo;
 
 	//This determines which selection we are using
