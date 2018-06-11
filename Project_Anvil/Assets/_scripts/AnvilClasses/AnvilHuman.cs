@@ -13,9 +13,7 @@ public class AnvilHuman : AnvilAgent {
 
     public AnvilHuman()
     {
-        this.agentSerial = "001";
-        this.agentName = randomNameGenerator.generateName();
-  
+        this.agentName = randomValuesGenerator.generateName();
         this.hunger = 0;
         this.bladder = 0;
         this.fatigue = 0;

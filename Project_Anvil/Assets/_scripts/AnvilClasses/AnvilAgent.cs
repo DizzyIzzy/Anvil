@@ -60,11 +60,11 @@ public class AnvilAgent : MonoBehaviour {
     {
 		if (this.agentName == "")
         {
-            this.agentName = randomNameGenerator.generateName();
+            this.agentName = randomValuesGenerator.generateName();
         }
         if (this.agentSerial == "")
         {
-            this.agentSerial = randomNameGenerator.generateLetter() + randomNameGenerator.generateLetter() + randomNameGenerator.GetOpenSerialNumber();
+            this.agentSerial = randomValuesGenerator.generateLetter() + randomValuesGenerator.generateLetter() + randomValuesGenerator.GetOpenSerialNumber();
         }
             myTransform = myTransform = gameObject.GetComponent<Transform>();
 		agentWayPoints = new List<AnvilWayPoint> ();
