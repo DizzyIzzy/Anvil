@@ -516,11 +516,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de1f535413150448963ad02df6778ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mAgentName: Singh, R.
-  mAgentSerial: 076A102
-  mFaction: Faction2
-  locString: 
+  agentID: 0
+  interestOrientation: {x: 0, y: 0, z: 0, w: 0}
   isSelected: 0
+  isImmortal: 0
+  agentName: 
+  agentSerial: 
+  Faction: 
+  locString: 
   transformString: 
   task: 
   moveScript: {fileID: 0}
@@ -536,12 +539,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1e84d7263784eb46a4c89f6801deaf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 95803512}
-  CurrentPos: {fileID: 0}
-  LatLongString: 
-  MGRS_Coordinates: 
-  UTM_Coordinates: 
-  MGRS_Back_To_LatLong: 
 --- !u!1 &104174467
 GameObject:
   m_ObjectHideFlags: 0
@@ -3253,6 +3250,7 @@ MonoBehaviour:
   agentHighlight: {fileID: 2800000, guid: 51665f2bcb212df43a9298f8fdcc9284, type: 3}
   WayPointHighlight: {fileID: 2800000, guid: 21b2ec0267c14c540940f1f0e6a6cc22, type: 3}
   blackBoard: {fileID: 0}
+  activeWayPointWorldPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &1046089965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4590,12 +4588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1e84d7263784eb46a4c89f6801deaf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1468827255}
-  CurrentPos: {fileID: 0}
-  LatLongString: 
-  MGRS_Coordinates: 
-  UTM_Coordinates: 
-  MGRS_Back_To_LatLong: 
 --- !u!114 &1587953440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4625,11 +4617,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de1f535413150448963ad02df6778ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mAgentName: Reeves,
-  mAgentSerial: 005A101
-  mFaction: Faction1
-  locString: 
+  agentID: 0
+  interestOrientation: {x: 0, y: 0, z: 0, w: 0}
   isSelected: 0
+  isImmortal: 0
+  agentName: 
+  agentSerial: 
+  Faction: 
+  locString: 
   transformString: 
   task: 
   moveScript: {fileID: 0}
@@ -5098,7 +5093,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1754058989}
   - component: {fileID: 1754058991}
-  - component: {fileID: 1754058990}
+  - component: {fileID: 1754058992}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -5120,21 +5115,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1754058990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1754058988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d7ff8ed3b76a4ee5a451d64a5393e3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _west: 5
-  _north: 5
-  _east: 5
-  _south: 5
 --- !u!114 &1754058991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5150,10 +5130,25 @@ MonoBehaviour:
   _initializeOnStart: 1
   _latitudeLongitudeString: 33.9425, -118.408056
   _root: {fileID: 0}
-  _tileProvider: {fileID: 1754058990}
+  _tileProvider: {fileID: 1754058992}
   _mapVisualizer: {fileID: 11400000, guid: 50e4c1a8fc3f8084985aebe0f3de15a5, type: 2}
   _unityTileSize: 100
   _snapMapHeightToZero: 0
+--- !u!114 &1754058992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1754058988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae9a62a6a8194f49bab9128c9acffb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 1397300579}
+  _visibleBuffer: 3
+  _disposeBuffer: 2
+  _updateInterval: 1
 --- !u!1 &1759261675
 GameObject:
   m_ObjectHideFlags: 0
