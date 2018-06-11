@@ -61,7 +61,6 @@ public class UIControlScript : MonoBehaviour {
     // next action as Delegate
     private void Awake()
     {
-        
         blackBoard = GameObject.Find("GameController").GetComponent<MasterBlackBoard>();
     }
     // Use this for initialization

@@ -346,8 +346,7 @@ public class KeyTracker : MonoBehaviour {
             
 
 			if (Input.GetKeyDown (KeyCode.B)) {
-
-				//If we are in action select and want to go back
+            //If we are in action select and want to go back
 				if (mainMenuSelect == true && agentMenuSelect == true && agentActionSelect == true) {
 					agentActionSelect = false;
 				//If we are in the agent select and want to go back
@@ -367,8 +366,9 @@ public class KeyTracker : MonoBehaviour {
 			Debug.Log ("Plus pressed");
 			//If we confirm while over the waypoints, set the current agents waypoint 
 			if (actionPoint == 1) {
-				//Add code to store the actual waypoint data
-				userControl.activeAgentDataLabel.text = waypointDataLabel.text;
+                //Add code to store the actual waypoint data
+                userControl.selectedAgent.setNavTarget(userControl.activeWayPoint);
+                userControl.activeAgentDataLabel.text = waypointDataLabel.text;
 				//This might need to be changed
 				userControl.PushWayPointToAgent ();
 				Debug.Log ("Plus pressed inside waypoint");
@@ -380,8 +380,6 @@ public class KeyTracker : MonoBehaviour {
 				{
 					moving = true;
 				}
-
-
 
 				//userControl.activeTaskLabel.text = taskDataLabel.text;
 				userControl.PushTaskToAgent();

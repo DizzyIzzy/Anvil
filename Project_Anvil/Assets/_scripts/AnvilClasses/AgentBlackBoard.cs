@@ -7,17 +7,15 @@ public class AgentBlackBoard : MonoBehaviour {
 	public AnvilWayPoint navTgt;
 	public AnvilRoute agentRoute;
 	public List<GameObject> TargetList = new List<GameObject>();
-
-	public GameObject blackBoard;
-
+    private MasterBlackBoard masterBlackBoard;
+    
 	public GameObject weaponTgt;
 
 	// Use this for initialization
 	void Start () {
+        masterBlackBoard = GameObject.Find("GameController").GetComponent<MasterBlackBoard>();
 
-		blackBoard = GameObject.Find("BlackBoard");
-
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {

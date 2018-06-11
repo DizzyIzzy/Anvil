@@ -5,14 +5,15 @@ using UnityEngine;
 public class AnvilHuman : AnvilAgent {
 
 	public float hunger;
-	public float bladder; //Might change
+	public float bladder; 
 	public float fatigue;
-	public float anxiety; //Might change
-	public float bladderMax; //Might change
+	public float anxiety; 
+	public float bladderMax;
+    public float speed;
 
     public AnvilHuman()
     {
-        this.agentID = 001;
+        this.agentSerial = "001";
         this.agentName = randomNameGenerator.generateName();
   
         this.hunger = 0;

@@ -5,22 +5,24 @@ using DotNetCoords;
 
 public class AnvilAgent : MonoBehaviour {
     //name,id,location, orientation, faction
-    public int agentID;
-    private int health;
-    
-    public Quaternion interestOrientation;
+    public string agentSerial;
+    public string agentName;      //[NAME]
+    public string agentCallsign;
+    public string Faction;
+
     public bool isSelected;
     public bool isImmortal;
-    public string agentName;      //[NAME]
-    public string agentSerial;
-	public LatLng locationLatLng;		//[Location]
-    public string Faction;
+    private float health;
+
+    private bool moving;
+	public LatLng locationLatLng;       //[Location]
+    public Quaternion interestOrientation;
     public string locString;
     
+    
     private Transform myTransform;
-
     public string transformString;
-
+   
     public AnvilWayPoint navTarget;		//[Nav Target]
     public AnvilWayPoint sensorTarget;  //[Sensor Tgt]
 	public string task; 			//[Task]
@@ -28,10 +30,13 @@ public class AnvilAgent : MonoBehaviour {
 	public Movement moveScript;
 
 	public List<AnvilWayPoint> agentWayPoints;
+    [SerializeField]
+    private string activeNavTarget;
+    [SerializeField]
+    private string activeSPI;
 
-	public string activeWaypointName;
 
-	private bool moving;
+
 
     //Gear - links to equipments by Arrays and List of owned or accessible objects
     //Goals -links to drives and traits classes
@@ -40,8 +45,7 @@ public class AnvilAgent : MonoBehaviour {
 
     public AnvilAgent()
     {
-        
-        
+                
     }
 
     public AnvilAgent(string agentName, string agentSerial, LatLng location, string faction)
@@ -60,16 +64,13 @@ public class AnvilAgent : MonoBehaviour {
         }
         if (this.agentSerial == "")
         {
-            this.agentSerial = randomNameGenerator.generateLetter() + randomNameGenerator.generateLetter() + ((int)Random.Range(0, 10000)).ToString();
+            this.agentSerial = randomNameGenerator.generateLetter() + randomNameGenerator.generateLetter() + randomNameGenerator.GetOpenSerialNumber();
         }
             myTransform = myTransform = gameObject.GetComponent<Transform>();
 		agentWayPoints = new List<AnvilWayPoint> ();
 		moveScript = gameObject.GetComponent<Movement> ();
-
-
-
-		Invoke("addPoints", 1);
-
+        gameObject.name = agentName;
+        Invoke("addPoints", 1);
 
     }
     void Update()
@@ -111,12 +112,19 @@ public class AnvilAgent : MonoBehaviour {
         return getLatLong().ToMGRSRef().ToString();
     }
 
-    public void setNavTarget (AnvilWayPoint setNavPoint)
+    public void setNavTarget (AnvilWayPoint NavWayPoint)
     {
-        navTarget = setNavPoint;
+        navTarget = NavWayPoint;
+        activeNavTarget = NavWayPoint.mWayPointName;
     }
 
-	public void setTask(string newTask)
+    public void setSPITarget(AnvilWayPoint SPIWayPoint)
+    {
+        navTarget = SPIWayPoint;
+        activeSPI = SPIWayPoint.mWayPointName;
+    }
+
+    public void setTask(string newTask)
 	{
 		task = newTask;
 	}
@@ -129,12 +137,12 @@ public class AnvilAgent : MonoBehaviour {
 		agentWayPoints.Add (new AnvilWayPoint (33.940991, -118.383353, 10, "SouthHighway"));
 		agentWayPoints.Add (new AnvilWayPoint (33.931410, -118.422255, 10, "NorthEastAir"));
     }
-    public void setHealth(int healthAmount)
+    public void setHealth(float healthAmount)
     {
         this.health = healthAmount;
     }
 
-    public void takeDamage(int damageAmount)
+    public void takeDamage(float damageAmount)
     {
         this.health = this.health - damageAmount;
     }

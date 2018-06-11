@@ -11,6 +11,7 @@ public static class randomNameGenerator: object {
 	// String of all chars that will be used for the First Name Initial and Middle Name Initial
 	static string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     static string alphabetWithBlank = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "; //blank space allows for no middle initial
+    static int serialNumberIndexer = 0; //used to provide sequential serials to avoid number conflicts
 
     // Generates the randomized name
     public static string generateName(){
@@ -20,7 +21,7 @@ public static class randomNameGenerator: object {
 		int numMiddle = Random.Range (0, 26);
         string returnString = lines[numLast] + ", " + alphabet[numFirst] + ".";
         if (numMiddle != 26) {
-            returnString += alphabet[numMiddle] + ".";
+            returnString += alphabetWithBlank[numMiddle] + ".";
 
         }
         // Returns last name in proper format: 'Smith, A.B.' or Smith, A.
@@ -31,6 +32,15 @@ public static class randomNameGenerator: object {
     {
         // Returns a random letter
         return alphabet[Random.Range(0, 25)].ToString();
+    }
+
+
+    public static string GetOpenSerialNumber()
+    {
+        string fmt = "000000";
+        string returnString = serialNumberIndexer.ToString(fmt);
+        serialNumberIndexer++;
+        return returnString;
     }
 
 }
