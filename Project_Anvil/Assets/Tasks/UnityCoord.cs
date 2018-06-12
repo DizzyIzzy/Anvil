@@ -26,9 +26,9 @@ public class UnityCoord: MonoBehaviour
 			Vector2d latLong4 = new Vector2d(33.931410, -118.422255);
 
 
-			Debug.Log("Map Center : " + _map.CenterMercator.ToString());
-			Debug.Log("Map World Relative Scale : " + _map.WorldRelativeScale.ToString());
-			Debug.Log("World Position : " + Conversions.GeoToWorldPosition(latLong, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz());
+		//	Debug.Log("Map Center : " + _map.CenterMercator.ToString());
+		//	Debug.Log("Map World Relative Scale : " + _map.WorldRelativeScale.ToString());
+		//	Debug.Log("World Position : " + Conversions.GeoToWorldPosition(latLong, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz());
 
 
 			GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -38,7 +38,7 @@ public class UnityCoord: MonoBehaviour
 
 		
 
-			Debug.Log ("Debug1: " + go.transform.localPosition.x + " " + go.transform.localPosition.y + " " + go.transform.localPosition.z);
+		//	Debug.Log ("Debug1: " + go.transform.localPosition.x + " " + go.transform.localPosition.y + " " + go.transform.localPosition.z);
 
 
 

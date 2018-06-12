@@ -8,8 +8,9 @@ public class AnvilAgent : MonoBehaviour {
     public string agentSerial;
     public string agentName;      //[NAME]
     public string agentCallsign;
-    public string Faction;
 
+  
+    private FactionController myFactionController;
     public bool isSelected;
     public bool isImmortal;
     private float health;
@@ -34,6 +35,8 @@ public class AnvilAgent : MonoBehaviour {
     private string activeNavTarget;
     [SerializeField]
     private string activeSPI;
+    [SerializeField]
+    private string faction;
 
 
 
@@ -53,26 +56,37 @@ public class AnvilAgent : MonoBehaviour {
         this.agentName = agentName;
         this.agentSerial = agentSerial;
         locationLatLng = ConversionTool.LatLongFromUnityVector3D(transform.position);
-        Faction = faction;
+        
         locString = locationLatLng.ToString();
     }
     private void Start()
     {
-		if (this.agentName == "")
-        {
-            this.agentName = randomValuesGenerator.generateName();
-        }
-        if (this.agentSerial == "")
-        {
-            this.agentSerial = randomValuesGenerator.generateLetter() + randomValuesGenerator.generateLetter() + randomValuesGenerator.GetOpenSerialNumber();
-        }
-            myTransform = myTransform = gameObject.GetComponent<Transform>();
-		agentWayPoints = new List<AnvilWayPoint> ();
-		moveScript = gameObject.GetComponent<Movement> ();
-        gameObject.name = agentName;
+        InitializeAgent(); 
+        myTransform = myTransform = gameObject.GetComponent<Transform>();
+        agentWayPoints = new List<AnvilWayPoint>();
+        moveScript = gameObject.GetComponent<Movement>();
+
         Invoke("addPoints", 1);
 
     }
+
+    public void InitializeAgent()
+    {
+        if (this.agentSerial == "")
+        {
+            this.agentSerial = randomValuesGenerator.GetHashedSerialNumber();
+        }
+        if (this.agentCallsign == "")
+        {
+            this.agentCallsign = "no callsign assigned yet";
+        }
+        myFactionController = gameObject.GetComponentInParent<FactionController>();
+        if (this.faction == "")
+        {
+            this.faction = myFactionController.FactionName;
+        }
+    }
+
     void Update()
     {
         transformString = myTransform.position.x.ToString() + "," + myTransform.position.y.ToString();
@@ -98,8 +112,8 @@ public class AnvilAgent : MonoBehaviour {
         string saveString =
              agentName + "," +
              agentSerial + "," +
-             locationLatLng+ ","+
-             Faction;
+             locationLatLng + "," +
+             faction.ToString() ;
         return saveString;
     }
     public LatLng getLatLong()

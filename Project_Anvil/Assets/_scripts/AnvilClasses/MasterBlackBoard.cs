@@ -10,11 +10,12 @@ public class MasterBlackBoard : MonoBehaviour {
     public List<AnvilAgent> allGameAgents;
     private AnvilAgent activeAgent;
     private int wayPointSerial;
+
+
     
-    public GameObject faction;
+    
 
-
-	public GameObject controlScript;
+    public GameObject controlScript;
 
 
 
@@ -24,16 +25,15 @@ public class MasterBlackBoard : MonoBehaviour {
     {
         allGameAgents = new List<AnvilAgent>(GameObject.Find("Faction1").GetComponentsInChildren<AnvilAgent>());
     }
+
+
     void Start () {
-        
+       
         allGameWayPoints = new List<AnvilWayPoint>();
         allGameRoutes = new List<AnvilRoute>();
-
-     
         wayPointSerial = GetWayPointSerial();
-
-		controlScript = GameObject.Find("UIController");
-
+        controlScript = GameObject.Find("UIController");
+        
 		ReadWayPointFile ();
     }
     
@@ -132,5 +132,9 @@ public class MasterBlackBoard : MonoBehaviour {
     {
         return activeAgent;
     }
+
+
+
+
 
 }
