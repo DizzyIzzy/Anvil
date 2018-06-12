@@ -2,20 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnvilSystem {
-    private bool powerOn;
-    private bool emitterOn;
-    private bool mortal;
-    private int systemHealth;
-    private bool armed; // need to disambiguate Arming as Weapons Condition vs ESAF later
-    public AnvilWayPoint targetLocation;
-    public AnvilAgent targetAgent;
-    public AnvilSystem targetSystem;
-    public AnvilWeapon onBoardWeapon;
-    private float facingDirection;
-    private float weaponDirection;
-    private float weaponElevation;
-    private float maxspeed;
+public class AnvilSystem:MonoBehaviour {
+    [SerializeField] private float systemSerial;
+    [SerializeField] private bool isRunning;
+    [SerializeField] private bool isImmortal;
+    [SerializeField] private float damage;
+    private List<AnvilSystem> connectedSystemList;
+
+    //private List<Sensor> sensorList;
+    //private List<Transceiver> transceiverList;
     
     // future features 
     // List of Passengers (anvilagents)
@@ -24,21 +19,13 @@ public class AnvilSystem {
         // Use this for initialization
 
 	void Start () {
-        systemHealth = 100;
-        armed = true;
-        powerOn = true;
-        emitterOn = true;
-        mortal = true;
-
+        damage = 100;
 
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if (targetAgent ==null && targetSystem == null)
-        {
-            weaponDirection = facingDirection;
-            weaponElevation = 0;
+
         }
 	}
-}
+

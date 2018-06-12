@@ -121,7 +121,7 @@ public static class randomValuesGenerator: object {
     {
         string fmt = "00000";
         string returnString = serialNumberIndexer.ToString(fmt);
-        returnString += Get5DigitRandomIntString();
+        
         serialNumberIndexer++;
         return returnString;
     }

@@ -8,6 +8,7 @@ public class MasterBlackBoard : MonoBehaviour {
     public List<AnvilRoute> allGameRoutes;
     public List<AnvilWayPoint> allGameWayPoints;
     public List<AnvilAgent> allGameAgents;
+    public List<FactionController> allFactions;
     private AnvilAgent activeAgent;
     private int wayPointSerial;
 
@@ -23,9 +24,18 @@ public class MasterBlackBoard : MonoBehaviour {
 
     void Awake()
     {
-        allGameAgents = new List<AnvilAgent>(GameObject.Find("Faction1").GetComponentsInChildren<AnvilAgent>());
+        RefreshAllAgentsList();
     }
 
+    public void RefreshAllAgentsList()
+    {
+        allGameAgents = new List<AnvilAgent>();
+        allFactions = new List<FactionController>(GameObject.Find("GameController").GetComponentsInChildren<FactionController>());
+        foreach(FactionController faction in allFactions)
+        {
+            allGameAgents.AddRange(faction.factionAgentList);
+        }
+     }
 
     void Start () {
        

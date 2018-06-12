@@ -34,7 +34,6 @@ public class ObjectPooler : MonoBehaviour {
         foreach(Pool pool in pools)
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
-
             // loops placing all objects in the pool and setting them to inactive
             for (int i = 0; i < pool.size; i++)
             {
@@ -42,7 +41,6 @@ public class ObjectPooler : MonoBehaviour {
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
-
             poolDictionary.Add(pool.tag, objectPool);
         }
 		
@@ -57,13 +55,11 @@ public class ObjectPooler : MonoBehaviour {
     // object pool for future use if needed
     public GameObject SpawnFromPool(string _tag, Vector3 _position, Quaternion _rot, GameObject parent)
     {
-        
         if (!poolDictionary.ContainsKey(_tag))
         {
             Debug.Log("there isnt anything in the dictionary with tag: " + _tag);
             return null;
         }
-
         GameObject objectToSpawn  = poolDictionary[_tag].Dequeue();
         GameObject parentHolder = parent;
         objectToSpawn.SetActive(true);

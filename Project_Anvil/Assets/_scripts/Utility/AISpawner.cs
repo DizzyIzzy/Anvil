@@ -16,7 +16,7 @@ public class AISpawner : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        spawningParent = GameObject.Find("Faction2");
+       
         objectPooler = ObjectPooler.Instance;
         offset = x / 2;
     }
@@ -28,15 +28,13 @@ public class AISpawner : MonoBehaviour {
         prefabHeight = _prefabHeight;
         for(int j = 0; j < count; j++)
         {
-            objectPooler.SpawnFromPool("AIUnit", PlaceStuffRandomly(), Quaternion.identity, gameObject);
+            objectPooler.SpawnFromPool("AIUnit", PlaceStuffRandomly(), Quaternion.identity, spawningParent);
         }
     }
 
-    // PlaceStuffRandomly //
-    // returns a new vector3 that is at least the minimum distance from other units
+    // PlaceStuffRandomly - returns a new vector3 that is at least the minimum distance from other units
     public Vector3 PlaceStuffRandomly()
     {
-
         Vector3 newPos;
         bool Nope = false;
 

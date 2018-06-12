@@ -5,6 +5,8 @@ using UnityEngine;
 public class FactionController : MonoBehaviour
 {
     public string FactionName;
+    public string FactionCallsign;
+    public string factionDigraph; // two letter short version of callsign for brevity
     [SerializeField]
     private AnvilHuman FactionLead;
     public List<AnvilRoute> factionRouteList;
@@ -60,7 +62,7 @@ public class FactionController : MonoBehaviour
     public void RefreshFaction()
     {
         factionAgentList = new List<AnvilAgent>(gameObject.GetComponentsInChildren<AnvilAgent>());
-
+        FindSeniorAgentInFaction();
     }
 
     // Update is called once per frame
@@ -68,5 +70,34 @@ public class FactionController : MonoBehaviour
     {
 
     }
+
+
+
+    private void FindSeniorAgentInFaction()
+    {
+        AnvilHuman highestRankingHuman;
+        List<AnvilAgent> justHumans = new List<AnvilAgent>();
+        foreach (AnvilAgent thisAgent in factionAgentList)
+        {
+            if (thisAgent is AnvilHuman)
+            {
+                justHumans.Add(thisAgent);
+            }
+        }
+        highestRankingHuman = justHumans[0] as AnvilHuman;
+
+        foreach (AnvilHuman thisHuman in justHumans)
+        {
+            if (thisHuman.getRankIndex() > highestRankingHuman.getRankIndex())
+            {
+                highestRankingHuman = thisHuman;
+            }
+        }
+        FactionLead = highestRankingHuman;
+    }
+    public string GetDigraph()
+    {
+        return factionDigraph; 
+            }
 }
     

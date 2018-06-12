@@ -65,40 +65,35 @@ public class Movement : MonoBehaviour {
 
 	}
 
-	void addPoints()
-	{
-		Vector2d latLong = new Vector2d(33.951948, -118.402236);
-		Vector2d latLong1 = new Vector2d(33.949028, -118.431064);
-		Vector2d latLong2 = new Vector2d(33.936320, -118.426153);
-		Vector2d latLong3 = new Vector2d(33.940991, -118.383353);
-		Vector2d latLong4 = new Vector2d(33.931410, -118.422255);
+    void addPoints()
+    {
+        Vector2d latLong = new Vector2d(33.951948, -118.402236);
+        Vector2d latLong1 = new Vector2d(33.949028, -118.431064);
+        Vector2d latLong2 = new Vector2d(33.936320, -118.426153);
+        Vector2d latLong3 = new Vector2d(33.940991, -118.383353);
+        Vector2d latLong4 = new Vector2d(33.931410, -118.422255);
 
+        GameObject go1 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        go1.transform.localPosition = Conversions.GeoToWorldPosition(latLong1, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();
+        go1.transform.localPosition += new Vector3(0, 8, 0);
 
+        GameObject go2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        go2.transform.localPosition = Conversions.GeoToWorldPosition(latLong2, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();
+        go2.transform.localPosition += new Vector3(0, 8, 0);
 
-		GameObject go1 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-		go1.transform.localPosition = Conversions.GeoToWorldPosition(latLong1, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();
-		go1.transform.localPosition += new Vector3 (0, 8, 0);
+        GameObject go3 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        go3.transform.localPosition = Conversions.GeoToWorldPosition(latLong3, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();
+        go3.transform.localPosition += new Vector3(0, 8, 0);
 
-		GameObject go2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-		go2.transform.localPosition = Conversions.GeoToWorldPosition(latLong2, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();
-		go2.transform.localPosition += new Vector3 (0, 8, 0);
+        GameObject go4 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        go4.transform.localPosition = Conversions.GeoToWorldPosition(latLong4, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();
+        go4.transform.localPosition += new Vector3(0, 8, 0);
 
-		GameObject go3 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-		go3.transform.localPosition = Conversions.GeoToWorldPosition(latLong3, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();
-		go3.transform.localPosition += new Vector3 (0, 8, 0);
-
-		GameObject go4 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-		go4.transform.localPosition = Conversions.GeoToWorldPosition(latLong4, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();
-		go4.transform.localPosition += new Vector3 (0, 8, 0);
-
-
-
-		points.Add (go1);
-		points.Add (go2);
-		points.Add (go3);
-		points.Add (go4);
-
-	}
+        points.Add(go1);
+        points.Add(go2);
+        points.Add(go3);
+        points.Add(go4);
+    }
 
    
 	public void moveToWaypoint(AnvilWayPoint waypoint)

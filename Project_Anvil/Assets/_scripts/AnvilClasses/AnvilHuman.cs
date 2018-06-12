@@ -5,8 +5,8 @@ using UnityEngine;
 public class AnvilHuman : AnvilAgent {
 
     public string rank;
-    [SerializeField]
-    private int rankIndex;
+    [SerializeField] private string agentServiceNumber;
+    [SerializeField] private int rankIndex;
 
     public float hunger;
 	public float bladder; 
@@ -24,12 +24,16 @@ public class AnvilHuman : AnvilAgent {
     // Use this for initialization
     void Start ()
     {
-        this.InitializeAgent();
+        InitializeAgent();
         InitializeHuman();
     }
 
     private void InitializeHuman()
     {
+        if (this.agentServiceNumber == "")
+        {
+            this.agentServiceNumber = randomValuesGenerator.GetHashedSerialNumber();
+        }
         if (this.agentName == "")
         {
             this.agentName = randomValuesGenerator.GenerateName();

@@ -74,16 +74,20 @@ public class AnvilAgent : MonoBehaviour {
     {
         if (this.agentSerial == "")
         {
-            this.agentSerial = randomValuesGenerator.GetHashedSerialNumber();
-        }
-        if (this.agentCallsign == "")
-        {
-            this.agentCallsign = "no callsign assigned yet";
-        }
+            this.agentSerial = randomValuesGenerator.GetOpenSerialNumber();
+        } 
+      
         myFactionController = gameObject.GetComponentInParent<FactionController>();
         if (this.faction == "")
         {
             this.faction = myFactionController.FactionName;
+        }
+        if (this.agentCallsign == "")
+        {
+            string digits = randomValuesGenerator.GetOpenSerialNumber().Substring(2);
+            string callsign = myFactionController.GetDigraph() + digits;
+            this.agentCallsign = callsign;
+
         }
     }
 
@@ -161,6 +165,6 @@ public class AnvilAgent : MonoBehaviour {
         this.health = this.health - damageAmount;
     }
 
-
+   
 
 }

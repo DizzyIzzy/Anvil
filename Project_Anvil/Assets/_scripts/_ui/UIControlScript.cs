@@ -162,8 +162,6 @@ public class UIControlScript : MonoBehaviour {
         {
             activeWayPoint = selectedRoute.routeWayPoints[wayPointIndex];
             activeWayPointWorldPoint = ConversionTool1.WayPointToUnityVector3D2(activeWayPoint);
-            Debug.Log("activeWayPointWorldPoint: " + activeWayPointWorldPoint);
-            Debug.Log (activeWayPoint.ToSaveString());
             //Old waypointUIinfo
             //activeWayPointLabel.text = "[" + (wayPointIndex + 1) + "/" + selectedRoute.routeWayPoints.Count + "]" + activeWayPoint.mWayPointName;
 			activeWayPointLabel.text = "Wpt: " + activeWayPoint.mWayPointName;
@@ -352,7 +350,7 @@ public class UIControlScript : MonoBehaviour {
         {
             Vector3 screenPos = Camera.main.WorldToScreenPoint(selectedAgent.transform.position);
             GUI.DrawTexture(new Rect(screenPos.x - reticleSize / 2, (Screen.height - screenPos.y - reticleSize / 2), reticleSize, reticleSize), agentHighlight);
-            GUI.Label(new Rect(screenPos.x - reticleSize / 2, (Screen.height - screenPos.y + labelHeight), 40, labelHeight), selectedAgent.agentName);
+            GUI.Label(new Rect(screenPos.x - reticleSize / 2, (Screen.height - screenPos.y + labelHeight), 40, labelHeight), selectedAgent.agentCallsign);
         }
         //Reticle on UI menu selected navTarget
         if (activeWayPoint != null)

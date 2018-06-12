@@ -21,7 +21,7 @@ public static class ConversionTool1 {
         BasicMap _map = GameObject.Find("Map").GetComponent<BasicMap>();
         Vector2d outputV2 = Conversions.GeoToWorldPosition(waypoint.mLatitude, waypoint.mLongitude, _map.CenterMercator, _map.WorldRelativeScale);
         Vector3 outputV3 = new Vector3((float)outputV2.x,0, (float)outputV2.y);
-        Debug.Log("x: " + (float)outputV2.x + "y: " + (float)outputV2.y);
+
         return outputV3;
     }
    
