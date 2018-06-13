@@ -17,7 +17,7 @@ public class KeyTracker : MonoBehaviour {
 	//References to other scripts
 	CameraController cameraMove;
 	public UIControlScript userControl;
-	public MasterBlackBoard blackBoard;
+	//public MasterBlackBoard blackBoard;
 	public Tasks taskToDo;
 
 	//This determines which selection we are using
@@ -394,7 +394,7 @@ public class KeyTracker : MonoBehaviour {
 
 		AnvilWayPoint wayPoint = new AnvilWayPoint (33.95, -118.45, 49, "NPSGate");
 
-		Vector2d latLong = new Vector2d(wayPoint.mLatitude, wayPoint.mLongitude);
+		Vector2d latLong = new Vector2d(wayPoint.latitude, wayPoint.longitude);
 		if (Input.GetKeyDown (KeyCode.E)) 
 		{
 			moveAgent.transform.localPosition = Conversions.GeoToWorldPosition(latLong, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();

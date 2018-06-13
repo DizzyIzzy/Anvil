@@ -7,7 +7,7 @@ using Mapbox.Unity.Map;
 using Mapbox.Unity.Utilities;
 using Mapbox.Utils;
 
-public class AnvilWayPoint{
+public class AnvilWayPoint : MonoBehaviour{
 	AbstractMap _map;
 
     public LatLng latLong;
@@ -15,9 +15,9 @@ public class AnvilWayPoint{
     public string mWayPointName;
     string wayPointShortTitle;
     string group;
-    public double mLatitude;
-    public  double mLongitude;
-    public double mElevation;
+    public double latitude;
+    public  double longitude;
+    public double elevation;
     public static int lastUnassignedSerial=0;
 
     private GameObject blackBoard;
@@ -32,7 +32,7 @@ public class AnvilWayPoint{
         blackBoard = GameObject.Find("BlackBoard");
         // blackBoardWayPointSerial = blackBoard.GetComponent<BlackBoardScript>().GetWayPointSerial();
         blackBoardWayPointSerial = 5;
-        blackBoardWayPointList = blackBoard.GetComponent<MasterBlackBoard>().allGameWayPoints;
+        blackBoardWayPointList = MasterBlackBoard.allGameWayPoints;
 
 		position = new Vector3 ();
     }
@@ -40,10 +40,11 @@ public class AnvilWayPoint{
     {
         string serialString = DateTime.Now.ToShortDateString();
         string wayPointSerialID = serialString + lastUnassignedSerial.ToString();
-        mLatitude = latitude;
-        mLongitude = longitude;
-        mElevation = height;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        elevation = height;
         mWayPointName = newWayPointName;
+       // this.name = newWayPointName;
         lastUnassignedSerial ++;
         latLong = new LatLng(latitude, longitude, height);
 
@@ -58,13 +59,13 @@ public class AnvilWayPoint{
 
     override public string ToString()
     {
-        string wptString = mWayPointName + "/" + mLatitude + "/" + mLongitude;
+        string wptString = mWayPointName + "/" + latitude + "/" + longitude;
         return wptString;
     }
 
     public string LatLonString()
     {
-        string wptString = "Lat: " + mLatitude+ "\nLong: " +  mLongitude + "\nElev: " + mElevation;
+        string wptString = "Lat: " + latitude+ "\nLong: " +  longitude + "\nElev: " + elevation;
         return wptString;
     }
     //TODO method return WayPoint as KML string (https://developers.google.com/kml/documentation/kmlreference#point)
@@ -82,9 +83,9 @@ public class AnvilWayPoint{
     public string ToSaveString()
     {
         string saveString =
-              mLatitude + "," +
-        mLongitude + "," +
-        mElevation + "," +
+              latitude + "," +
+        longitude + "," +
+        elevation + "," +
         mWayPointName ;
         return saveString;
 

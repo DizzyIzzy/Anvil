@@ -15,7 +15,7 @@ public class SimpleTextFileManager : MonoBehaviour {
     }
     public void SaveWayPointFile()
     {
-        List<AnvilWayPoint> allWayPoints =  (blackBoard.GetComponent<MasterBlackBoard>().allGameWayPoints);
+        List<AnvilWayPoint> allWayPoints =  MasterBlackBoard.allGameWayPoints;
         string timeString = DateTime.Now.ToString("yyMMddHHMMss");
         string path = "Assets/Resources/Saves/" + timeString + ".txt";
         StreamWriter writer = new StreamWriter(path);

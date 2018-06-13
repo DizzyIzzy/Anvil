@@ -4,30 +4,27 @@ using UnityEngine;
 using System;
 using System.IO;
 
-public class MasterBlackBoard : MonoBehaviour {
-    public List<AnvilRoute> allGameRoutes;
-    public List<AnvilWayPoint> allGameWayPoints;
-    public List<AnvilAgent> allGameAgents;
-    public List<FactionController> allFactions;
-    private AnvilAgent activeAgent;
-    private int wayPointSerial;
+public static class MasterBlackBoard  {
+    static public List<AnvilRoute> allGameRoutes;
+    static public List<AnvilWayPoint> allGameWayPoints;
+    static public List<AnvilAgent> allGameAgents;
+    static public List<FactionController> allFactions;
+    static private AnvilAgent activeAgent;
+    static private int wayPointSerial;
 
-
-    
-    
-
-    public GameObject controlScript;
-
-
+    static public GameObject controlScript;
 
     // Use this for initialization
 
-    void Awake()
+    public static void InitializeMasterBlackBoard()
     {
+        controlScript = GameObject.Find("UIController");
+        ReadWayPointsFromFile ();
+        RefreshAllNavigationInfo();
         RefreshAllAgentsList();
     }
 
-    public void RefreshAllAgentsList()
+    static public void RefreshAllAgentsList()
     {
         allGameAgents = new List<AnvilAgent>();
         allFactions = new List<FactionController>(GameObject.Find("GameController").GetComponentsInChildren<FactionController>());
@@ -37,21 +34,29 @@ public class MasterBlackBoard : MonoBehaviour {
         }
      }
 
-    void Start () {
-       
+    static public void RefreshAllNavigationInfo()
+    {
         allGameWayPoints = new List<AnvilWayPoint>();
         allGameRoutes = new List<AnvilRoute>();
         wayPointSerial = GetWayPointSerial();
-        controlScript = GameObject.Find("UIController");
-        
-		ReadWayPointFile ();
     }
-    
-    public int GetWayPointSerial()
+
+    // void Start () {
+
+    //    allGameWayPoints = new List<AnvilWayPoint>();
+    //    allGameRoutes = new List<AnvilRoute>();
+    //      wayPointSerial = GetWayPointSerial();
+    //  controlScript = GameObject.Find("UIController");
+
+    //	ReadWayPointsFromFile ();
+
+
+    static public int GetWayPointSerial()
     {
         return allGameWayPoints.Count;
     }
-    public void createAWayPoint()
+
+    static public void createAWayPoint()
     {
         Debug.Log("this is waypoint" + wayPointSerial);
         string wayPointName = "WPT" + wayPointSerial;
@@ -60,7 +65,7 @@ public class MasterBlackBoard : MonoBehaviour {
         Debug.Log(newWayPoint.ToString());
         wayPointSerial++;
     }
-    public void ListPointsToConsole()
+    static public void ListPointsToConsole()
     {
         Debug.Log("BlackBoard WayPoints:");
         foreach (AnvilWayPoint thisPoint in allGameWayPoints)
@@ -69,7 +74,7 @@ public class MasterBlackBoard : MonoBehaviour {
         }
     }
 
-    public void SaveWayPointFile()
+    static public void SaveWayPointsToFile()
     {
  
         string timeString = DateTime.Now.ToString("yyMMddHHMMss");//would be used if wanted multiple states of saves by inserting the timestring into the filename
@@ -87,7 +92,7 @@ public class MasterBlackBoard : MonoBehaviour {
         writer.Close();
     }
 
-    public void ReadWayPointFile()
+    static public void ReadWayPointsFromFile()
     {
         allGameWayPoints = new List<AnvilWayPoint>();
         string fileName = "Waypoints";
@@ -119,13 +124,13 @@ public class MasterBlackBoard : MonoBehaviour {
 
       //  GameObject.Find("UIController").GetComponent<UserControlScript>().UpdateRouteUIInfo();
 
-		controlScript.GetComponent<UIControlScript> ().nextRoute();
+	//	controlScript.GetComponent<UIControlScript> ().nextRoute();
 
 
     }   
 
     //for debug purposes
-    public void ListAllAgentsToConsole()
+    static public void ListAllAgentsToConsole()
     {
         foreach (AnvilAgent thisAgent in allGameAgents)
         {
@@ -133,12 +138,12 @@ public class MasterBlackBoard : MonoBehaviour {
         }
     }
 
-    public void setActiveAgent (AnvilAgent newActiveAgent)
+    static public void setActiveAgent (AnvilAgent newActiveAgent)
     {
         activeAgent = newActiveAgent;
     }
 
-    public AnvilAgent getActiveAgent()
+    static public AnvilAgent getActiveAgent()
     {
         return activeAgent;
     }

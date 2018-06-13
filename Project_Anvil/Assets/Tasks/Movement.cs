@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour {
 
 	public AbstractMap _map;
 	private List<AnvilWayPoint> agentWayPoints;
-	public MasterBlackBoard blackBoard;
+	//public MasterBlackBoard blackBoard;
 	public AnvilAgent agent;
 	public KeyTracker keyTrack;
 
@@ -99,7 +99,7 @@ public class Movement : MonoBehaviour {
 	public void moveToWaypoint(AnvilWayPoint waypoint)
 	{
         speed = 0.05f;
-			Vector2d goTo = new Vector2d (waypoint.mLatitude, waypoint.mLongitude);
+			Vector2d goTo = new Vector2d (waypoint.latitude, waypoint.longitude);
 
 
 

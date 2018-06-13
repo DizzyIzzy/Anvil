@@ -475,7 +475,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1496679735}
+      - m_Target: {fileID: 0}
         m_MethodName: ReadWayPointFile
         m_Mode: 1
         m_Arguments:
@@ -1076,7 +1076,7 @@ Prefab:
         type: 2}
       propertyPath: blackBoard
       value: 
-      objectReference: {fileID: 1496679735}
+      objectReference: {fileID: 0}
     - target: {fileID: 114020437557808130, guid: 8c660fcaa9f9d9846bcc4b60dc224572,
         type: 2}
       propertyPath: keyTrack
@@ -1331,6 +1331,7 @@ MonoBehaviour:
   FactionLead: {fileID: 0}
   factionAgentList: []
   factionHumanList: []
+  allWayPointsList: []
 --- !u!4 &315564956
 Transform:
   m_ObjectHideFlags: 0
@@ -1433,7 +1434,6 @@ GameObject:
   m_Component:
   - component: {fileID: 338166609}
   - component: {fileID: 338166608}
-  - component: {fileID: 338166610}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1453,6 +1453,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   factionsList: []
+  allGameWayPoints: []
+  allGameAgents: []
+  allFactions: []
+  activeAgent: {fileID: 0}
 --- !u!4 &338166609
 Transform:
   m_ObjectHideFlags: 0
@@ -1463,26 +1467,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1496679736}
   - {fileID: 1046089963}
   - {fileID: 893307644}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &338166610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 338166607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 504b6053a26637746bcb523949933c63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allGameAgents: []
-  allFactions: []
-  controlScript: {fileID: 0}
 --- !u!4 &379541456 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4713157900140388, guid: 58fd1b794a906c94eb89c9029dc4d346,
@@ -2147,7 +2136,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1496679735}
+      - m_Target: {fileID: 0}
         m_MethodName: SaveWayPointFile
         m_Mode: 1
         m_Arguments:
@@ -3030,7 +3019,7 @@ Transform:
   - {fileID: 315564956}
   - {fileID: 1629671198}
   m_Father: {fileID: 338166609}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &895659311
 GameObject:
@@ -3395,7 +3384,7 @@ Transform:
   m_Children:
   - {fileID: 2100103020}
   m_Father: {fileID: 338166609}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1046089964
 MonoBehaviour:
@@ -3410,6 +3399,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedAgent: {fileID: 0}
   allFactionAgents: []
+  activeRouteExecution: []
+  sensorTargetList: []
+  activeSensorTarget: {fileID: 0}
+  activeNavTarget: {fileID: 0}
+  activeWayPoint: {fileID: 0}
   faction: {fileID: 0}
   currentTask: 
   agentIndex: 0
@@ -3427,7 +3421,6 @@ MonoBehaviour:
   activeTaskLabel: {fileID: 1395382780}
   agentHighlight: {fileID: 2800000, guid: 51665f2bcb212df43a9298f8fdcc9284, type: 3}
   WayPointHighlight: {fileID: 2800000, guid: 21b2ec0267c14c540940f1f0e6a6cc22, type: 3}
-  blackBoard: {fileID: 0}
   activeWayPointWorldPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &1046089965
 MonoBehaviour:
@@ -3506,7 +3499,6 @@ MonoBehaviour:
   menuPoint: 3
   actionPoint: 0
   userControl: {fileID: 1046089964}
-  blackBoard: {fileID: 1496679735}
   taskToDo: {fileID: 0}
   mainMenuSelect: 0
   agentMenuSelect: 0
@@ -4517,49 +4509,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4713157900140388, guid: 58fd1b794a906c94eb89c9029dc4d346,
     type: 2}
   m_PrefabInternal: {fileID: 1891018279}
---- !u!1 &1496679734
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1496679736}
-  - component: {fileID: 1496679735}
-  m_Layer: 0
-  m_Name: BlackBoard
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1496679735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1496679734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 504b6053a26637746bcb523949933c63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allGameAgents: []
-  allFactions: []
-  controlScript: {fileID: 0}
---- !u!4 &1496679736
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1496679734}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 338166609}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1521728584
 GameObject:
   m_ObjectHideFlags: 0
@@ -4873,6 +4822,7 @@ MonoBehaviour:
   FactionLead: {fileID: 0}
   factionAgentList: []
   factionHumanList: []
+  allWayPointsList: []
 --- !u!4 &1629671198
 Transform:
   m_ObjectHideFlags: 0
@@ -5222,6 +5172,7 @@ MonoBehaviour:
   FactionLead: {fileID: 0}
   factionAgentList: []
   factionHumanList: []
+  allWayPointsList: []
 --- !u!1 &1754058988
 GameObject:
   m_ObjectHideFlags: 0
@@ -5915,7 +5866,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1496679735}
+      - m_Target: {fileID: 0}
         m_MethodName: ListPointsToConsole
         m_Mode: 1
         m_Arguments:
@@ -6232,7 +6183,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1496679735}
+      - m_Target: {fileID: 0}
         m_MethodName: ListAllAgentsToConsole
         m_Mode: 1
         m_Arguments:
@@ -6550,7 +6501,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1496679735}
+      - m_Target: {fileID: 0}
         m_MethodName: createAWayPoint
         m_Mode: 1
         m_Arguments:

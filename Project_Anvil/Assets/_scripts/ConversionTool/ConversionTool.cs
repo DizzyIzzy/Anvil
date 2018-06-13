@@ -70,9 +70,9 @@ public Text CurrentPos;
 
     public static Vector3 WayPointToUnityVector3D(AnvilWayPoint waypoint)
     {
-        double latitude = waypoint.mLatitude;
-        double longitude = waypoint.mLongitude;
-        float height = 6378137 + (float)waypoint.mElevation;
+        double latitude = waypoint.latitude;
+        double longitude = waypoint.longitude;
+        float height = 6378137 + (float)waypoint.elevation;
         Vector2d outputV2 = new Vector2d(latitude, longitude);
         Vector3 outputV3 = Conversions.GeoToWorldGlobePosition(outputV2, height);
         return outputV3;

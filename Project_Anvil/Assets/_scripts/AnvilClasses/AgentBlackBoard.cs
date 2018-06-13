@@ -7,13 +7,12 @@ public class AgentBlackBoard : MonoBehaviour {
 	public AnvilWayPoint navTgt;
 	public AnvilRoute agentRoute;
 	public List<GameObject> TargetList = new List<GameObject>();
-    private MasterBlackBoard masterBlackBoard;
-    
+
 	public GameObject weaponTgt;
 
 	// Use this for initialization
 	void Start () {
-        masterBlackBoard = GameObject.Find("GameController").GetComponent<MasterBlackBoard>();
+        
 
     }
 	

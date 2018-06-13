@@ -4,9 +4,15 @@ using UnityEngine;
 public class GameControl : MonoBehaviour {
 
 	public static GameControl control;
-    private MasterBlackBoard masterBlackBoard;
+  //  private MasterBlackBoard masterBlackBoard;
     [SerializeField]
-    private List<string> factionsList = new List<string>();
+    private List<FactionController> factionsList = new List<FactionController>();
+    [SerializeField] private List<AnvilRoute> allGameRoutes;
+    [SerializeField] private List<AnvilWayPoint> allGameWayPoints;
+    [SerializeField] private List<AnvilAgent> allGameAgents;
+    [SerializeField] private List<FactionController> allFactions;
+    [SerializeField] private AnvilAgent activeAgent;
+
     void Awake () {
         
       
@@ -23,18 +29,35 @@ public class GameControl : MonoBehaviour {
 
     private void Start()
     {
-        
+        MasterBlackBoard.InitializeMasterBlackBoard();
+        factionsList = MasterBlackBoard.allFactions;
+        allGameRoutes = MasterBlackBoard.allGameRoutes;
+        allGameWayPoints = MasterBlackBoard.allGameWayPoints;
+        allGameAgents = MasterBlackBoard.allGameAgents;
+    }
+
+    private void Update()
+    {
+        UpdateMemory();
     }
     //establish and populate factions in the hierarchy so agents can be assigned.
 
-  
-	void OnGUI()
+
+    void OnGUI()
 	{
 		//OnGUI.Label(Put Lat long Data Here)
 	}
 
-    public List<string> getFactionList()
+    public List<FactionController> getFactionList()
     {
         return factionsList;
+    }
+
+    private void UpdateMemory()
+    {
+        factionsList = MasterBlackBoard.allFactions;
+        allGameRoutes = MasterBlackBoard.allGameRoutes;
+        allGameWayPoints = MasterBlackBoard.allGameWayPoints;
+        allGameAgents = MasterBlackBoard.allGameAgents;
     }
 }

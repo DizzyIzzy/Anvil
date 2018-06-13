@@ -87,7 +87,6 @@ public class AnvilAgent : MonoBehaviour {
             string digits = randomValuesGenerator.GetOpenSerialNumber().Substring(2);
             string callsign = myFactionController.GetDigraph() + digits;
             this.agentCallsign = callsign;
-
         }
     }
 

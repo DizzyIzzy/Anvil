@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour {
     
 	private Transform target;
 
-    private MasterBlackBoard masterBlackBoard;
+  //  private MasterBlackBoard masterBlackBoard;
 	public GameObject mainCamera;
 
 	KeyTracker keyTracker;
@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour {
 
     private void Awake()
     {
-        masterBlackBoard = GameObject.Find("GameController").GetComponent<MasterBlackBoard>();
+    //    masterBlackBoard = GameObject.Find("GameController").GetComponent<MasterBlackBoard>();
     }
 
     void Start () {
@@ -98,9 +98,9 @@ public class CameraController : MonoBehaviour {
             Debug.Log("CBang - center toggle is: " + centerToggle);
             if (centerToggle == false)
             {
-                Debug.Log("Center on player" + masterBlackBoard.getActiveAgent().agentName);
+                Debug.Log("Center on player" + MasterBlackBoard.getActiveAgent().agentName);
                 inFollowMode = true;
-                cameraCenter = masterBlackBoard.getActiveAgent().transform;
+                cameraCenter = MasterBlackBoard.getActiveAgent().transform;
                 centerToggle = true;
             }
             else 
@@ -131,7 +131,7 @@ public class CameraController : MonoBehaviour {
     }
 
     private void overHeadFollow() {
-        Debug.Log("Following" + masterBlackBoard.getActiveAgent().agentName);
+        Debug.Log("Following" + MasterBlackBoard.getActiveAgent().agentName);
         Vector3 target_Position = new Vector3 (cameraCenter.position.x, mainCamera.transform.position.y, cameraCenter.position.z);
         mainCamera.transform.position = target_Position;
         transform.LookAt(cameraCenter);
