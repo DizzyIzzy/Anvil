@@ -29,7 +29,7 @@ public class Movement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		points = new List<GameObject> ();
-		Invoke("addPoints", 1);
+		//Invoke("addPoints", 1);
 
 		agent = GetComponent<AnvilAgent> ();
 

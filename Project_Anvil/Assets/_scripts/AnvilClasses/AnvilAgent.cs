@@ -188,8 +188,8 @@ public class AnvilAgent : MonoBehaviour {
     public List<string> GetAgentPossibleTasks()
     {
         List<string> returnList = new List<string>();
-        //return a list of the tasks this agent can perform based on associated vehicles, systems, rank, and training
-        return 
+		//return a list of the tasks this agent can perform based on associated vehicles, systems, rank, and training
+		return returnList;
     }
 
 }

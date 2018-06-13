@@ -26,6 +26,6 @@ public class UIBlackBoardHandler : MonoBehaviour {
 
     public string getSelectorPanelString()
     {
-
+		return null;
     }
 }

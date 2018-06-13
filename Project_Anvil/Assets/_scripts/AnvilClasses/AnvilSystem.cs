@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnvilSystem:MonoBehaviour {
+public class AnvilSystem : MonoBehaviour {
     [SerializeField] private float systemSerial;
     [SerializeField] private bool isRunning;
     [SerializeField] private bool isImmortal;

@@ -12,6 +12,8 @@ public class AgentBlackBoard : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+	
         
 
     }

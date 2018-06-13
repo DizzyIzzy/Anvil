@@ -13,6 +13,17 @@ public class AnvilHuman : AnvilAgent {
 	public float fatigue;
 	public float anxiety; 
     public float speed;
+	public int enemyCount;
+
+
+	public List<GameObject> enemiesInMemory; 
+	//Air vehicles list
+	//Water vehicles list
+	//Land vehicles list
+	//Ground Agent list
+	//Water Agent list
+
+
     
     public AnvilHuman()
     {
@@ -20,6 +31,7 @@ public class AnvilHuman : AnvilAgent {
         this.bladder = 0;
         this.fatigue = 0;
         this.anxiety = 0;
+		this.enemiesInMemory = new List<GameObject>();
     }
     // Use this for initialization
     void Start ()
@@ -30,6 +42,8 @@ public class AnvilHuman : AnvilAgent {
 
     private void InitializeHuman()
     {
+		enemyCount = 0;
+
         if (this.agentServiceNumber == "")
         {
             this.agentServiceNumber = randomValuesGenerator.GetHashedSerialNumber();
@@ -51,6 +65,9 @@ public class AnvilHuman : AnvilAgent {
         {
             this.task = "Idle";
         }
+
+		enemiesInMemory = new List<GameObject>();
+
     }
 
 
@@ -64,4 +81,18 @@ public class AnvilHuman : AnvilAgent {
     {
         return this.rankIndex;
     }
+
+	public void addEnemy(GameObject enemy)
+	{
+		
+
+		if (!enemiesInMemory.Contains(enemy))
+		{
+			enemiesInMemory.Add(enemy);
+			enemyCount++;
+		}
+	}
+
+
+
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class FieldOfView : MonoBehaviour {
+public class FieldOfView : AnvilSystem {
 
 	public float viewRadius;
 	[Range(0,360)]
@@ -16,20 +16,31 @@ public class FieldOfView : MonoBehaviour {
 	[HideInInspector]
 	public List<Transform> visibleTargets = new List<Transform>();
 
-	public float meshResolution;
+	
 
 	//This is how accurate you want the edges to be
 	public int edgeResolveIterations;
 	//For when 2 rays hit something but there is empty space between them
 	public float edgeDstThreshold;
 
+
+	//Things to handle the mesh drawing
 	public MeshFilter viewMeshFilter;
 	Mesh viewMesh;
+	public float meshResolution;
+
+
+	//The active AnvilHuman this script is with
+	public AnvilHuman anvilHuman;
+
+
 
 	void Start() {
-		viewMesh = new Mesh ();
-		viewMesh.name = "View Mesh";
-		viewMeshFilter.mesh = viewMesh;
+	//	viewMesh = new Mesh ();
+	//	viewMesh.name = "View Mesh";
+	//	viewMeshFilter.mesh = viewMesh;
+
+		anvilHuman = GetComponent<AnvilHuman>();
 
 		StartCoroutine ("FindTargetsWithDelay", .2f);
 	}
@@ -43,7 +54,9 @@ public class FieldOfView : MonoBehaviour {
 	}
 
 	void LateUpdate() {
-		DrawFieldOfView ();
+
+		//	DrawFieldOfView ();
+
 	}
 
 	void FindVisibleTargets() {
@@ -60,6 +73,10 @@ public class FieldOfView : MonoBehaviour {
 				float dstToTarget = Vector3.Distance (transform.position, target.position);
 				if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask)) {
 					visibleTargets.Add (target);
+
+
+					anvilHuman.addEnemy(target.gameObject);
+
 					Debug.Log ("Get off my turff or I'll shoot!");
 				}
 			}
@@ -67,6 +84,16 @@ public class FieldOfView : MonoBehaviour {
 	}
 
 
+
+
+
+
+
+
+
+
+
+	//This handles drawing the field of view, everything below this is for drawing
 	void DrawFieldOfView() {
 		int stepCount = Mathf.RoundToInt(viewAngle * meshResolution);
 		float stepAngleSize = viewAngle / stepCount;
@@ -90,8 +117,6 @@ public class FieldOfView : MonoBehaviour {
 				}
 
 			}
-
-
 			viewPoints.Add (newViewCast.point);
 			oldViewCast = newViewCast;
 		}
@@ -157,6 +182,8 @@ public class FieldOfView : MonoBehaviour {
 		}
 	}
 
+
+	//Gets the direction of an object from its angle
 	public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal) {
 		if (!angleIsGlobal) {
 			angleInDegrees += transform.eulerAngles.y;
