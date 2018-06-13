@@ -13,6 +13,7 @@ public class KeyTracker : MonoBehaviour {
 	//This keeps track of what we want to select from main menu
 	public int menuPoint = 0;
 	public int actionPoint = 0;
+	public int settingPoint = 0;
 
 	//References to other scripts
 	CameraController cameraMove;
@@ -24,12 +25,19 @@ public class KeyTracker : MonoBehaviour {
 	public bool mainMenuSelect;
 	public bool agentMenuSelect;
 	public bool agentActionSelect;
+	public bool settingSelect;
 
 	//These are the buttons
     private UnityEngine.UI.Button settingButton;
 	private UnityEngine.UI.Button playerButton;
 	private UnityEngine.UI.Button waypointButton;
 	private UnityEngine.UI.Button mapButton;
+
+	private UnityEngine.UI.Button optionsButton;
+	private UnityEngine.UI.Button controlsButton;
+	private UnityEngine.UI.Button filesButton;
+	private UnityEngine.UI.Button networkButton;
+
 
 	//These hold the GUI panels to turn on or off
 	private GameObject mainMenuPanel;
@@ -38,6 +46,7 @@ public class KeyTracker : MonoBehaviour {
 	public GameObject actionMenuPanel;
 	public GameObject moveAgent;
 	public GameObject routePanel;
+	public GameObject settingsPanel;
 
     //These are the text objects for the menu
 	public Text routeDataLabel;
@@ -45,6 +54,9 @@ public class KeyTracker : MonoBehaviour {
 	public Text factionDataLabel;
 	public Text agentDataLabel;
 	public Text taskDataLabel;
+
+
+
 	private Text thisLabel;
 	private List<Text> allLabels;
 
@@ -55,6 +67,7 @@ public class KeyTracker : MonoBehaviour {
 	void Start () {
 		agentActionSelect = false;
 		mainMenuSelect = false;
+		settingSelect = false;
 	    cameraMove = GetComponent(typeof(CameraController)) as CameraController;
 
 		taskToDo = GetComponent<Tasks> ();
@@ -85,6 +98,8 @@ public class KeyTracker : MonoBehaviour {
 		{
 		case 0:
 			//Code for setting menu
+			uiPicker(menuPoint);
+			settingSelect = true;
 			break;
 		case 1:
 			//This is the case for the agent menu
@@ -132,6 +147,7 @@ public class KeyTracker : MonoBehaviour {
 		playerButton =  GameObject.Find ("Player Actions").GetComponent<UnityEngine.UI.Button> ();
 		waypointButton = GameObject.Find ("Waypoint Actions").GetComponent<UnityEngine.UI.Button> ();
 		mapButton = GameObject.Find ("Map Control").GetComponent<UnityEngine.UI.Button> ();
+		optionsButton = GameObject.Find("Map Control").GetComponent<UnityEngine.UI.Button>();
 	}
 	//This allows the jump from map to settings and settings to map
 	public void checkMenuPoint()
@@ -172,6 +188,40 @@ public class KeyTracker : MonoBehaviour {
 			playerButton.OnDeselect (null);
 		}
 	}
+
+
+	public void checkSettingSelected()
+	{
+		if (settingPoint == 0)
+		{
+			optionsButton.OnSelect(null);
+			playerButton.OnDeselect(null);
+			waypointButton.OnDeselect(null);
+			mapButton.OnDeselect(null);
+		}
+		else if (settingPoint == 1)
+		{
+			playerButton.OnSelect(null);
+			settingButton.OnDeselect(null);
+			waypointButton.OnDeselect(null);
+			mapButton.OnDeselect(null);
+		}
+		else if (settingPoint == 2)
+		{
+			waypointButton.OnSelect(null);
+			settingButton.OnDeselect(null);
+			playerButton.OnDeselect(null);
+			mapButton.OnDeselect(null);
+		}
+		else if (settingPoint == 3)
+		{
+			mapButton.OnSelect(null);
+			settingButton.OnDeselect(null);
+			waypointButton.OnDeselect(null);
+			playerButton.OnDeselect(null);
+		}
+	}
+
     
 	public void checkCameraMove()
 	{
@@ -251,9 +301,14 @@ public class KeyTracker : MonoBehaviour {
 					//Navigates the possible agents
 					userControl.NextAgent ();
 			} 
-				//If we are navigating the agent action menu
-			else if (agentActionSelect) 
+				else if (settingSelect)
 			{
+
+
+			}
+				//If we are navigating the agent action menu
+				else if (agentActionSelect) 
+				{
 				
 				//If we are changing routes
 				if (actionPoint == 0) {
@@ -294,7 +349,16 @@ public class KeyTracker : MonoBehaviour {
 				//Gets the previous agent
 					userControl.PrevAgent ();
 			}
-				//If we are navigating the action select
+				else if (settingSelect)
+			{
+
+
+
+
+
+			}
+
+			//If we are navigating the action select
 			else if (agentActionSelect) 
 			{
 				//Navigating Routes
@@ -409,6 +473,7 @@ public class KeyTracker : MonoBehaviour {
 		{
 		case 0:
 			//Code for other menu
+			settingsUI();
 			break;
 		case 1:
 			//Code for other menu
@@ -419,7 +484,7 @@ public class KeyTracker : MonoBehaviour {
 			routeUI();
 			break;
 		case 3:
-				mapUI();
+			mapUI();
 			break;
 		}
 	}
@@ -430,6 +495,7 @@ public class KeyTracker : MonoBehaviour {
 		agentPanel.gameObject.SetActive(true);
 		debugPanel.gameObject.SetActive(false);
 		routePanel.gameObject.SetActive (false);
+		settingsPanel.gameObject.SetActive(false);
 	}
 
 	public void mapUI()
@@ -438,6 +504,7 @@ public class KeyTracker : MonoBehaviour {
 		agentPanel.gameObject.SetActive(false);
 		debugPanel.gameObject.SetActive(false);
 		routePanel.gameObject.SetActive (false);
+		settingsPanel.gameObject.SetActive(false);
 	}
 
 	public void agentUI()
@@ -446,6 +513,7 @@ public class KeyTracker : MonoBehaviour {
 		agentPanel.gameObject.SetActive(true);
 		debugPanel.gameObject.SetActive(false);
 		routePanel.gameObject.SetActive (false);
+		settingsPanel.gameObject.SetActive(false);
 	}
 
 	public void waypointUI()
@@ -454,6 +522,7 @@ public class KeyTracker : MonoBehaviour {
 		agentPanel.gameObject.SetActive(false);
 		debugPanel.gameObject.SetActive(false);
 		routePanel.gameObject.SetActive (false);
+		settingsPanel.gameObject.SetActive(false);
 	}
 
 	public void routeUI()
@@ -462,6 +531,16 @@ public class KeyTracker : MonoBehaviour {
 		mainMenuPanel.gameObject.SetActive(false);
 		agentPanel.gameObject.SetActive(false);
 		debugPanel.gameObject.SetActive(false);
+		settingsPanel.gameObject.SetActive(false);
+	}
+
+	public void settingsUI()
+	{
+		routePanel.gameObject.SetActive(false);
+		mainMenuPanel.gameObject.SetActive(false);
+		agentPanel.gameObject.SetActive(false);
+		debugPanel.gameObject.SetActive(false);
+		settingsPanel.gameObject.SetActive(true);
 	}
 
 	public void getPanels()
@@ -470,6 +549,7 @@ public class KeyTracker : MonoBehaviour {
 		agentPanel = GameObject.Find("AgentPanel");
 		debugPanel = GameObject.Find("DebugBlackboard");
 		routePanel = GameObject.Find("RoutePanel");
+		settingsPanel = GameObject.Find("SettingsPanel");
 	}
     
 	//This adds all the text values to a list in order to make highlighting easier
