@@ -137,7 +137,7 @@ public class AnvilAgent : MonoBehaviour {
 
     public void setSPITarget(AnvilWayPoint SPIWayPoint)
     {
-        navTarget = SPIWayPoint;
+        sensorTarget = SPIWayPoint;
         activeSPI = SPIWayPoint.mWayPointName;
     }
 
@@ -164,6 +164,32 @@ public class AnvilAgent : MonoBehaviour {
         this.health = this.health - damageAmount;
     }
 
-   
+    public string getShortLocationString()
+    {
+        getLatLong();
+        string fmt = "000.#####";
+        return locationLatLng.Latitude.ToString(fmt) + "\n" + locationLatLng.Longitude.ToString(fmt);
+    }
+
+    public string getAgentBlackBoardDataString()
+    {
+        //the blank lines between the agentName and the navwaypoint are for UI fit purposes
+        string returnString =
+            "[" + agentCallsign + "]" + "\n" +
+            agentName + "\n" +
+            "\n" +
+            "\n" +
+            "nav/" + navTarget + "\n" +
+            "SPI/" + activeSPI + "\n" +
+            "do/" + task;
+        return returnString;
+    }
+
+    public List<string> GetAgentPossibleTasks()
+    {
+        List<string> returnList = new List<string>();
+        //return a list of the tasks this agent can perform based on associated vehicles, systems, rank, and training
+        return 
+    }
 
 }

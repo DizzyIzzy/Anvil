@@ -107,38 +107,27 @@ public class UIControlScript : MonoBehaviour {
         MasterBlackBoard.setActiveAgent(selectedAgent);
         if (selectedAgent != null)
         {
-            activeAgentLabel.text = selectedAgent.agentName;
+           // activeAgentLabel.text = selectedAgent.agentName;
             if (selectedAgent.locationLatLng != null)
             {
-                activeAgentPosLabel.text = selectedAgent.locationLatLng.ToString();
+                activeAgentPosLabel.text = selectedAgent.getShortLocationString();
             }
 
+            activeAgentDataLabel.text = selectedAgent.getAgentBlackBoardDataString();
             //activeAgentPosLabel.text = selectedAgent.mLocation.ToString() + "*\n +" +
             //  ConversionTool.LatLongToUnityVector3D(selectedAgent.mLocation);
+            //  if (selectedAgent.navTarget == null)
+            //          {  activeAgentDataLabel.text = "- no waypoint";}
+            //     else {  activeAgentDataLabel.text = selectedAgent.navTarget.mWayPointName;}
 
-            if (selectedAgent.navTarget != null)
-            {
-                if (selectedAgent.navTarget.mWayPointName == null)
-                {
-                    activeAgentDataLabel.text = "- no waypoint set";
-                }
-                else
-                {
-                    activeAgentDataLabel.text = selectedAgent.navTarget.mWayPointName;
-                }
-            }
+        //    if (selectedAgent.sensorTarget == null)
+      //      { activeAgentDataLabel.text = "- no SPI"; }
+       //     else { activeAgentDataLabel.text = selectedAgent.navTarget.mWayPointName; }
 
-			if (selectedAgent.task != null) 
-			{
-				if (selectedAgent.task == "")
-				{
-					activeTaskLabel.text = "Task: Idle";
-				}
-				else
-				{
-					activeTaskLabel.text = selectedAgent.task;
-				}
-			}
+     //       if (selectedAgent.task == "")
+	//		{   activeTaskLabel.text = "Task: Idle";
+		//	} else{activeTaskLabel.text = selectedAgent.task}
+			
         }
     }
     
