@@ -429,7 +429,7 @@ RectTransform:
   m_Children:
   - {fileID: 593296648}
   m_Father: {fileID: 2100103020}
-  m_RootOrder: 1
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -644,7 +644,7 @@ Prefab:
     - target: {fileID: 224640030910948214, guid: 77dce3c2244a62d4cbd8618c1fffc30f,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224640030910948214, guid: 77dce3c2244a62d4cbd8618c1fffc30f,
         type: 2}
@@ -965,8 +965,9 @@ GameObject:
   - component: {fileID: 163582663}
   - component: {fileID: 163582665}
   - component: {fileID: 163582664}
+  - component: {fileID: 163582666}
   m_Layer: 0
-  m_Name: MasterMenuPanel
+  m_Name: actionMenuPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -988,7 +989,7 @@ RectTransform:
   - {fileID: 283874612}
   - {fileID: 5954101}
   m_Father: {fileID: 2100103020}
-  m_RootOrder: 8
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -1028,6 +1029,24 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 163582662}
+--- !u!114 &163582666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 163582662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e17d0eaed61c33c4ba5376f2e463037f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionMenuPanel: {fileID: 0}
+  routeDataLabel: {fileID: 0}
+  waypointDataLabel: {fileID: 0}
+  factionDataLabel: {fileID: 0}
+  agentDataLabel: {fileID: 0}
+  taskDataLabel: {fileID: 0}
+  allLabels: []
 --- !u!1001 &189235347
 Prefab:
   m_ObjectHideFlags: 0
@@ -1635,6 +1654,7 @@ GameObject:
   - component: {fileID: 407403235}
   - component: {fileID: 407403237}
   - component: {fileID: 407403236}
+  - component: {fileID: 407403238}
   m_Layer: 0
   m_Name: AgentPanel
   m_TagString: Untagged
@@ -1659,7 +1679,7 @@ RectTransform:
   - {fileID: 1521728585}
   - {fileID: 2053153379}
   m_Father: {fileID: 2100103020}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -1699,6 +1719,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 407403234}
+--- !u!114 &407403238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 407403234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4660b5dde6fed428cd476e19f0017c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentPosText: {fileID: 0}
+  navDataText: {fileID: 0}
 --- !u!1001 &421370865
 Prefab:
   m_ObjectHideFlags: 0
@@ -2161,7 +2194,7 @@ RectTransform:
   m_Children:
   - {fileID: 392385131}
   m_Father: {fileID: 2100103020}
-  m_RootOrder: 0
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3692,9 +3725,11 @@ GameObject:
   - component: {fileID: 1046089964}
   - component: {fileID: 1046089966}
   - component: {fileID: 1046089965}
-  - component: {fileID: 1046089969}
   - component: {fileID: 1046089967}
   - component: {fileID: 1046089968}
+  - component: {fileID: 1046089969}
+  - component: {fileID: 1046089970}
+  - component: {fileID: 1046089971}
   m_Layer: 0
   m_Name: UIController
   m_TagString: Untagged
@@ -3820,7 +3855,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1046089962}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 889a3c630adc9db49aa837245c8f3c66, type: 3}
   m_Name: 
@@ -3828,20 +3863,54 @@ MonoBehaviour:
   _map: {fileID: 1754058991}
   menuPoint: 3
   actionPoint: 0
+  settingPoint: 0
   userControl: {fileID: 1046089964}
   taskToDo: {fileID: 0}
+  uiHandler: {fileID: 0}
   mainMenuSelect: 0
   agentMenuSelect: 0
   agentActionSelect: 0
+  settingSelect: 0
   actionMenuPanel: {fileID: 163582662}
-  moveAgent: {fileID: 1587953432}
-  routePanel: {fileID: 0}
-  routeDataLabel: {fileID: 1162757459}
-  waypointDataLabel: {fileID: 320059007}
-  factionDataLabel: {fileID: 114604181}
-  agentDataLabel: {fileID: 283874613}
-  taskDataLabel: {fileID: 5954102}
   moving: 0
+--- !u!114 &1046089970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1046089962}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4434689a39c0f78429cd311276fb4ef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuPanel: {fileID: 0}
+  agentPanel: {fileID: 0}
+  debugPanel: {fileID: 0}
+  actionMenuPanel: {fileID: 0}
+  routePanel: {fileID: 0}
+  settingsPanel: {fileID: 0}
+  routeDataLabel: {fileID: 0}
+  waypointDataLabel: {fileID: 0}
+  factionDataLabel: {fileID: 0}
+  agentDataLabel: {fileID: 0}
+  taskDataLabel: {fileID: 0}
+--- !u!114 &1046089971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1046089962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d10215a535e671749bf28fb0d8479489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MenuPanel: {fileID: 0}
+  AgentPanel: {fileID: 0}
+  actionMenuPanel: {fileID: 0}
+  listOfPanels: []
+  panelIndex: 0
 --- !u!1 &1057758135
 GameObject:
   m_ObjectHideFlags: 0
@@ -4777,7 +4846,7 @@ RectTransform:
   - {fileID: 140790381}
   - {fileID: 1727841340}
   m_Father: {fileID: 2100103020}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -4849,7 +4918,7 @@ RectTransform:
   - {fileID: 903841167}
   - {fileID: 1096355150}
   m_Father: {fileID: 2100103020}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -5148,11 +5217,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1521728584}
---- !u!1 &1587953432 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1300081748089696, guid: 8c660fcaa9f9d9846bcc4b60dc224572,
-    type: 2}
-  m_PrefabInternal: {fileID: 189235347}
 --- !u!4 &1587953433 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4873537325259212, guid: 8c660fcaa9f9d9846bcc4b60dc224572,
@@ -5193,7 +5257,7 @@ RectTransform:
   m_Children:
   - {fileID: 1732257609}
   m_Father: {fileID: 2100103020}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -6264,7 +6328,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 2.28}
   m_Children: []
   m_Father: {fileID: 2100103020}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -6512,7 +6576,7 @@ RectTransform:
   m_Children:
   - {fileID: 910608821}
   m_Father: {fileID: 2100103020}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -6581,7 +6645,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 2.28}
   m_Children: []
   m_Father: {fileID: 2100103020}
-  m_RootOrder: 13
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -6708,7 +6772,7 @@ RectTransform:
   - {fileID: 1699903784}
   - {fileID: 196684834}
   m_Father: {fileID: 2100103020}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -6899,7 +6963,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 2.28}
   m_Children: []
   m_Father: {fileID: 2100103020}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -7186,6 +7250,24 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2053687477}
+--- !u!1 &2063154808 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1270991682290404, guid: 77dce3c2244a62d4cbd8618c1fffc30f,
+    type: 2}
+  m_PrefabInternal: {fileID: 112344346}
+--- !u!114 &2063154811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2063154808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7f1828a32b52d42a794297f9987a06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuPanel: {fileID: 0}
+  allButtons: []
 --- !u!1 &2078192024
 GameObject:
   m_ObjectHideFlags: 0
@@ -7288,20 +7370,20 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 643443700}
-  - {fileID: 87898588}
   - {fileID: 553895858}
   - {fileID: 407403235}
-  - {fileID: 1628309312}
+  - {fileID: 163582663}
   - {fileID: 1999947970}
   - {fileID: 1976422266}
+  - {fileID: 1628309312}
   - {fileID: 1357074538}
-  - {fileID: 163582663}
   - {fileID: 2109711266}
   - {fileID: 1359703094}
   - {fileID: 2013600957}
   - {fileID: 1952436237}
   - {fileID: 1993030093}
+  - {fileID: 643443700}
+  - {fileID: 87898588}
   m_Father: {fileID: 1046089963}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7473,7 +7555,7 @@ RectTransform:
   - {fileID: 1184903023}
   - {fileID: 691477901}
   m_Father: {fileID: 2100103020}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
