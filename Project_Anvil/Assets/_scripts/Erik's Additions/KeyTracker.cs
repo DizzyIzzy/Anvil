@@ -57,7 +57,7 @@ public class KeyTracker : MonoBehaviour {
 		checkCameraMove ();
 		getInput ();
 
-		uiHandler.checkMainMenuSelected(menuPoint);
+		//uiHandler.checkMainMenuSelected(menuPoint);
 
 		//This helps highlight the different main menu options
 		switch (menuPoint)
@@ -81,7 +81,7 @@ public class KeyTracker : MonoBehaviour {
 					actionMenuPanel.gameObject.SetActive (true);
 					//agentPanel.gameObject.SetActive (false);
 					checkActionPoint ();
-					uiHandler.checkActionSelected (actionPoint);
+					//uiHandler.checkActionSelected (actionPoint);
 				} else {
 					actionMenuPanel.gameObject.SetActive (false);
 					//agentPanel.gameObject.SetActive (true);

@@ -74,6 +74,7 @@ public class UIHandler : MonoBehaviour {
 
 
 	//Checks which button we will highlight in Main Menu
+	/*
 	public void checkMainMenuSelected(int selectionIndex)
 	{
 		switch (selectionIndex)
@@ -138,7 +139,9 @@ public class UIHandler : MonoBehaviour {
 
 		}
 	}
+	*/
 
+	/*
 	public void checkActionSelected(int actionPoint)
 	{
 		switch (actionPoint)
@@ -170,7 +173,7 @@ public class UIHandler : MonoBehaviour {
 			}
 		}
 	}
-
+	*/
 
 
 

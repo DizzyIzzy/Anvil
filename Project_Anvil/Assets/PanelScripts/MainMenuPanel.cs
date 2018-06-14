@@ -12,7 +12,7 @@ public class MainMenuPanel : MonoBehaviour {
 
 	public List<UnityEngine.UI.Button> allButtons;
 
-	private int selectionIndex;
+	public int selectionIndex;
 
 	// Use this for initialization
 	void Start () {
@@ -31,11 +31,13 @@ public class MainMenuPanel : MonoBehaviour {
 	{
 		selectionIndex--;
 		checkSelectionIndex();
+		Debug.Log("Selection Index: " + selectionIndex);
 	}
 	public void GetDownInput()
 	{
 		selectionIndex++;
 		checkSelectionIndex();
+		Debug.Log("Selection Index: " + selectionIndex);
 	}
 
 	public void GetRightInput()
