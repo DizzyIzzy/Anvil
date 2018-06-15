@@ -105,6 +105,7 @@ public class PanelController : MonoBehaviour {
 
 
 		mainMenuPanelIndex = MenuPanel.GetComponent<MainMenuPanel>().selectionIndex;
+		uiHandler.uiPicker(panelIndex);
 	}
 
 

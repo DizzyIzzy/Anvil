@@ -8,6 +8,9 @@ public class AnvilHuman : AnvilAgent {
     [SerializeField] private string agentServiceNumber;
     [SerializeField] private int rankIndex;
 
+	public int maxHealth;
+	public int currentHealth;
+
     public float hunger;
 	public float bladder; 
 	public float fatigue;
@@ -27,6 +30,8 @@ public class AnvilHuman : AnvilAgent {
     
     public AnvilHuman()
     {
+		this.maxHealth = 100;
+		this.currentHealth = maxHealth;
         this.hunger = 0;
         this.bladder = 0;
         this.fatigue = 0;
@@ -93,6 +98,29 @@ public class AnvilHuman : AnvilAgent {
 		}
 	}
 
+	public void doDamage(int damageAmount)
+	{
+		Debug.Log("Ouch my health is at: " + currentHealth);
+		currentHealth -= damageAmount;
+		healthCheck();
+	}
+
+	public void healthCheck()
+	{
+		if(currentHealth<= 0)
+		{
+			this.gameObject.SetActive(false);
+		}
+	}
+
+	public void healAgent(int healAmount)
+	{
+		currentHealth += healAmount;
+		if(currentHealth >= maxHealth)
+		{
+			currentHealth = maxHealth;
+		}
+	}
 
 
 }

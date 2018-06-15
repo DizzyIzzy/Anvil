@@ -58,15 +58,18 @@ public class UIHandler : MonoBehaviour {
 		switch (pick)
 		{
 			case 0:
-				settingsUI();
+				mainMenuUI();
 				break;
 			case 1:
-				agentUI();
+				settingsUI();
 				break;
 			case 2:
-				routeUI();
+				agentUI();
 				break;
 			case 3:
+				routeUI();
+				break;
+			case 4:
 				mapUI();
 				break;
 		}

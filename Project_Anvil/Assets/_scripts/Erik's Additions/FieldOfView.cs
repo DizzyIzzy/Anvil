@@ -77,6 +77,8 @@ public class FieldOfView : AnvilSystem {
 
 					anvilHuman.addEnemy(target.gameObject);
 
+					target.GetComponent<AnvilHuman>().doDamage(20);
+
 					Debug.Log ("Get off my turff or I'll shoot!");
 				}
 			}
