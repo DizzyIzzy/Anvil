@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114801327971042500}
   - component: {fileID: 114328721099969186}
   - component: {fileID: 114233432081681894}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Human
   m_TagString: ModelAir
   m_Icon: {fileID: 0}
@@ -40,8 +40,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1382763131712950}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -64.55, y: 11.4, z: -12.7}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -54.49, y: 11.4, z: -29.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -139,7 +139,7 @@ MonoBehaviour:
   viewAngle: 91
   targetMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2304
   obstacleMask:
     serializedVersion: 2
     m_Bits: 512
@@ -179,11 +179,14 @@ MonoBehaviour:
   rank: 
   agentServiceNumber: 
   rankIndex: 0
+  maxHealth: 100
+  currentHealth: 100
   hunger: 0
   bladder: 0
   fatigue: 0
   anxiety: 0
   speed: 0
+  enemyCount: 0
   enemiesInMemory: []
 --- !u!114 &114801327971042500
 MonoBehaviour:

@@ -38,7 +38,7 @@ public class AnvilAgent : MonoBehaviour {
     [SerializeField]
     private string faction;
 
-
+	
 
 
     //Gear - links to equipments by Arrays and List of owned or accessible objects

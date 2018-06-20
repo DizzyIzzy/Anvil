@@ -4,7 +4,8 @@ using UnityEngine;
 using System;
 using System.IO;
 
-public static class MasterBlackBoard  {
+public class MasterBlackBoard : MonoBehaviour
+{
     static public List<AnvilRoute> allGameRoutes;
     static public List<AnvilWayPoint> allGameWayPoints;
     static public List<AnvilAgent> allGameAgents;
@@ -41,15 +42,17 @@ public static class MasterBlackBoard  {
         wayPointSerial = GetWayPointSerial();
     }
 
-    // void Start () {
+    
+     void Awake () {
 
-    //    allGameWayPoints = new List<AnvilWayPoint>();
-    //    allGameRoutes = new List<AnvilRoute>();
-    //      wayPointSerial = GetWayPointSerial();
-    //  controlScript = GameObject.Find("UIController");
+       allGameWayPoints = new List<AnvilWayPoint>();
+        allGameRoutes = new List<AnvilRoute>();
+      wayPointSerial = GetWayPointSerial();
+      controlScript = GameObject.Find("UIController");
 
-    //	ReadWayPointsFromFile ();
-
+    	ReadWayPointsFromFile ();
+    }
+    
 
     static public int GetWayPointSerial()
     {
@@ -94,6 +97,7 @@ public static class MasterBlackBoard  {
 
     static public void ReadWayPointsFromFile()
     {
+		Debug.Log("Reading Waypoints");
         allGameWayPoints = new List<AnvilWayPoint>();
         string fileName = "Waypoints";
         string path = "Assets/Resources/Saves/" + fileName +".txt";

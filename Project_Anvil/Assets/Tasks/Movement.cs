@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mapbox.Unity.Map;
@@ -107,7 +107,7 @@ public class Movement : MonoBehaviour {
 			goToPoint.transform.localPosition += new Vector3 (0, 8, 0);
 		
 	
-		if (keyTrack.moving == true) {
+		//if (keyTrack.moving == true) {
 			Vector3 lookAtGoal = new Vector3 (goToPoint.transform.localPosition.x, goToPoint.transform.localPosition.y, goToPoint.transform.localPosition.z);
 
 			Vector3 direction = lookAtGoal - this.transform.position;
@@ -115,7 +115,7 @@ public class Movement : MonoBehaviour {
 			this.transform.rotation = Quaternion.Slerp (this.transform.rotation, Quaternion.LookRotation (direction), Time.deltaTime * rotSpeed);
 
 			this.transform.position = Vector3.MoveTowards (transform.position, goToPoint.transform.position, speed);
-		}
+		//}
 
 		if (this.transform.position == goToPoint.transform.localPosition) 
 		{

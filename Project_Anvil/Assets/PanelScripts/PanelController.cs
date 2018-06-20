@@ -34,7 +34,7 @@ public class PanelController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log(mainMenuPanelIndex);
+		//Debug.Log(mainMenuPanelIndex);
 
 		//This will have to change to show different panels
 		//uiHandler.uiPicker(mainMenuPanelIndex);
@@ -47,6 +47,12 @@ public class PanelController : MonoBehaviour {
 			if (panelIndex == 2)
 			{
 				panelIndex = 5;
+				listOfPanels[panelIndex].GetComponent<ActionMenuPanel>().checkActionSelected();
+				//listOfPanels[panelIndex].SendMessage("GetCInput");
+			}
+			else if(panelIndex == 5)
+			{
+				listOfPanels[panelIndex].SendMessage("GetCInput");
 			}
 			else
 			{
@@ -77,9 +83,6 @@ public class PanelController : MonoBehaviour {
 			{
 				panelIndex = 0;
 			}
-
-
-
 
 		}
 

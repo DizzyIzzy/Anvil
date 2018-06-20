@@ -79,6 +79,7 @@ public class UIControlScript : MonoBehaviour {
 
        // faction = GameObject.Find(factionName);
         allUIRoutes = MasterBlackBoard.allGameRoutes;
+
         allFactionAgents = MasterBlackBoard.allGameAgents;
         
         UpdateAgentUIInfo();
@@ -107,13 +108,13 @@ public class UIControlScript : MonoBehaviour {
         MasterBlackBoard.setActiveAgent(selectedAgent);
         if (selectedAgent != null)
         {
-           // activeAgentLabel.text = selectedAgent.agentName;
-            if (selectedAgent.locationLatLng != null)
-            {
-                activeAgentPosLabel.text = selectedAgent.getShortLocationString();
-            }
+			// activeAgentLabel.text = selectedAgent.agentName;
+			if (selectedAgent.locationLatLng != null)
+			{
+				activeAgentPosLabel.text = selectedAgent.getShortLocationString();
+			}
 
-            activeAgentDataLabel.text = selectedAgent.getAgentBlackBoardDataString();
+			activeAgentDataLabel.text = selectedAgent.getAgentBlackBoardDataString();
             //activeAgentPosLabel.text = selectedAgent.mLocation.ToString() + "*\n +" +
             //  ConversionTool.LatLongToUnityVector3D(selectedAgent.mLocation);
             //  if (selectedAgent.navTarget == null)
@@ -179,6 +180,7 @@ public class UIControlScript : MonoBehaviour {
 
     public void NextAgent()
     {
+		MasterBlackBoard.ReadWayPointsFromFile();
         allFactionAgents = MasterBlackBoard.allGameAgents;
         if (allFactionAgents == null)
         { MasterBlackBoard.RefreshAllAgentsList(); }
@@ -212,6 +214,9 @@ public class UIControlScript : MonoBehaviour {
             }
         UpdateAgentUIInfo();
     }
+
+
+
     public void nextRoute()
     {
 		allUIRoutes = MasterBlackBoard.allGameRoutes;
