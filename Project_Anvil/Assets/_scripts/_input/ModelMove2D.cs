@@ -49,7 +49,7 @@ public float accuracy = 1.0f;
         if (gameObject.tag == "ModelAir")
         {
             isAirUnit = true;
-            uiAirUnitDisplay = GameObject.Find("UIAirUnit").transform.gameObject.GetComponent<UIAirUnitDisplay>();
+          //  uiAirUnitDisplay = GameObject.Find("UIAirUnit").transform.gameObject.GetComponent<UIAirUnitDisplay>();
         }
 	}
 

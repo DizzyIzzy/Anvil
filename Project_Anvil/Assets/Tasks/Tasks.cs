@@ -19,9 +19,8 @@ public class Tasks : MonoBehaviour {
 
 	//The agent we want this task to apply to
 	public AnvilAgent agentToOrder;
-
 	public UIControlScript userControl;
-
+	//public Movement movementTasks;
 
 	//The point we want the agent to move too
 
@@ -47,14 +46,21 @@ public class Tasks : MonoBehaviour {
 	void Update () {
 		userControl = GetComponent<UIControlScript>();
 		
+		
 	}
 
 
 	public void doTask(string taskName)
 	{
-		if (taskName == "moveNow") 
+		if (taskName == "Task: moveNow") 
 		{
-		//	agentToOrder.GetComponent<Movement> ().moveToWaypoint (userControl.selectedAgent.navTarget);
+			//agentToOrder.moveScript.moveNow = true;
+			//agentToOrder.GetComponent<Movement>().goToTarget = true;
+			//movementTasks = agentToOrder.GetComponent<Movement>();
+			//movementTasks.
+			agentToOrder.GetComponent<Movement>().goToTarget = agentToOrder.navTarget;
+			agentToOrder.GetComponent<Movement>().moveNow = true;
+			//movementTasks.moveNow = true;
 		}
 	}
 
@@ -77,41 +83,5 @@ public class Tasks : MonoBehaviour {
 		}
 	}
 
-
-
-	public void moveToWaypoint(AnvilWayPoint waypoint)
-	{
-
-		Debug.Log("Waypoint agent name: " + agentToOrder.agentName);
-		Debug.Log("Waypoint Name: " + waypoint.mWayPointName);
-		Debug.Log("Lat: " + waypoint.latitude + "Long: " + waypoint.longitude);
-
-		speed = 0.05f;
-	
-
-		GameObject goToPoint = new GameObject();
-
-		Vector2d goTo = new Vector2d(waypoint.latitude, waypoint.longitude);
-		goToPoint.transform.localPosition = Conversions.GeoToWorldPosition(goTo, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();
-		goToPoint.transform.localPosition += new Vector3(0, 10, 0);
-
-		if (moving)
-		{
-		Vector3 lookAtGoal = new Vector3(goToPoint.transform.localPosition.x, goToPoint.transform.localPosition.y, goToPoint.transform.localPosition.z);
-		Vector3 direction = lookAtGoal - agentToOrder.transform.position;
-
-	
-		agentToOrder.transform.rotation = Quaternion.Slerp(agentToOrder.transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * rotSpeed);
-		agentToOrder.transform.position = Vector3.MoveTowards(agentToOrder.transform.position, goToPoint.transform.position, speed);
-		//agentToOrder.transform.position = Vector3.Lerp(agentToOrder.transform.position, goToPoint.transform.position, speed);
-
-		}
-
-		//if (agentToOrder.transform.position == goToPoint.transform.localPosition)
-		//{
-		//	moving = false;
-		//}
-
-	}
 
 }

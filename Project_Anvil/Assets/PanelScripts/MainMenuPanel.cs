@@ -19,7 +19,7 @@ public class MainMenuPanel : MonoBehaviour {
 		selectionIndex = 0;
 		mainMenuPanel = GameObject.Find("Menu Panel");
 		getButtons();
-		
+		checkSelectionIndex();
 	}
 	
 	// Update is called once per frame

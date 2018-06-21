@@ -38,6 +38,8 @@ public class AnvilAgent : MonoBehaviour {
     [SerializeField]
     private string faction;
 
+
+	
 	
 
 
@@ -104,7 +106,7 @@ public class AnvilAgent : MonoBehaviour {
 
 		if (moving)
 		{
-			moveScript.moveToWaypoint (agentWayPoints [0]);
+			//moveScript.moveToWaypoint (agentWayPoints [0]);
 		}
 
 		//activeWaypointName = mNavTarget.mWayPointName;

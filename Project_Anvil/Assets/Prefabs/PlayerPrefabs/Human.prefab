@@ -26,8 +26,8 @@ GameObject:
   - component: {fileID: 23467602764871106}
   - component: {fileID: 114801327971042500}
   - component: {fileID: 114328721099969186}
-  - component: {fileID: 114233432081681894}
-  m_Layer: 10
+  - component: {fileID: 114163495186546520}
+  m_Layer: 11
   m_Name: Human
   m_TagString: ModelAir
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: bd75060d5f4a3b24d93bbb02e2dcfaf4, type: 2}
+  - {fileID: 2100000, guid: 290179cb2a46ba4409a939322f1fa8e4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   navTgt: {fileID: 0}
   TargetList: []
   weaponTgt: {fileID: 0}
---- !u!114 &114233432081681894
+--- !u!114 &114163495186546520
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -115,11 +115,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _map: {fileID: 0}
-  agent: {fileID: 0}
-  keyTrack: {fileID: 0}
-  speed: 10
-  accuracy: 1
-  rotSpeed: 5
+  tasks: {fileID: 0}
+  speed: 0
+  accuracy: 0
+  rotSpeed: 0
+  moveNow: 0
+  agentToOrder: {fileID: 0}
+  goToTarget: {fileID: 0}
 --- !u!114 &114328721099969186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,7 +141,7 @@ MonoBehaviour:
   viewAngle: 91
   targetMask:
     serializedVersion: 2
-    m_Bits: 2304
+    m_Bits: 1280
   obstacleMask:
     serializedVersion: 2
     m_Bits: 512

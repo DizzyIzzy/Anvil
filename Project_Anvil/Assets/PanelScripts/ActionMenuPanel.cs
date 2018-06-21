@@ -261,7 +261,7 @@ public class ActionMenuPanel : MonoBehaviour {
 	public void prevTask()
 	{
 		taskListCount = tasks.taskList.Count;
-		Debug.Log("NextTask pressed" + taskListCount);
+		//Debug.Log("NextTask pressed" + taskListCount);
 		int nextTaskIndex = taskIndex - 1;
 		if (nextTaskIndex < 0)
 		{
@@ -279,7 +279,7 @@ public class ActionMenuPanel : MonoBehaviour {
 	public void nextTask()
 	{
 		taskListCount = tasks.taskList.Count;
-		Debug.Log("NextTask pressed" + taskListCount);
+		//Debug.Log("NextTask pressed" + taskListCount);
 		int nextTaskIndex = taskIndex + 1;
 		if (nextTaskIndex >= taskListCount)
 		{
@@ -333,11 +333,17 @@ public class ActionMenuPanel : MonoBehaviour {
 				break;
 			case 3:
 				Debug.Log("Set this agent to something");
-				break;
+				break; 
 			case 4:
+			
 				agentPanel.selectedAgent.task = taskDataLabel.text;
 				tasks.agentToOrder = agentPanel.selectedAgent;
-				tasks.moveToWaypoint(agentPanel.selectedAgent.navTarget);
+
+				Debug.Log("Doing task: " + tasks.agentToOrder.task);
+
+				tasks.doTask(tasks.agentToOrder.task);
+
+				//tasks.moveToWaypoint(agentPanel.selectedAgent.navTarget);
 				//agentPanel.selectedAgent.GetComponent<Tasks>().moveToWaypoint(agentPanel.selectedAgent.navTarget);
 
 			//	agentPanel.UpdateAgentUIInfo();
@@ -350,7 +356,7 @@ public class ActionMenuPanel : MonoBehaviour {
 
 	public void checkActionSelected()
 	{
-		Debug.Log("Before CheckActionPoint: " + actionPoint);
+		//Debug.Log("Before CheckActionPoint: " + actionPoint);
 		if (actionPoint >= 5)
 		{
 			actionPoint = 0;
@@ -359,7 +365,7 @@ public class ActionMenuPanel : MonoBehaviour {
 		{
 			actionPoint = 4;
 		}
-		Debug.Log("AFter ActionPoint: " + actionPoint);
+		//Debug.Log("AFter ActionPoint: " + actionPoint);
 
 		switch (actionPoint)
 		{

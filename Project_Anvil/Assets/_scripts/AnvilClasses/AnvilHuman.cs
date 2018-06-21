@@ -19,14 +19,14 @@ public class AnvilHuman : AnvilAgent {
 	public int enemyCount;
 
 
-	public List<GameObject> enemiesInMemory; 
+	public List<GameObject> enemiesInMemory;
 	//Air vehicles list
 	//Water vehicles list
 	//Land vehicles list
 	//Ground Agent list
 	//Water Agent list
 
-
+	
     
     public AnvilHuman()
     {

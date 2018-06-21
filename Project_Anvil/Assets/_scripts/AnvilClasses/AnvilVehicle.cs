@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vehicle : MonoBehaviour {
+public class AnvilVehicle : MonoBehaviour {
 
 	string vehicleID;
 	int vehicleLicense;
 	Color color; 
 	int vehicleHealth;
 
-    AnvilAgent driver;
-	List<AnvilAgent> passengers = new List<AnvilAgent>();
+    GameObject driver;
+	public List<GameObject> passengers = new List<GameObject>();
 
 	int fuel;
 	int damage;
@@ -32,9 +32,19 @@ public class Vehicle : MonoBehaviour {
 		
 	}
     
-	public void addPassenger(AnvilAgent passenger)
+	public void addPassenger(GameObject passenger)
 	{
-		passengers.Add (passenger);
+		if (!passengers.Contains(passenger))
+		{
+			if (passengers.Count == 0)
+			{
+				driver = passenger;
+			}
+			else
+			{
+				passengers.Add(passenger);
+			}
+		}
 	}
 
 

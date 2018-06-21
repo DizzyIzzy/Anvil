@@ -8,11 +8,9 @@ using Mapbox.Utils;
 public class Movement : MonoBehaviour {
 
 	public AbstractMap _map;
-	private List<AnvilWayPoint> agentWayPoints;
-	//public MasterBlackBoard blackBoard;
-	public AnvilAgent agent;
-	public KeyTracker keyTrack;
+	public Tasks tasks;
 
+	private List<AnvilWayPoint> agentWayPoints;
 	private List<GameObject>points;
 
 	int currentWP = 0;
@@ -21,47 +19,38 @@ public class Movement : MonoBehaviour {
 	public float accuracy;
 	public float rotSpeed;
 
-	private bool moving;
-
+	public bool moveNow;
 
 	GameObject goToPoint;
+
+	public AnvilAgent agentToOrder;
+
+
+	public AnvilWayPoint goToTarget;
 
 	// Use this for initialization
 	void Start () {
 		points = new List<GameObject> ();
 		//Invoke("addPoints", 1);
 
-		agent = GetComponent<AnvilAgent> ();
-
-		moving = false;
+		moveNow = false;
 		goToPoint = new GameObject ();
-		//agentWayPoints = blackBoard.allGameWayPoints;
+		tasks = GameObject.Find("UIController").GetComponent<Tasks>();
+		_map = GameObject.Find("Map").GetComponent<AbstractMap>();
+
 	}
 	
 	// Update is called once per frame
-	void LateUpdate () {
+	void LateUpdate ()
+	{
+		
 
-
-		//This can be used for going between waypoints in a route
-		/*
-		Vector3 lookAtGoal = new Vector3 (points [currentWP].transform.localPosition.x, points [currentWP].transform.localPosition.y, points [currentWP].transform.localPosition.z);
-
-		Vector3 direction = lookAtGoal - this.transform.position;
-
-		this.transform.rotation = Quaternion.Slerp (this.transform.rotation, Quaternion.LookRotation (direction), Time.deltaTime * rotSpeed);
-
-		if (direction.magnitude < accuracy) 
+		if (moveNow)
 		{
-			currentWP++;
-			if (currentWP >= points.Count) 
-			{
-				currentWP = 0;
-			}
-
+			executeMoveNow(goToTarget);
 		}
 
-		this.transform.Translate (0, 0, speed * Time.deltaTime);
-		*/
+
 
 	}
 
@@ -96,35 +85,53 @@ public class Movement : MonoBehaviour {
     }
 
    
-	public void moveToWaypoint(AnvilWayPoint waypoint)
+	public void executeRoute()
 	{
-        speed = 0.05f;
-			Vector2d goTo = new Vector2d (waypoint.latitude, waypoint.longitude);
+		//This can be used for going between waypoints in a route
+		/*
+		Vector3 lookAtGoal = new Vector3 (points [currentWP].transform.localPosition.x, points [currentWP].transform.localPosition.y, points [currentWP].transform.localPosition.z);
 
+		Vector3 direction = lookAtGoal - this.transform.position;
 
+		this.transform.rotation = Quaternion.Slerp (this.transform.rotation, Quaternion.LookRotation (direction), Time.deltaTime * rotSpeed);
 
-			goToPoint.transform.localPosition = Conversions.GeoToWorldPosition (goTo, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz ();
-			goToPoint.transform.localPosition += new Vector3 (0, 8, 0);
-		
-	
-		//if (keyTrack.moving == true) {
-			Vector3 lookAtGoal = new Vector3 (goToPoint.transform.localPosition.x, goToPoint.transform.localPosition.y, goToPoint.transform.localPosition.z);
-
-			Vector3 direction = lookAtGoal - this.transform.position;
-
-			this.transform.rotation = Quaternion.Slerp (this.transform.rotation, Quaternion.LookRotation (direction), Time.deltaTime * rotSpeed);
-
-			this.transform.position = Vector3.MoveTowards (transform.position, goToPoint.transform.position, speed);
-		//}
-
-		if (this.transform.position == goToPoint.transform.localPosition) 
+		if (direction.magnitude < accuracy) 
 		{
-			keyTrack.moving = false;
+			currentWP++;
+			if (currentWP >= points.Count) 
+			{
+				currentWP = 0;
+			}
+
 		}
 
+		this.transform.Translate (0, 0, speed * Time.deltaTime);
+		*/
+	}
 
-		//this.transform.Translate (0, 0, speed * Time.deltaTime);
 
+
+	public void executeMoveNow(AnvilWayPoint waypoint)
+	{
+
+		speed = 0.05f;
+
+		Vector2d goTo = new Vector2d(waypoint.latitude, waypoint.longitude);
+		goToPoint.transform.localPosition = Conversions.GeoToWorldPosition(goTo, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();
+		goToPoint.transform.localPosition += new Vector3(0, 10, 0);
+
+		Vector3 lookAtGoal = new Vector3(goToPoint.transform.localPosition.x, goToPoint.transform.localPosition.y, goToPoint.transform.localPosition.z);
+		Vector3 direction = lookAtGoal - this.transform.position;
+
+
+		this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * rotSpeed);
+		this.transform.position = Vector3.MoveTowards(this.transform.position, goToPoint.transform.position, speed);
+
+
+		if (this.transform.position == goToPoint.transform.localPosition)
+		{
+			moveNow = false;
+		}
 
 	}
 
