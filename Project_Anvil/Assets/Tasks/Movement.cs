@@ -135,6 +135,11 @@ public class Movement : MonoBehaviour {
 
 	}
 
+	public void idle()
+	{
+		moveNow = false;
+	}
+
 
 
 }

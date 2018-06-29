@@ -19,8 +19,7 @@ public class Tasks : MonoBehaviour {
 
 	//The agent we want this task to apply to
 	public AnvilAgent agentToOrder;
-	public UIControlScript userControl;
-	//public Movement movementTasks;
+	//public UIControlScript userControl;
 
 	//The point we want the agent to move too
 
@@ -44,7 +43,7 @@ public class Tasks : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		userControl = GetComponent<UIControlScript>();
+	//	userControl = GetComponent<UIControlScript>();
 		
 		
 	}
@@ -54,13 +53,8 @@ public class Tasks : MonoBehaviour {
 	{
 		if (taskName == "Task: moveNow") 
 		{
-			//agentToOrder.moveScript.moveNow = true;
-			//agentToOrder.GetComponent<Movement>().goToTarget = true;
-			//movementTasks = agentToOrder.GetComponent<Movement>();
-			//movementTasks.
 			agentToOrder.GetComponent<Movement>().goToTarget = agentToOrder.navTarget;
 			agentToOrder.GetComponent<Movement>().moveNow = true;
-			//movementTasks.moveNow = true;
 		}
 	}
 
