@@ -5,33 +5,17 @@ using Mapbox.Unity.Map;
 using Mapbox.Unity.Utilities;
 using Mapbox.Utils;
 
-public class Defense : MonoBehaviour {
-
-	public AbstractMap _map;
-	public Tasks tasks;
-
+public class Defense : AgentTasks{
 	private List<AnvilWayPoint> agentWayPoints;
 	private List<Vector3> points;
 
 	int currentWP = 0;
-
-	public float speed;
-	public float accuracy;
-	public float rotSpeed;
-
-	public bool moveNow;
-
-	GameObject goToPoint;
-
-	public AnvilAgent agentToOrder;
-
 
 	public AnvilWayPoint goToTarget;
 
 	public FieldOfView fov;
 
 	Vector3 currentPosition;
-
 
 	private bool dirRight = true;
 	public bool inRecon = false;
@@ -42,21 +26,14 @@ public class Defense : MonoBehaviour {
 
 	public float rotationFreq;
 
+
+
 	// Use this for initialization
 	void Start()
 	{
 		points = new List<Vector3>();
-
-		moveNow = false;
-		goToPoint = new GameObject();
-		tasks = GameObject.Find("UIController").GetComponent<Tasks>();
-		_map = GameObject.Find("Map").GetComponent<AbstractMap>();
 		fov = GetComponent<FieldOfView>();
-
-
-
 		currentPosition = this.transform.localPosition;
-
 
 		//This is for the patrol part
 		//Only patrols between 10 units in front of it but could change to add a waypoint
@@ -75,10 +52,6 @@ public class Defense : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate()
 	{
-		if (moveNow)
-		{
-			//executeMoveNow(goToTarget);
-		}
 		//Patrol();
 		//Defend();
 		Recon();

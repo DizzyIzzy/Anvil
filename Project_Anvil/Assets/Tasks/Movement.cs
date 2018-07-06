@@ -5,25 +5,20 @@ using Mapbox.Unity.Map;
 using Mapbox.Unity.Utilities;
 using Mapbox.Utils;
 
-public class Movement : MonoBehaviour {
-
-	public AbstractMap _map;
-	public Tasks tasks;
+public class Movement : AgentTasks{
 
 	private List<AnvilWayPoint> agentWayPoints;
 	private List<GameObject>points;
 
 	int currentWP = 0;
 
-	public float speed;
-	public float accuracy;
-	public float rotSpeed;
 
 	public bool moveNow;
 
 	GameObject goToPoint;
 
-	public AnvilAgent agentToOrder;
+	
+
 
 
 	public AnvilWayPoint goToTarget;
@@ -31,12 +26,10 @@ public class Movement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		points = new List<GameObject> ();
-		//Invoke("addPoints", 1);
 
 		moveNow = false;
 		goToPoint = new GameObject ();
-		tasks = GameObject.Find("UIController").GetComponent<Tasks>();
-		_map = GameObject.Find("Map").GetComponent<AbstractMap>();
+
 
 	}
 	

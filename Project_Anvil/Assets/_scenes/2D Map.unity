@@ -1504,6 +1504,8 @@ GameObject:
   - component: {fileID: 338166609}
   - component: {fileID: 338166608}
   - component: {fileID: 338166610}
+  - component: {fileID: 338166611}
+  - component: {fileID: 338166612}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1553,6 +1555,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 504b6053a26637746bcb523949933c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &338166611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 338166607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bf4986e14cc2734f96f81a060ead213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentToOrder: {fileID: 0}
+--- !u!114 &338166612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 338166607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3564ef48f3ce6a64c91b785ad4894289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _map: {fileID: 1754058991}
+  speed: 10
+  accuracy: 5
+  rotSpeed: 2
 --- !u!4 &379541456 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4713157900140388, guid: 58fd1b794a906c94eb89c9029dc4d346,
@@ -4122,7 +4151,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _map: {fileID: 1754058991}
-  tasks: {fileID: 0}
   speed: 0
   accuracy: 0
   rotSpeed: 0
@@ -5425,7 +5453,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _map: {fileID: 0}
-  tasks: {fileID: 0}
   speed: 5
   accuracy: 2
   rotSpeed: 10

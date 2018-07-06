@@ -102,7 +102,6 @@ public class AgentPanel : MonoBehaviour {
 				agentPosText.text = selectedAgent.getAgentBlackBoardDataString();
 			}
 
-			//agentPosText.text = selectedAgent.agentName;
 			navDataText.text = selectedAgent.getAgentBlackBoardDataString();
 
 
