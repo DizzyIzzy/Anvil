@@ -19,6 +19,8 @@ public class AnvilHuman : AnvilAgent {
 	public int enemyCount;
 
 
+    public Animator patrolState;
+
 	public List<GameObject> enemiesInMemory;
 	//Air vehicles list
 	//Water vehicles list
@@ -43,6 +45,8 @@ public class AnvilHuman : AnvilAgent {
     {
         InitializeAgent();
         InitializeHuman();
+
+        patrolState = GetComponent<Animator>();
     }
 
     private void InitializeHuman()
@@ -79,7 +83,7 @@ public class AnvilHuman : AnvilAgent {
  
     // Update is called once per frame
     void Update () {
-		
+		checkEnemy();
 	}
 
     public int getRankIndex()
@@ -89,14 +93,36 @@ public class AnvilHuman : AnvilAgent {
 
 	public void addEnemy(GameObject enemy)
 	{
-		
-
 		if (!enemiesInMemory.Contains(enemy))
 		{
 			enemiesInMemory.Add(enemy);
 			enemyCount++;
 		}
 	}
+
+    public GameObject getEnemy()
+    {
+        return enemiesInMemory[0];
+
+    }
+
+
+
+    public void checkEnemy()
+    {
+        if(enemiesInMemory.Count >= 1)
+        {
+            patrolState.SetBool("EngageBool", true);
+        }
+        else 
+        {
+            return;
+        }
+    }
+
+
+
+
 
 	public void doDamage(int damageAmount)
 	{

@@ -65,7 +65,7 @@ public class TaskPanel : MonoBehaviour {
 		}
 	}
 
-
+	/*
 	public void checkActionSelected()
 	{
 
@@ -73,14 +73,6 @@ public class TaskPanel : MonoBehaviour {
 		switch (dividerIndex)
 		{
 			case 0:
-
-				switch(selectorIndex)
-				{
-					case 0:
-						//thisLabel 
-				}
-
-
 				thisLabel = routeDataLabel;
 				break;
 			case 1:
@@ -102,6 +94,7 @@ public class TaskPanel : MonoBehaviour {
 			}
 		}
 	}
+	*/
 
 
 }

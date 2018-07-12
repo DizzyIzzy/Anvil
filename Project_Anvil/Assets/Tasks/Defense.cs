@@ -7,6 +7,8 @@ using Mapbox.Utils;
 
 public class Defense : AgentTasks{
 	private List<AnvilWayPoint> agentWayPoints;
+	
+	Vector3 currentPosition;
 	private List<Vector3> points;
 
 	int currentWP = 0;
@@ -15,7 +17,7 @@ public class Defense : AgentTasks{
 
 	public FieldOfView fov;
 
-	Vector3 currentPosition;
+	
 
 	private bool dirRight = true;
 	public bool inRecon = false;

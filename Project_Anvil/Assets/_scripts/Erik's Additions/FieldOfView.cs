@@ -42,7 +42,8 @@ public class FieldOfView : AnvilSystem {
 
 		anvilHuman = GetComponent<AnvilHuman>();
 
-		StartCoroutine ("FindTargetsWithDelay", .2f);
+		//This will call the function every .05f seconds
+		//StartCoroutine ("FindTargetsWithDelay", .05f);
 	}
 
 
@@ -56,6 +57,8 @@ public class FieldOfView : AnvilSystem {
 	void LateUpdate() {
 
 		//	DrawFieldOfView ();
+		//Improve performance take take this out and uncomment the StartCoroutine
+		FindVisibleTargets();
 
 	}
 
@@ -74,10 +77,11 @@ public class FieldOfView : AnvilSystem {
 				if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask)) {
 					visibleTargets.Add (target);
 
-
+					//This add an enemy to the agents memeory
 					anvilHuman.addEnemy(target.gameObject);
 
-					target.GetComponent<AnvilHuman>().doDamage(20);
+					//This will do damage to the opponent
+					//target.GetComponent<AnvilHuman>().doDamage(20);
 
 					Debug.Log ("Get off my turff or I'll shoot!");
 				}
