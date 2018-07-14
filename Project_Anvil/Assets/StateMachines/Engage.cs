@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Engage : ActionTasks {
+public class Engage : NPCBaseFSM
+{
 
-	public float rotSpeed = 1.0f;
-	public float speed = 2.0f;
+	//public float rotSpeed = 1.0f;
+	//public float speed = 2.0f;
 	//public GameObject opponent;
 
 	
@@ -14,7 +15,7 @@ public class Engage : ActionTasks {
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		base.OnStateEnter(animator,stateInfo,layerIndex);
-		//opponent = agent.GetComponent<AnvilHuman>().getEnemy();
+		opponent = agent.GetComponent<AnvilHuman>().getEnemy();
 		
 	}
 

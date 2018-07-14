@@ -15,11 +15,18 @@ public class AnvilHuman : AnvilAgent {
 	public float bladder; 
 	public float fatigue;
 	public float anxiety; 
+
+
     public float speed;
+    public float rotSpeed;
+    public float distAccuracy;
+
 	public int enemyCount;
 
+    public float ammo;
+    public float maxAmmo = 100;
 
-    public Animator patrolState;
+    //public Animator patrolState;
 
 	public List<GameObject> enemiesInMemory;
 	//Air vehicles list
@@ -38,6 +45,12 @@ public class AnvilHuman : AnvilAgent {
         this.bladder = 0;
         this.fatigue = 0;
         this.anxiety = 0;
+
+        this.speed = 2.0f;
+        this.rotSpeed = 1.0f;
+        this.distAccuracy = 3.0f;
+        this.ammo = 100.0f;
+
 		this.enemiesInMemory = new List<GameObject>();
     }
     // Use this for initialization
@@ -46,12 +59,18 @@ public class AnvilHuman : AnvilAgent {
         InitializeAgent();
         InitializeHuman();
 
-        patrolState = GetComponent<Animator>();
+       // patrolState = GetComponent<Animator>();
     }
 
     private void InitializeHuman()
     {
-		enemyCount = 0;
+        this.speed = 2.0f;
+        this.rotSpeed = 1.0f;
+        this.distAccuracy = 3.0f;
+
+        enemyCount = 0;
+
+        this.ammo = 100.0f;
 
         if (this.agentServiceNumber == "")
         {
@@ -83,7 +102,7 @@ public class AnvilHuman : AnvilAgent {
  
     // Update is called once per frame
     void Update () {
-		checkEnemy();
+		//checkEnemy();
 	}
 
     public int getRankIndex()
@@ -107,7 +126,7 @@ public class AnvilHuman : AnvilAgent {
     }
 
 
-
+    /*
     public void checkEnemy()
     {
         if(enemiesInMemory.Count >= 1)
@@ -119,7 +138,7 @@ public class AnvilHuman : AnvilAgent {
             return;
         }
     }
-
+    */
 
 
 
@@ -148,5 +167,14 @@ public class AnvilHuman : AnvilAgent {
 		}
 	}
 
+    public void reloadAmmo()
+    {
+        Invoke("reload", 2);
+    }
+
+    public void reload()
+    {
+        this.ammo = maxAmmo;
+    }
 
 }

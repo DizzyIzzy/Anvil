@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class moveToPoint : ActionTasks {
+public class moveToPoint : NPCBaseFSM
+{
 	Vector3 currentPosition;
 	private List<Vector3> points;
 
 	//public GameObject agent;
 
-	public float speed;
+	//public float speed;
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
