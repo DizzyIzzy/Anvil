@@ -10,6 +10,7 @@ TagManager:
   - MeshCombiner
   - CombinedMeshContainer
   - BlueAgent
+  - Follow
   layers:
   - Default
   - TransparentFX
